@@ -1,9 +1,9 @@
 package ro.siit.fitness.gym.domain;
 
 public class GymSubscription {
-    String type;
-    int price;
-    float discount;
+    private String type;
+    private int price;
+    private float discount;
 
     public GymSubscription() {
     }

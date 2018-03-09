@@ -62,7 +62,7 @@ public class Admin {
                 ", trainer=" + trainer +
                 '}';
     }
-
+/*
     public String checkCardAvability(SubscriptionCard card) {
         //if endDate > currentDate all good else valability false
         boolean valability=true;
@@ -83,5 +83,6 @@ public class Admin {
     public String printCard(GymTrainer trainer, GymMember member, GymSubscription subscription, SubscriptionCard card){
         //if checkTrainer=true get member data and create new subCard
     }
+*/
 
 }

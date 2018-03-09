@@ -4,37 +4,37 @@ import java.util.List;
 
 public class GymTrainer {
 
-    private String firstName;
-    private String lastName;
-    GymMember gymMember;
-    List<String> program;
+    private String firstNameTrainer;
+    private String lastNameTrainer;
+    private GymMember gymMember;
+    private List<String> program;
     private final int MIN_NUMBER_GYM_MEMBERS = 5;
     private final int MAX_NUMBER_GYM_MEMBERS = 20;
 
     public GymTrainer() {
     }
 
-    public GymTrainer(String firstName, String lastName, GymMember gymMember, List<String> program) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public GymTrainer(String firstNameTrainer, String lastNameTrainer, GymMember gymMember, List<String> program) {
+        this.firstNameTrainer = firstNameTrainer;
+        this.lastNameTrainer = lastNameTrainer;
         this.gymMember = gymMember;
         this.program = program;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstNameTrainer() {
+        return firstNameTrainer;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstNameTrainer(String firstNameTrainer) {
+        this.firstNameTrainer = firstNameTrainer;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastNameTrainer() {
+        return lastNameTrainer;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastNameTrainer(String lastNameTrainer) {
+        this.lastNameTrainer = lastNameTrainer;
     }
 
     public GymMember getGymMember() {
@@ -53,19 +53,11 @@ public class GymTrainer {
         this.program = program;
     }
 
-    public int getMIN_NUMBER_GYM_MEMBERS() {
-        return MIN_NUMBER_GYM_MEMBERS;
-    }
-
-    public int getMAX_NUMBER_GYM_MEMBERS() {
-        return MAX_NUMBER_GYM_MEMBERS;
-    }
-
     @Override
     public String toString() {
         return "GymTrainer{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                "firstNameTrainer='" + firstNameTrainer + '\'' +
+                ", lastNameTrainer='" + lastNameTrainer + '\'' +
                 ", gymMember=" + gymMember +
                 ", program=" + program +
                 ", MIN_NUMBER_GYM_MEMBERS=" + MIN_NUMBER_GYM_MEMBERS +
@@ -82,16 +74,18 @@ public class GymTrainer {
 
         if (MIN_NUMBER_GYM_MEMBERS != that.MIN_NUMBER_GYM_MEMBERS) return false;
         if (MAX_NUMBER_GYM_MEMBERS != that.MAX_NUMBER_GYM_MEMBERS) return false;
-        if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
-        if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
+        if (firstNameTrainer != null ? !firstNameTrainer.equals(that.firstNameTrainer) : that.firstNameTrainer != null)
+            return false;
+        if (lastNameTrainer != null ? !lastNameTrainer.equals(that.lastNameTrainer) : that.lastNameTrainer != null)
+            return false;
         if (gymMember != null ? !gymMember.equals(that.gymMember) : that.gymMember != null) return false;
         return program != null ? program.equals(that.program) : that.program == null;
     }
 
     @Override
     public int hashCode() {
-        int result = firstName != null ? firstName.hashCode() : 0;
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        int result = firstNameTrainer != null ? firstNameTrainer.hashCode() : 0;
+        result = 31 * result + (lastNameTrainer != null ? lastNameTrainer.hashCode() : 0);
         result = 31 * result + (gymMember != null ? gymMember.hashCode() : 0);
         result = 31 * result + (program != null ? program.hashCode() : 0);
         result = 31 * result + MIN_NUMBER_GYM_MEMBERS;
