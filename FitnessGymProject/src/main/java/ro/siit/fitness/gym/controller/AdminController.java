@@ -10,6 +10,7 @@ import ro.siit.fitness.gym.domain.GymSubscription;
 import ro.siit.fitness.gym.domain.GymTrainer;
 import ro.siit.fitness.gym.domain.SubscriptionCard;
 import ro.siit.fitness.gym.dto.CreateGymMemberRegistration;
+import ro.siit.fitness.gym.dto.CreateSubscriptionCard;
 import ro.siit.fitness.gym.service.AdminService;
 import ro.siit.fitness.gym.service.GymMemberService;
 
@@ -23,13 +24,6 @@ public class AdminController {
     private AdminService adminService;
     private GymMemberService gymMemberService;
 
-    @RequestMapping(value = "/subscriptioncards", method = RequestMethod.GET)
-    public String listCards(Model model, HttpServletRequest request) {
-        List<SubscriptionCard> subscriptionCards = adminService.getAll();
-        model.addAttribute("subscriptionCards", subscriptionCards);
-        model.addAttribute("createGymMemberCard", new CreateGymMemberRegistration());
-        return "listCards";
-    }
 
     @RequestMapping(value = "/gymmembers", method = RequestMethod.GET)
     public String listGymMembers(Model model, HttpServletRequest request) {
@@ -39,11 +33,18 @@ public class AdminController {
         return "listGymMembers";
     }
 
+    @RequestMapping(value = "/gymmembers", method = RequestMethod.POST)
     public String createGymMember(CreateGymMemberRegistration gymMemberRegistration, Model model) {
         GymMember gymMember = getGymMember(gymMemberRegistration);
         gymMemberService.createGymMember(gymMember);
         return "redirect:/gymmembers";
     }
+
+    /**
+     *  Method for recording GymMember data
+     * @param gymMemberRegistration
+     * @return
+     */
 
     private GymMember getGymMember(CreateGymMemberRegistration gymMemberRegistration) {
 
@@ -72,6 +73,13 @@ public class AdminController {
         return gymMember;
     }
 
+
+    /**
+     * Method for saving GymMember registration
+     * @param gymMember
+     * @return
+     */
+
     private CreateGymMemberRegistration getGymMemberRegistration(GymMember gymMember) {
         CreateGymMemberRegistration createGymMemberRegistration = new CreateGymMemberRegistration();
 
@@ -92,5 +100,51 @@ public class AdminController {
         createGymMemberRegistration.setPrice(gymMember.getSubscription().getPrice());
 
         return createGymMemberRegistration;
+    }
+
+    @RequestMapping(value = "/subscriptioncards", method = RequestMethod.GET)
+    public String listCards(Model model, HttpServletRequest request) {
+        List<SubscriptionCard> subscriptionCards = adminService.getAll();
+        model.addAttribute("subscriptionCards", subscriptionCards);
+        model.addAttribute("createSubscriptionCard", new CreateSubscriptionCard());
+        return "listCards";
+    }
+
+    /**
+     * Method for creating a new subscription card
+     * @param createSubscriptionCard
+     * @return
+     */
+
+    private SubscriptionCard getSubscriptionCard(CreateSubscriptionCard createSubscriptionCard){
+        GymMember gymMember = new GymMember();
+        gymMember.setFirstName(createSubscriptionCard.getFirstName());
+        gymMember.setLastName(createSubscriptionCard.getLastName());
+
+        SubscriptionCard subscriptionCard = new SubscriptionCard();
+        subscriptionCard.setId(createSubscriptionCard.getId());
+        subscriptionCard.setStartDate(createSubscriptionCard.getStartDate());
+        subscriptionCard.setEndDate(createSubscriptionCard.getEndDate());
+
+        subscriptionCard.getGymMember();
+        return subscriptionCard;
+    }
+
+    /**
+     * Method for printing the card
+     * @param subscriptionCard
+     * @return
+     */
+
+    private CreateSubscriptionCard printCard(SubscriptionCard subscriptionCard){
+        CreateSubscriptionCard createSubscriptionCard = new CreateSubscriptionCard();
+        createSubscriptionCard.setFirstName(subscriptionCard.getGymMember().getFirstName());
+        createSubscriptionCard.setLastName(subscriptionCard.getGymMember().getLastName());
+
+        createSubscriptionCard.setId(subscriptionCard.getId());
+        createSubscriptionCard.setStartDate(subscriptionCard.getStartDate());
+        createSubscriptionCard.setEndDate(subscriptionCard.getEndDate());
+
+        return createSubscriptionCard;
     }
 }

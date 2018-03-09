@@ -7,7 +7,7 @@ public class SubscriptionCard {
     private long id;
     private Date startDate;
     private Date endDate;
-    GymMember gymMember;
+    private GymMember gymMember;
 
     public SubscriptionCard() {
     }
