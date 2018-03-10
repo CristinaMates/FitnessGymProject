@@ -1,6 +1,7 @@
 package ro.siit.fitness.gym.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,8 +12,10 @@ import ro.siit.fitness.gym.dto.CreateSubscriptionCard;
 import ro.siit.fitness.gym.service.SubscriptionCardService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
+@Controller
 public class SubscriptionCardController {
     @Autowired
     private SubscriptionCardService subscriptionCardService;
@@ -56,9 +59,21 @@ public class SubscriptionCardController {
         createSubscriptionCard.setLastName(subscriptionCard.getGymMember().getLastName());
 
         createSubscriptionCard.setId(subscriptionCard.getId());
-        createSubscriptionCard.setStartDate(subscriptionCard.getStartDate());
-        createSubscriptionCard.setEndDate(subscriptionCard.getEndDate());
+        if(checkCardAvailability(subscriptionCard)) {
+            subscriptionCard.setStartDate(createSubscriptionCard.getStartDate());
+            subscriptionCard.setEndDate(createSubscriptionCard.getEndDate());
+        }
 
         return createSubscriptionCard;
     }
+
+    private boolean checkCardAvailability(SubscriptionCard subscriptionCard) {
+        Date currentDate = new Date();
+        if(subscriptionCard.getEndDate().before(currentDate)){
+            return true;
+        }
+        return false;
+
+    }
+
 }
