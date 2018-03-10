@@ -4,7 +4,7 @@ import ro.siit.fitness.gym.domain.GymMember;
 
 import java.util.Date;
 
-public class CreateSubscriptionCard {
+public class CreateGymSubscriptionCard {
 
     private GymMember gymMember;
     private String firstName;
