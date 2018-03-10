@@ -30,23 +30,23 @@ public class ReservationController {
     }
 
     @RequestMapping(value = "/reservations", method = RequestMethod.POST)
-    public String createReservations(CreateGymMemberReservation gymMemberReservation, Model model) {
-        Reservation reservations = getReservations(gymMemberReservation);
-        reservationService.createReservation(reservations);
+    public String createReservation(CreateGymMemberReservation gymMemberReservation, Model model) {
+        Reservation reservation = getReservation(gymMemberReservation);
+        reservationService.createReservation(reservation);
         return "redirect:/reservations";
     }
 
-    @RequestMapping(value = "/clients/{id}", method = RequestMethod.GET)
-    public String getReservations(@PathVariable long id, Model model) {
+    @RequestMapping(value = "/reservations/{id}", method = RequestMethod.GET)
+    public String getReservation(@PathVariable long id, Model model) {
         Reservation reservation = reservationService.getById(id);
-        model.addAttribute("updateGymMemberReservation", createReservationRequest(reservation));
+        model.addAttribute("updateGymMemberReservation", getReservationRequest(reservation));
         model.addAttribute("reservation_id", id);
         return "updateReservation";
     }
 
     @RequestMapping(value = "/reservations/update/{id}", method = RequestMethod.POST)
     public String updateReservation(CreateGymMemberReservation createGymMemberReservationRequest, @PathVariable long id) {
-        Reservation reservation = getReservations(createGymMemberReservationRequest);
+        Reservation reservation = getReservation(createGymMemberReservationRequest);
         reservationService.updateReservation(reservation, id);
 
         return "redirect:/reservations";
@@ -65,9 +65,9 @@ public class ReservationController {
      * @param createGymMemberReservation
      * @return a reservation which contain the following information - First Name and Last Name of the Trainer, programs realized by the Trainer, period available
      */
-    private Reservation getReservations(CreateGymMemberReservation createGymMemberReservation) {
-        Reservation reservations = new Reservation();
-        reservations.setPeriod(createGymMemberReservation.getPeriod());
+    private Reservation getReservation(CreateGymMemberReservation createGymMemberReservation) {
+        Reservation reservation = new Reservation();
+        reservation.setPeriod(createGymMemberReservation.getPeriod());
 
         GymTrainer gymTrainer = new GymTrainer();
         gymTrainer.setFirstNameTrainer(createGymMemberReservation.getFirstNameTrainer());
@@ -77,18 +77,26 @@ public class ReservationController {
         GymMember gymMember = new GymMember();
         gymMember.setEmail(createGymMemberReservation.getEmail());
 
-        reservations.getGymTrainer();
-        return reservations;
+        reservation.setGymTrainer(gymTrainer);
+        reservation.setGymMember(gymMember);
+        return reservation;
     }
 
     /**
      * Method for getting a reservation request
      *
-     * @param reservations
+     * @param reservation
      * @return a reservation reference from the dto
      */
-    private CreateGymMemberReservation createReservationRequest(Reservation reservations) {
+    private CreateGymMemberReservation getReservationRequest(Reservation reservation) {
         CreateGymMemberReservation createGymMemberReservation = new CreateGymMemberReservation();
+
+        createGymMemberReservation.setEmail(reservation.getGymMember().getEmail());
+        createGymMemberReservation.setFirstNameTrainer(reservation.getGymTrainer().getFirstNameTrainer());
+        createGymMemberReservation.setLastNameTrainer(reservation.getGymTrainer().getLastNameTrainer());
+        createGymMemberReservation.setProgram(reservation.getGymTrainer().getProgram());
+        createGymMemberReservation.setPeriod(reservation.getPeriod());
+
         return createGymMemberReservation;
     }
 

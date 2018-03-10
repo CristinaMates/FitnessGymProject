@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
+<head>
+    <title>Update Reservation</title>
+    <meta http-equiv="Content-Type" content="application/x-www-form-urlencoded; charset=UTF-8" />
+</head>
+<body>
+
+
+<form action="#" th:action="@{/reservations/update/} + ${reservation_id} + '/'" th:object="${updateGymMemberReservation}" method="post">
+    <div>
+        <label th:for="${email}">Gym member email</label>
+        <input type="text" id="email" name="email" th:value="*{email}"/>
+    </div>
+    <div>
+        <label th:for="${firstNameTrainer}">Gym trainer first name</label>
+        <input type="text" id="firstNameTrainer" name="firstNameTrainer" th:value="*{firstNameTrainer}"/>
+    </div>
+    <div>
+        <label th:for="${lastNameTrainer}">Gym trainer last name</label>
+        <input type="text" id="lastNameTrainer" name="lastNameTrainer" th:value="*{lastNameTrainer}"/>
+    </div>
+    <div>
+        <label th:for="${program}">Gym trainer program</label>
+        <input type="text" id="program" name="program" th:value="*{program}"/>
+    </div>
+    <div>
+        <label th:for="${period}">Gym trainer period</label>
+        <input type="text" id="period" name="period" th:value="*{period}"/>
+    </div>
+    <div>
+        <input type="submit" id="doUpdate" name="update" value="update reservation"/>
+    </div>
+</form>
+
+</body>
+</html>
