@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>List of gym members</title>
+    <title>Update Client</title>
+    <meta http-equiv="Content-Type" content="application/x-www-form-urlencoded; charset=UTF-8" />
 </head>
 <body>
 
 
-<form action="#" th:action="@{/gymmembers}" th:object="${createGymMemberRegistration}" method="post">
+<form action="#" th:action="@{/gymmembers/update/} + ${gymMember_id} + '/'" th:object="${updateGymMemberRegistration}" method="post">
     <div>
         <label th:for="${firstName}">Gym member first name</label>
         <input type="text" id="firstName" name="firstName" th:value="*{firstName}"/>
@@ -74,79 +74,9 @@
     </div>
 
     <div>
-        <input type="submit" id="doUpdate" name="save client" value="create gym member"/>
+        <input type="submit" id="doUpdate" name="update gym member" value="Update gym member"/>
     </div>
 </form>
-
-<br/>
-<br/>
-
-
-<table id="myTableId" dt:table="true">
-    <thead>
-    <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Gender</th>
-        <th>Birth date</th>
-        <th>Telephone</th>
-        <th>Email</th>
-        <th>Student</th>
-        <th>Corporate</th>
-        <th>ID</th>
-
-        <th>Gym Trainer</th>
-        <th>Trainer first name</th>
-        <th>Trainer last name</th>
-        <th>Trainer program</th>
-
-        <th>Gym subcription</th>
-        <th>Type</th>
-        <th>Price</th>
-        <th>Discount</th>
-        <th>Update</th>
-        <th>Delete</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="gymMember : ${gymMembers}">
-        <td th:text="${gymMember.firstName}"></td>
-        <td th:text="${gymMember.lastName}"></td>
-        <td th:text="${gymMember.gender}"></td>
-        <td th:text="${gymMember.birthDate}"></td>
-        <td th:text="${gymMember.telephone}"></td>
-        <td th:text="${gymMember.email}"></td>
-        <td th:text="${gymMember.student}"></td>
-        <td th:text="${gymMember.corporate}"></td>
-        <td th:text="${gymMember.id}"></td>
-
-
-        <td>Gym Trainer</td>
-        <td th:text="${gymMember.gymTrainer.firstNameTrainer}"></td>
-        <td th:text="${gymMember.gymTrainer.lastNameTrainer}"></td>
-        <td th:text="${gymMember.gymTrainer.program}"></td>
-
-        <td>Gym Subsctiption</td>
-        <td th:text="${gymMember.gymSubscription.type}"></td>
-        <td th:text="${gymMember.gymSubscription.price}"></td>
-        <td th:text="${gymMember.gymSubscription.discount}"></td>
-
-
-        <td>
-            <a th:href="@{/gymmembers/} + ${gymMember?.id} + '/'">Update</a>
-        </td>
-
-        <td>
-            <form th:action="@{/gymmembers/delete/} + ${gymMember?.id} + '/'" th:object="${gymMember}" method="post">
-                <input type="submit" value="Delete"/>
-            </form>
-        </td>
-
-        <td>
-        </td>
-    </tr>
-    </tbody>
-</table>
 
 </body>
 </html>

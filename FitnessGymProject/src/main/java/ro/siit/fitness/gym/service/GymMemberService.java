@@ -10,4 +10,11 @@ public interface GymMemberService {
 
     void createGymMember(GymMember gymMembers);
 
+    void updateGymMember(GymMember gymMember, long id);
+
+    void removeGymMember(long id);
+
+    GymMember getById(long id);
+
+
 }

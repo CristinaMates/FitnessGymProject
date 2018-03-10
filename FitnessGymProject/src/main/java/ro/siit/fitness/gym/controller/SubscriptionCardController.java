@@ -1,6 +1,7 @@
 package ro.siit.fitness.gym.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,7 +13,7 @@ import ro.siit.fitness.gym.service.SubscriptionCardService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-
+@Controller
 public class SubscriptionCardController {
     @Autowired
     private SubscriptionCardService subscriptionCardService;

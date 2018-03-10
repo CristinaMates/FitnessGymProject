@@ -1,0 +1,67 @@
+!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Create card</title>
+</head>
+<body>
+
+
+<form action="#" th:action="@{/subscriptioncards}" th:object="${createSubscriptionCard}" method="post">
+    <div>
+        <label th:for="${gymMember}">Gym member</label>
+    </div>
+    <div>
+        <label th:for="${firstName}">Gym member first</label>
+        <input type="text" id="firstName" name="firstName" th:value="*{firstName}"/>
+    </div>
+    <div>
+        <label th:for="${lastName}">Gym member last name</label>
+        <input type="text" id="lastName" name="lastName" th:value="*{lastName}"/>
+    </div>
+    <div>
+        <label th:for="${startDate}">Start Date</label>
+        <input type="text" id="startDate" name="startDate" th:value="*{startDate}"/>
+    </div>
+    <div>
+        <label th:for="${endDate}">End date</label>
+        <input type="text" id="endDate" name="endDate" th:value="*{endDate}"/>
+    </div>
+    <div>
+        <input type="submit" id="doUpdate" name="save client" value="create subscription card"/>
+    </div>
+</form>
+
+<br/>
+<br/>
+
+
+<table id="myTableId" dt:table="true">
+    <thead>
+    <tr>
+        <th>Gym member</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+
+        <th>Start date</th>
+        <th>End date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="subscriptionCard : ${subscriptionCards}">
+        <td th:text="${subscriptionCard.gymMember.firstName}"></td>
+        <td th:text="${subscriptionCard.gymMember.lastName}"></td>
+
+        <td th:text="${subscriptionCard.startDate}"></td>
+        <td th:text="${subscriptionCard.endDate}"></td>
+
+
+        <td>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

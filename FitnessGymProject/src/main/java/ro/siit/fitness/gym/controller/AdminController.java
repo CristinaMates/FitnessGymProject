@@ -3,6 +3,7 @@ package ro.siit.fitness.gym.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ro.siit.fitness.gym.domain.GymMember;
@@ -35,6 +36,29 @@ public class AdminController {
         return "redirect:/gymmembers";
     }
 
+    @RequestMapping(value = "/gymmembers/{id}", method = RequestMethod.GET)
+    public String getGymMember(@PathVariable long id, Model model) {
+        GymMember gymMember = gymMemberService.getById(id);
+        model.addAttribute("updateGymMemberRegistration", getGymMemberRegistration(gymMember));
+        model.addAttribute("gymMember_id", id);
+        return "updateGymMember";
+    }
+
+    @RequestMapping(value = "/gymmembers/update/{id}", method = RequestMethod.POST)
+    public String updateGymMember(CreateGymMemberRegistration gymMemberRegistration, @PathVariable long id) {
+        GymMember gymMember = getGymMember(gymMemberRegistration);
+        gymMemberService.updateGymMember(gymMember, id);
+
+        return "redirect:/gymmembers";
+    }
+
+    @RequestMapping(value = "/gymmembers/delete/{id}", method = RequestMethod.POST)
+    public String removeGymMember(@PathVariable long id, Model model) {
+        gymMemberService.removeGymMember(id);
+
+        return "redirect:/gymmembers";
+    }
+
     /**
      *  Method for recording GymMember data
      * @param gymMemberRegistration
@@ -61,13 +85,13 @@ public class AdminController {
         GymSubscription gymSubscription = new GymSubscription();
         gymSubscription.setType(gymMemberRegistration.getType());
         gymSubscription.setPrice(gymMemberRegistration.getPrice());
+        gymSubscription.setDiscount(gymMemberRegistration.getDiscount());
 
         gymMember.setGymTrainer(gymTrainer);
         gymMember.setGymSubscription(gymSubscription);
 
         return gymMember;
     }
-
 
     /**
      * Method for updating GymMember registration
@@ -93,6 +117,7 @@ public class AdminController {
 
         createGymMemberRegistration.setType(gymMember.getGymSubscription().getType());
         createGymMemberRegistration.setPrice(gymMember.getGymSubscription().getPrice());
+        createGymMemberRegistration.setDiscount(gymMember.getGymSubscription().getDiscount());
 
         return createGymMemberRegistration;
     }

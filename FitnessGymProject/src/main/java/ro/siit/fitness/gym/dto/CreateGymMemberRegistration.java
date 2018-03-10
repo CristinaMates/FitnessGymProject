@@ -17,16 +17,18 @@ public class CreateGymMemberRegistration {
     private String email;
     private boolean student;
     private boolean corporate;
+    private long id;
 
     private GymTrainer gymTrainer;
     private String firstNameTrainer;
     private String lastNameTrainer;
     private List<String> program;
+
     private GymSubscription gymSubscription;
     private String type;
     private int price;
-   // private float discount;
-   // private long id;
+    private float discount;
+
 
 
     public GymTrainer getGymTrainer() {
@@ -148,7 +150,7 @@ public class CreateGymMemberRegistration {
     public void setPrice(int price) {
         this.price = price;
     }
-/*
+
     public float getDiscount() {
         return discount;
     }
@@ -164,5 +166,5 @@ public class CreateGymMemberRegistration {
     public void setId(long id) {
         this.id = id;
     }
-    */
+
 }
