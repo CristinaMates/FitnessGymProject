@@ -15,6 +15,7 @@ public class GymTrainer {
     public GymTrainer() {
     }
 
+
     public GymTrainer(String firstNameTrainer, String lastNameTrainer, int capacity, List<GymMember> gymMember, String program) {
         this.firstNameTrainer = firstNameTrainer;
         this.lastNameTrainer = lastNameTrainer;

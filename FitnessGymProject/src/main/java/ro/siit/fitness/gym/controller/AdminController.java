@@ -29,7 +29,7 @@ public class AdminController {
         return "listGymMembers";
     }
 
-    @RequestMapping (value = "/gymmembers", method = RequestMethod.POST)
+    @RequestMapping(value = "/gymmembers", method = RequestMethod.POST)
     public String createGymMember(CreateGymMemberRegistration gymMemberRegistration, Model model) {
         GymMember gymMember = getGymMember(gymMemberRegistration);
         gymMemberService.createGymMember(gymMember);
@@ -60,7 +60,8 @@ public class AdminController {
     }
 
     /**
-     *  Method for recording GymMember data
+     * Method for recording GymMember data
+     *
      * @param gymMemberRegistration
      * @return
      */
@@ -106,6 +107,7 @@ public class AdminController {
 
     /**
      * Method for updating GymMember registration
+     *
      * @param gymMember
      * @return
      */

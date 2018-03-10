@@ -15,10 +15,7 @@ import ro.siit.fitness.gym.service.SubscriptionCardService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
-<<<<<<< HEAD
-=======
 
->>>>>>> 51abaa53bcc3b2a9a0532a7e489bb93149e0a388
 @Controller
 public class SubscriptionCardController {
     @Autowired
