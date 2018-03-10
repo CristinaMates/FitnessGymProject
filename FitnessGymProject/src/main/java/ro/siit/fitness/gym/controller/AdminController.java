@@ -54,10 +54,11 @@ public class AdminController {
         gymMember.setCorporate(gymMemberRegistration.isCorporate());
 
         GymTrainer gymTrainer = new GymTrainer();
-        gymTrainer.setFirstNameTrainer(gymMemberRegistration.getFirstNameTrainer());
-        gymTrainer.setLastNameTrainer(gymMemberRegistration.getLastNameTrainer());
-        gymTrainer.setProgram(gymMemberRegistration.getProgram());
-
+        if (chechTrainerAvailability(gymTrainer)) {
+            gymTrainer.setFirstNameTrainer(gymMemberRegistration.getFirstNameTrainer());
+            gymTrainer.setLastNameTrainer(gymMemberRegistration.getLastNameTrainer());
+            gymTrainer.setProgram(gymMemberRegistration.getProgram());
+        }
         GymSubscription gymSubscription = new GymSubscription();
         gymSubscription.setType(gymMemberRegistration.getType());
         gymSubscription.setPrice(gymMemberRegistration.getPrice());
@@ -68,6 +69,13 @@ public class AdminController {
         return gymMember;
     }
 
+    private boolean chechTrainerAvailability(GymTrainer gymTrainer) {
+
+        if (gymTrainer.getMAX_NUMBER_GYM_MEMBERS() > gymTrainer.getCapacity()) {
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Method for updating GymMember registration
@@ -91,9 +99,18 @@ public class AdminController {
         createGymMemberRegistration.setLastNameTrainer(gymMember.getGymTrainer().getLastNameTrainer());
         createGymMemberRegistration.setProgram(gymMember.getGymTrainer().getProgram());
 
-        createGymMemberRegistration.setType(gymMember.getGymSubscription().getType());
-        createGymMemberRegistration.setPrice(gymMember.getGymSubscription().getPrice());
-
+        if (checkGymMemberBudget(gymMember, gymMember.getGymSubscription().getPrice())) {
+            createGymMemberRegistration.setType(gymMember.getGymSubscription().getType());
+            createGymMemberRegistration.setPrice(gymMember.getGymSubscription().getPrice());
+        }
         return createGymMemberRegistration;
+    }
+
+    private boolean checkGymMemberBudget(GymMember gymMember, int price) {
+        if (gymMember.getMemberBudget() > price) {
+            return true;
+        }
+        return false;
+
     }
 }

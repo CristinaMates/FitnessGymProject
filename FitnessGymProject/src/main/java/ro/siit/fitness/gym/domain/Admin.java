@@ -62,27 +62,6 @@ public class Admin {
                 ", trainer=" + trainer +
                 '}';
     }
-/*
-    public String checkCardAvability(SubscriptionCard card) {
-        //if endDate > currentDate all good else valability false
-        boolean valability=true;
-        //if valability=true sout card is available else card expired
-    }
 
-    public String checkTrainerAvalability(GymTrainer trainer){
-        //if gymtrainers clients.lenght < max_capacity trainer valability=true else valability=false
-        boolean valability=true;
-        //if valability=true trainer is available else program full
-    }
-
-    public String[] getTrainerByProgram(String[] trainers){
-        //get programs and print trainers and schedule
-        return trainers;
-    }
-
-    public String printCard(GymTrainer trainer, GymMember member, GymSubscription subscription, SubscriptionCard card){
-        //if checkTrainer=true get member data and create new subCard
-    }
-*/
 
 }
