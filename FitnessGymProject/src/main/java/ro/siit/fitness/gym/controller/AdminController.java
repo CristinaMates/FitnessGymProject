@@ -20,17 +20,8 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
-    //private AdminService adminServi7ce;
     private GymMemberService gymMemberService;
-/*
-    @RequestMapping(value = "/subscriptioncards", method = RequestMethod.GET)
-    public String listCards(Model model, HttpServletRequest request) {
-        List<SubscriptionCard> subscriptionCards = adminService.getAll();
-        model.addAttribute("subscriptionCards", subscriptionCards);
-        model.addAttribute("createGymMemberCard", new CreateGymMemberRegistration());
-        return "listCards";
-    }
-*/
+
     @RequestMapping(value = "/gymmembers", method = RequestMethod.GET)
     public String listGymMembers(Model model, HttpServletRequest request) {
         List<GymMember> gymMembers = gymMemberService.getAll();
@@ -72,7 +63,7 @@ public class AdminController {
         return gymMember;
     }
 
-    /*
+
     private CreateGymMemberRegistration getGymMemberRegistration(GymMember gymMember) {
         CreateGymMemberRegistration createGymMemberRegistration = new CreateGymMemberRegistration();
 
@@ -94,5 +85,5 @@ public class AdminController {
 
         return createGymMemberRegistration;
     }
-    */
+
 }
