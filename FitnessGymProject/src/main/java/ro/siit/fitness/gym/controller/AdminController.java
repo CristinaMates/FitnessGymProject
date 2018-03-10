@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import ro.siit.fitness.gym.domain.GymMember;
 import ro.siit.fitness.gym.domain.GymSubscription;
 import ro.siit.fitness.gym.domain.GymTrainer;
-import ro.siit.fitness.gym.domain.SubscriptionCard;
 import ro.siit.fitness.gym.dto.CreateGymMemberRegistration;
-import ro.siit.fitness.gym.service.AdminService;
 import ro.siit.fitness.gym.service.GymMemberService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,12 +27,19 @@ public class AdminController {
         model.addAttribute("createGymMemberRegistration", new CreateGymMemberRegistration());
         return "listGymMembers";
     }
+
     @RequestMapping (value = "/gymmembers", method = RequestMethod.POST)
     public String createGymMember(CreateGymMemberRegistration gymMemberRegistration, Model model) {
         GymMember gymMember = getGymMember(gymMemberRegistration);
         gymMemberService.createGymMember(gymMember);
         return "redirect:/gymmembers";
     }
+
+    /**
+     *  Method for recording GymMember data
+     * @param gymMemberRegistration
+     * @return
+     */
 
     private GymMember getGymMember(CreateGymMemberRegistration gymMemberRegistration) {
 
@@ -64,6 +69,12 @@ public class AdminController {
     }
 
 
+    /**
+     * Method for updating GymMember registration
+     * @param gymMember
+     * @return
+     */
+
     private CreateGymMemberRegistration getGymMemberRegistration(GymMember gymMember) {
         CreateGymMemberRegistration createGymMemberRegistration = new CreateGymMemberRegistration();
 
@@ -80,10 +91,9 @@ public class AdminController {
         createGymMemberRegistration.setLastNameTrainer(gymMember.getGymTrainer().getLastNameTrainer());
         createGymMemberRegistration.setProgram(gymMember.getGymTrainer().getProgram());
 
-        createGymMemberRegistration.setType(gymMember.getSubscription().getType());
-        createGymMemberRegistration.setPrice(gymMember.getSubscription().getPrice());
+        createGymMemberRegistration.setType(gymMember.getGymSubscription().getType());
+        createGymMemberRegistration.setPrice(gymMember.getGymSubscription().getPrice());
 
         return createGymMemberRegistration;
     }
-
 }
