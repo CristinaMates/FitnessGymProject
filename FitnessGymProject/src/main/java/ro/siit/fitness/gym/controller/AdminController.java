@@ -20,9 +20,9 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
-    private AdminService adminService;
+    //private AdminService adminServi7ce;
     private GymMemberService gymMemberService;
-
+/*
     @RequestMapping(value = "/subscriptioncards", method = RequestMethod.GET)
     public String listCards(Model model, HttpServletRequest request) {
         List<SubscriptionCard> subscriptionCards = adminService.getAll();
@@ -30,7 +30,7 @@ public class AdminController {
         model.addAttribute("createGymMemberCard", new CreateGymMemberRegistration());
         return "listCards";
     }
-
+*/
     @RequestMapping(value = "/gymmembers", method = RequestMethod.GET)
     public String listGymMembers(Model model, HttpServletRequest request) {
         List<GymMember> gymMembers = gymMemberService.getAll();
@@ -38,7 +38,7 @@ public class AdminController {
         model.addAttribute("createGymMemberRegistration", new CreateGymMemberRegistration());
         return "listGymMembers";
     }
-
+    @RequestMapping (value = "/gymmembers", method = RequestMethod.POST)
     public String createGymMember(CreateGymMemberRegistration gymMemberRegistration, Model model) {
         GymMember gymMember = getGymMember(gymMemberRegistration);
         gymMemberService.createGymMember(gymMember);
@@ -67,11 +67,12 @@ public class AdminController {
         gymSubscription.setPrice(gymMemberRegistration.getPrice());
 
         gymMember.setGymTrainer(gymTrainer);
-        gymMember.setSubscription(gymSubscription);
+        gymMember.setGymSubscription(gymSubscription);
 
         return gymMember;
     }
 
+    /*
     private CreateGymMemberRegistration getGymMemberRegistration(GymMember gymMember) {
         CreateGymMemberRegistration createGymMemberRegistration = new CreateGymMemberRegistration();
 
@@ -93,4 +94,5 @@ public class AdminController {
 
         return createGymMemberRegistration;
     }
+    */
 }
