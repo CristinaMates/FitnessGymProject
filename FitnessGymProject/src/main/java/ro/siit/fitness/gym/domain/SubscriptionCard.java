@@ -9,6 +9,7 @@ public class SubscriptionCard {
     private Date endDate;
     private GymMember gymMember;
 
+
     public SubscriptionCard() {
     }
 

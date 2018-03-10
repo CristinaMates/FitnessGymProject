@@ -22,13 +22,12 @@ public class CreateGymMemberRegistration {
     private GymTrainer gymTrainer;
     private String firstNameTrainer;
     private String lastNameTrainer;
-    private List<String> program;
+    private String program;
 
     private GymSubscription gymSubscription;
     private String type;
     private int price;
     private float discount;
-
 
 
     public GymTrainer getGymTrainer() {
@@ -127,11 +126,11 @@ public class CreateGymMemberRegistration {
         this.corporate = corporate;
     }
 
-    public List<String> getProgram() {
+    public String getProgram() {
         return program;
     }
 
-    public void setProgram(List<String> program) {
+    public void setProgram(String program) {
         this.program = program;
     }
 
