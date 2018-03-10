@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>List of gym members</title>
+</head>
+<body>
+
+
+<form action="#" th:action="@{/gymmembers}" th:object="${createGymMemberRegistration}" method="post">
+    <div>
+        <label th:for="${firstName}">Gym member first name</label>
+        <input type="text" id="firstName" name="firstName" th:value="*{firstName}"/>
+    </div>
+    <div>
+        <label th:for="${lastName}">Gym member last name</label>
+        <input type="text" id="lastName" name="lastName" th:value="*{lastName}"/>
+    </div>
+    <div>
+        <label th:for="${gender}">Gym member gender</label>
+        <input type="text" id="gender" name="gender" th:value="*{gender}"/>
+    </div>
+    <div>
+        <label th:for="${birthDate}">Gym membe birth date</label>
+        <input type="text" id="birthDate" name="birthDate" th:value="*{birthDate}"/>
+    </div>
+    <div>
+        <label th:for="${telephone}">Gym member telephone</label>
+        <input type="text" id="telephone" name="telephone" th:value="*{telephone}"/>
+    </div>
+    <div>
+        <label th:for="${email}">Gym member email</label>
+        <input type="text" id="email" name="email" th:value="*{email}"/>
+    </div>
+    <div>
+        <label th:for="${student}">Gym member student</label>
+        <input type="text" id="student" name="student" th:value="*{student}"/>
+    </div>
+    <div>
+        <label th:for="${corporate}">Gym member corporate</label>
+        <input type="text" id="corporate" name="corporate" th:value="*{corporate}"/>
+    </div>
+    <div>
+        <label th:for="${gymTrainer}">Gym trainer</label>
+    </div>
+    <div>
+        <label th:for="${firstNameTrainer}">Trainer first name</label>
+        <input type="text" id="firstNameTrainer" name="firstNameTrainer" th:value="*{firstNameTrainer}"/>
+    </div>
+    <div>
+        <label th:for="${lastNameTrainer}">Trainer last name</label>
+        <input type="text" id="lastNameTrainer" name="lastNameTrainer" th:value="*{lastNameTrainer}"/>
+    </div>
+    <div>
+        <label th:for="${program}">Trainer program</label>
+        <input type="text" id="program" name="program" th:value="*{program}"/>
+    </div>
+
+    <div>
+        <label th:for="${gymSubscription}">Gym subscription</label>
+    </div>
+    <div>
+        <label th:for="${type}">Gym subcription type</label>
+        <input type="text" id="type" name="type" th:value="*{type}"/>
+    </div>
+    <div>
+        <label th:for="${price}">Gym subcription price</label>
+        <input type="text" id="price" name="price" th:value="*{price}"/>
+    </div>
+
+    <div>
+        <input type="submit" id="doUpdate" name="save client" value="create gym member"/>
+    </div>
+</form>
+
+<br/>
+<br/>
+
+
+<table id="myTableId" dt:table="true">
+    <thead>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Gender</th>
+        <th>Birth date</th>
+        <th>Telephone</th>
+        <th>Email</th>
+        <th>Student</th>
+        <th>Corporate</th>
+
+        <th>Gym Trainer</th>
+        <th>Trainer first name</th>
+        <th>Trainer last name</th>
+        <th>Trainer program</th>
+
+        <th>Gym subcription</th>
+        <th>Type</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="gymMember : ${gymMembers}">
+        <td th:text="${gymMember.firstName}"></td>
+        <td th:text="${gymMember.lastName}"></td>
+        <td th:text="${gymMember.gender}"></td>
+        <td th:text="${gymMember.birthDate}"></td>
+        <td th:text="${gymMember.telephone}"></td>
+        <td th:text="${gymMember.email}"></td>
+        <td th:text="${gymMember.student}"></td>
+        <td th:text="${gymMember.corporate}"></td>
+
+        <td>Gym Trainer</td>
+        <td th:text="${gymMember.gymTrainer.firstNameTrainer}"></td>
+        <td th:text="${gymMember.gymTrainer.lastNameTrainer}"></td>
+        <td th:text="${gymMember.gymTrainer.program}"></td>
+
+        <td>Gym Subsctiption</td>
+        <td th:text="${gymMember.gymSubscription.type}"></td>
+        <td th:text="${gymMember.gymSubscription.price}"></td>
+
+
+        <!--<td>-->
+        <!--<a th:href="@{/clients/} + ${client?.id} + '/'">Update</a>-->
+        <!--</td>-->
+
+        <td>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

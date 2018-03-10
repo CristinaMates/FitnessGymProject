@@ -1,9 +1,10 @@
 package ro.siit.fitness.gym.domain;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class GymMember {
-    private GymSubscription subscription;
+    private GymSubscription gymSubscription;
     private GymTrainer gymTrainer;
     private String firstName;
     private String lastName;
@@ -19,8 +20,8 @@ public class GymMember {
     public GymMember() {
     }
 
-    public GymMember(GymSubscription subscription, GymTrainer gymTrainer, String firstName, String lastName, Gender gender, Date birthDate, long id, long telephone, String email, boolean student, boolean corporate, int memberBudget) {
-        this.subscription = subscription;
+    public GymMember(GymSubscription gymSubscription, GymTrainer gymTrainer, String firstName, String lastName, Gender gender, Date birthDate, long id, long telephone, String email, boolean student, boolean corporate, int memberBudget) {
+        this.gymSubscription = gymSubscription;
         this.gymTrainer = gymTrainer;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -34,12 +35,12 @@ public class GymMember {
         this.memberBudget = memberBudget;
     }
 
-    public GymSubscription getSubscription() {
-        return subscription;
+    public GymSubscription getGymSubscription() {
+        return gymSubscription;
     }
 
-    public void setSubscription(GymSubscription subscription) {
-        this.subscription = subscription;
+    public void setGymSubscription(GymSubscription gymSubscription) {
+        this.gymSubscription = gymSubscription;
     }
 
     public GymTrainer getGymTrainer() {
@@ -133,7 +134,7 @@ public class GymMember {
     @Override
     public String toString() {
         return "GymMember{" +
-                "subscription=" + subscription +
+                "subscription=" + gymSubscription +
                 ", gymTrainer=" + gymTrainer +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
@@ -152,39 +153,25 @@ public class GymMember {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         GymMember gymMember = (GymMember) o;
-
-        if (id != gymMember.id) return false;
-        if (telephone != gymMember.telephone) return false;
-        if (student != gymMember.student) return false;
-        if (corporate != gymMember.corporate) return false;
-        if (memberBudget != gymMember.memberBudget) return false;
-        if (subscription != null ? !subscription.equals(gymMember.subscription) : gymMember.subscription != null)
-            return false;
-        if (gymTrainer != null ? !gymTrainer.equals(gymMember.gymTrainer) : gymMember.gymTrainer != null) return false;
-        if (firstName != null ? !firstName.equals(gymMember.firstName) : gymMember.firstName != null) return false;
-        if (lastName != null ? !lastName.equals(gymMember.lastName) : gymMember.lastName != null) return false;
-        if (gender != gymMember.gender) return false;
-        if (birthDate != null ? !birthDate.equals(gymMember.birthDate) : gymMember.birthDate != null) return false;
-        return email != null ? email.equals(gymMember.email) : gymMember.email == null;
+        return id == gymMember.id &&
+                telephone == gymMember.telephone &&
+                student == gymMember.student &&
+                corporate == gymMember.corporate &&
+                memberBudget == gymMember.memberBudget &&
+                Objects.equals(gymSubscription, gymMember.gymSubscription) &&
+                Objects.equals(gymTrainer, gymMember.gymTrainer) &&
+                Objects.equals(firstName, gymMember.firstName) &&
+                Objects.equals(lastName, gymMember.lastName) &&
+                gender == gymMember.gender &&
+                Objects.equals(birthDate, gymMember.birthDate) &&
+                Objects.equals(email, gymMember.email);
     }
 
     @Override
     public int hashCode() {
-        int result = subscription != null ? subscription.hashCode() : 0;
-        result = 31 * result + (gymTrainer != null ? gymTrainer.hashCode() : 0);
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        result = 31 * result + (gender != null ? gender.hashCode() : 0);
-        result = 31 * result + (birthDate != null ? birthDate.hashCode() : 0);
-        result = 31 * result + (int) (id ^ (id >>> 32));
-        result = 31 * result + (int) (telephone ^ (telephone >>> 32));
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (student ? 1 : 0);
-        result = 31 * result + (corporate ? 1 : 0);
-        result = 31 * result + memberBudget;
-        return result;
+
+        return Objects.hash(gymSubscription, gymTrainer, firstName, lastName, gender, birthDate, id, telephone, email, student, corporate, memberBudget);
     }
 }
 

@@ -8,6 +8,6 @@ public interface GymMemberService {
 
     List<GymMember> getAll();
 
-    void createGymMember(GymMember gymMember);
+    void createGymMember(GymMember gymMembers);
 
 }

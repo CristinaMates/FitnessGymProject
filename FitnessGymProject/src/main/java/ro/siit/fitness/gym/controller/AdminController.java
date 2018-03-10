@@ -21,9 +21,8 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
-    private AdminService adminService;
+    //private AdminService adminServi7ce;
     private GymMemberService gymMemberService;
-
 
     @RequestMapping(value = "/gymmembers", method = RequestMethod.GET)
     public String listGymMembers(Model model, HttpServletRequest request) {
@@ -33,7 +32,8 @@ public class AdminController {
         return "listGymMembers";
     }
 
-    @RequestMapping(value = "/gymmembers", method = RequestMethod.POST)
+    @RequestMapping (value = "/gymmembers", method = RequestMethod.POST)
+
     public String createGymMember(CreateGymMemberRegistration gymMemberRegistration, Model model) {
         GymMember gymMember = getGymMember(gymMemberRegistration);
         gymMemberService.createGymMember(gymMember);
@@ -68,7 +68,7 @@ public class AdminController {
         gymSubscription.setPrice(gymMemberRegistration.getPrice());
 
         gymMember.setGymTrainer(gymTrainer);
-        gymMember.setSubscription(gymSubscription);
+        gymMember.setGymSubscription(gymSubscription);
 
         return gymMember;
     }
@@ -79,6 +79,7 @@ public class AdminController {
      * @param gymMember
      * @return
      */
+
 
     private CreateGymMemberRegistration getGymMemberRegistration(GymMember gymMember) {
         CreateGymMemberRegistration createGymMemberRegistration = new CreateGymMemberRegistration();
@@ -96,55 +97,18 @@ public class AdminController {
         createGymMemberRegistration.setLastNameTrainer(gymMember.getGymTrainer().getLastNameTrainer());
         createGymMemberRegistration.setProgram(gymMember.getGymTrainer().getProgram());
 
-        createGymMemberRegistration.setType(gymMember.getSubscription().getType());
-        createGymMemberRegistration.setPrice(gymMember.getSubscription().getPrice());
+        createGymMemberRegistration.setType(gymMember.getGymSubscription().getType());
+        createGymMemberRegistration.setPrice(gymMember.getGymSubscription().getPrice());
 
         return createGymMemberRegistration;
     }
 
-    @RequestMapping(value = "/subscriptioncards", method = RequestMethod.GET)
-    public String listCards(Model model, HttpServletRequest request) {
-        List<SubscriptionCard> subscriptionCards = adminService.getAll();
-        model.addAttribute("subscriptionCards", subscriptionCards);
-        model.addAttribute("createSubscriptionCard", new CreateSubscriptionCard());
-        return "listCards";
-    }
 
-    /**
-     * Method for creating a new subscription card
-     * @param createSubscriptionCard
-     * @return
-     */
+   
 
-    private SubscriptionCard getSubscriptionCard(CreateSubscriptionCard createSubscriptionCard){
-        GymMember gymMember = new GymMember();
-        gymMember.setFirstName(createSubscriptionCard.getFirstName());
-        gymMember.setLastName(createSubscriptionCard.getLastName());
 
-        SubscriptionCard subscriptionCard = new SubscriptionCard();
-        subscriptionCard.setId(createSubscriptionCard.getId());
-        subscriptionCard.setStartDate(createSubscriptionCard.getStartDate());
-        subscriptionCard.setEndDate(createSubscriptionCard.getEndDate());
 
-        subscriptionCard.getGymMember();
-        return subscriptionCard;
-    }
 
-    /**
-     * Method for printing the card
-     * @param subscriptionCard
-     * @return
-     */
 
-    private CreateSubscriptionCard printCard(SubscriptionCard subscriptionCard){
-        CreateSubscriptionCard createSubscriptionCard = new CreateSubscriptionCard();
-        createSubscriptionCard.setFirstName(subscriptionCard.getGymMember().getFirstName());
-        createSubscriptionCard.setLastName(subscriptionCard.getGymMember().getLastName());
 
-        createSubscriptionCard.setId(subscriptionCard.getId());
-        createSubscriptionCard.setStartDate(subscriptionCard.getStartDate());
-        createSubscriptionCard.setEndDate(subscriptionCard.getEndDate());
-
-        return createSubscriptionCard;
-    }
 }
