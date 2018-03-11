@@ -1,6 +1,7 @@
 package ro.siit.fitness.gym.dto;
 
 import ro.siit.fitness.gym.domain.GymMember;
+import ro.siit.fitness.gym.domain.SubscriptionCard;
 
 import java.util.Date;
 
@@ -10,9 +11,18 @@ public class CreateGymSubscriptionCard {
     private String firstName;
     private String lastName;
 
+    private SubscriptionCard subscriptionCard;
     private long id;
     private Date startDate;
     private Date endDate;
+
+    public SubscriptionCard getSubscriptionCard() {
+        return subscriptionCard;
+    }
+
+    public void setSubscriptionCard(SubscriptionCard subscriptionCard) {
+        this.subscriptionCard = subscriptionCard;
+    }
 
     public String getFirstName() {
         return firstName;

@@ -1,4 +1,3 @@
-!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
 <head>
@@ -7,8 +6,7 @@
 </head>
 <body>
 
-
-<form action="#" th:action="@{/subscriptioncards}" th:object="${createSubscriptionCard}" method="post">
+<form action="#" th:action="@{/subscriptioncards}" th:object="${createGymSubscriptionCard}" method="post">
     <div>
         <label th:for="${gymMember}">Gym member</label>
     </div>
@@ -21,6 +19,9 @@
         <input type="text" id="lastName" name="lastName" th:value="*{lastName}"/>
     </div>
     <div>
+        <div>
+            <label th:for="${subscriptionCard}">Gym subscription card</label>
+        </div>
         <label th:for="${startDate}">Start Date</label>
         <input type="text" id="startDate" name="startDate" th:value="*{startDate}"/>
     </div>
@@ -46,6 +47,9 @@
 
         <th>Start date</th>
         <th>End date</th>
+        <th>ID</th>
+        <th>Update</th>
+        <th>Delete</th>
     </tr>
     </thead>
     <tbody>
@@ -55,6 +59,17 @@
 
         <td th:text="${subscriptionCard.startDate}"></td>
         <td th:text="${subscriptionCard.endDate}"></td>
+        <td th:text="${subscriptionCard.id}"></td>
+
+        <td>
+            <a th:href="@{/subscriptioncards/} + ${subscriptionCard?.id} + '/'">Update</a>
+        </td>
+
+        <td>
+            <form th:action="@{/subscriptioncards/delete/} + ${subscriptionCard?.id} + '/'" th:object="${subscriptionCard}" method="post">
+                <input type="submit" value="Delete"/>
+            </form>
+        </td>
 
 
         <td>

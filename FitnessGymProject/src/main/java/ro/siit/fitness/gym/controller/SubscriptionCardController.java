@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ro.siit.fitness.gym.domain.GymMember;
 import ro.siit.fitness.gym.domain.SubscriptionCard;
-import ro.siit.fitness.gym.dto.CreateGymMemberRegistration;
 import ro.siit.fitness.gym.dto.CreateGymSubscriptionCard;
 import ro.siit.fitness.gym.service.SubscriptionCardService;
 
@@ -25,55 +24,55 @@ public class SubscriptionCardController {
     public String listCards(Model model, HttpServletRequest request) {
         List<SubscriptionCard> subscriptionCards = subscriptionCardService.getAll();
         model.addAttribute("subscriptionCards", subscriptionCards);
-        model.addAttribute("createGymMemberCard", new CreateGymMemberRegistration());
-        return "listCards";
+        model.addAttribute("createGymSubscriptionCard", new CreateGymSubscriptionCard());
+        return "listSubscriptionCards";
     }
 
     @RequestMapping(value = "/subscriptioncards", method = RequestMethod.POST)
-    public String createGymSubscriptionCard(CreateGymSubscriptionCard gymSubscriptionCard, Model model) {
+    public String createSubscriptionCard(CreateGymSubscriptionCard gymSubscriptionCard, Model model) {
         SubscriptionCard subscriptionCard = getSubscriptionCard(gymSubscriptionCard);
         subscriptionCardService.createSubscriptionCard(subscriptionCard);
-        return "redirect:/subcriptioncards";
+        return "redirect:/subscriptioncards";
     }
 
-    @RequestMapping(value = "/subscriptioncards{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/subscriptioncards/{id}", method = RequestMethod.GET)
     public String getSubscriptionCard(@PathVariable long id, Model model) {
         SubscriptionCard subscriptionCard = subscriptionCardService.getById(id);
-        model.addAttribute("updateSubscriptionCardRequest", getSubcriptionCardRequest(subscriptionCard));
-        model.addAttribute("subcriptionCard_id", id);
+        model.addAttribute("updateGymSubscriptionCard", getGymSubcriptionCard(subscriptionCard));
+        model.addAttribute("subscriptionCard_id", id);
         return "updateSubscriptionCard";
     }
 
     @RequestMapping(value = "/subscriptioncards/update/{id}", method = RequestMethod.POST)
-    public String updateSubscriptionCard(CreateGymSubscriptionCard subscriptionCardRequest, @PathVariable long id) {
-        SubscriptionCard subscriptionCard = getSubscriptionCard(subscriptionCardRequest);
+    public String updateSubscriptionCard(CreateGymSubscriptionCard gymSubscriptionCard, @PathVariable long id) {
+        SubscriptionCard subscriptionCard = getSubscriptionCard(gymSubscriptionCard);
         subscriptionCardService.updateGymSubscriptionCard(subscriptionCard, id);
         return "redirect:/subscriptioncards";
     }
 
-    @RequestMapping(value = "subscriptioncards/delete/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/subscriptioncards/delete/{id}", method = RequestMethod.POST)
     public String removeGymSubscriptionCard(@PathVariable long id, Model model) {
         subscriptionCardService.removeGymSubscriptionCard(id);
-        return "redirect:/subscriptionscards";
+        return "redirect:/subscriptioncards";
     }
 
     /**
      * Method for getting information needed from dto
-     * @param createSubscriptionCard
+     * @param gymSubscriptionCard
      * @return a new subscriptionCard with the information got from the dto
      */
 
-    private SubscriptionCard getSubscriptionCard(CreateGymSubscriptionCard createSubscriptionCard) {
+    private SubscriptionCard getSubscriptionCard(CreateGymSubscriptionCard gymSubscriptionCard) {
         GymMember gymMember = new GymMember();
-        gymMember.setFirstName(createSubscriptionCard.getFirstName());
-        gymMember.setLastName(createSubscriptionCard.getLastName());
+        gymMember.setFirstName(gymSubscriptionCard.getFirstName());
+        gymMember.setLastName(gymSubscriptionCard.getLastName());
 
         SubscriptionCard subscriptionCard = new SubscriptionCard();
-        subscriptionCard.setId(createSubscriptionCard.getId());
-        subscriptionCard.setStartDate(createSubscriptionCard.getStartDate());
-        subscriptionCard.setEndDate(createSubscriptionCard.getEndDate());
+        subscriptionCard.setId(gymSubscriptionCard.getId());
+        subscriptionCard.setStartDate(gymSubscriptionCard.getStartDate());
+        subscriptionCard.setEndDate(gymSubscriptionCard.getEndDate());
 
-        subscriptionCard.getGymMember();
+        subscriptionCard.setGymMember(gymMember);
         return subscriptionCard;
     }
 
@@ -83,18 +82,18 @@ public class SubscriptionCardController {
      * @return a subscriptionCard reference from the dto
      */
 
-    private CreateGymSubscriptionCard getSubcriptionCardRequest(SubscriptionCard subscriptionCard) {
-        CreateGymSubscriptionCard createSubscriptionCard = new CreateGymSubscriptionCard();
-        createSubscriptionCard.setFirstName(subscriptionCard.getGymMember().getFirstName());
-        createSubscriptionCard.setLastName(subscriptionCard.getGymMember().getLastName());
+    private CreateGymSubscriptionCard getGymSubcriptionCard(SubscriptionCard subscriptionCard) {
+        CreateGymSubscriptionCard createGymSubscriptionCard = new CreateGymSubscriptionCard();
+        createGymSubscriptionCard.setFirstName(subscriptionCard.getGymMember().getFirstName());
+        createGymSubscriptionCard.setLastName(subscriptionCard.getGymMember().getLastName());
+        createGymSubscriptionCard.setId(subscriptionCard.getId());
 
-        createSubscriptionCard.setId(subscriptionCard.getId());
         if (checkCardAvailability(subscriptionCard)) {
-            subscriptionCard.setStartDate(createSubscriptionCard.getStartDate());
-            subscriptionCard.setEndDate(createSubscriptionCard.getEndDate());
+            subscriptionCard.setStartDate(createGymSubscriptionCard.getStartDate());
+            subscriptionCard.setEndDate(createGymSubscriptionCard.getEndDate());
         }
 
-        return createSubscriptionCard;
+        return createGymSubscriptionCard;
     }
 
     /**
