@@ -1,6 +1,7 @@
 package ro.siit.fitness.gym.domain;
 
 public class Reservation {
+    private GymMember gymMember;
     private String period;
     private GymTrainer gymTrainer;
     private long id;
@@ -8,10 +9,19 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(String period, GymTrainer gymTrainer, long id) {
+    public Reservation(GymMember gymMember, String period, GymTrainer gymTrainer, long id) {
+        this.gymMember = gymMember;
         this.period = period;
         this.gymTrainer = gymTrainer;
         this.id = id;
+    }
+
+    public GymMember getGymMember() {
+        return gymMember;
+    }
+
+    public void setGymMember(GymMember gymMember) {
+        this.gymMember = gymMember;
     }
 
     public String getPeriod() {
