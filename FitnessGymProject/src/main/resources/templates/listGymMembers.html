@@ -109,35 +109,35 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="gymMember : ${gymMembers}">
-        <td th:text="${gymMember.firstName}"></td>
-        <td th:text="${gymMember.lastName}"></td>
-        <td th:text="${gymMember.gender}"></td>
-        <td th:text="${gymMember.birthDate}"></td>
-        <td th:text="${gymMember.telephone}"></td>
-        <td th:text="${gymMember.email}"></td>
-        <td th:text="${gymMember.student}"></td>
-        <td th:text="${gymMember.corporate}"></td>
-        <td th:text="${gymMember.id}"></td>
+    <tr th:each="gymMembers : ${gymMembers}">
+        <td th:text="${gymMembers.firstName}"></td>
+        <td th:text="${gymMembers.lastName}"></td>
+        <td th:text="${gymMembers.gender}"></td>
+        <td th:text="${gymMembers.birthDate}"></td>
+        <td th:text="${gymMembers.telephone}"></td>
+        <td th:text="${gymMembers.email}"></td>
+        <td th:text="${gymMembers.student}"></td>
+        <td th:text="${gymMembers.corporate}"></td>
+        <td th:text="${gymMembers.id}"></td>
 
 
         <td>Gym Trainer</td>
-        <td th:text="${gymMember.gymTrainer.firstNameTrainer}"></td>
-        <td th:text="${gymMember.gymTrainer.lastNameTrainer}"></td>
-        <td th:text="${gymMember.gymTrainer.program}"></td>
+        <td th:text="${gymMembers.gymTrainer.firstNameTrainer}"></td>
+        <td th:text="${gymMembers.gymTrainer.lastNameTrainer}"></td>
+        <td th:text="${gymMembers.gymTrainer.program}"></td>
 
         <td>Gym Subsctiption</td>
-        <td th:text="${gymMember.gymSubscription.type}"></td>
-        <td th:text="${gymMember.gymSubscription.price}"></td>
-        <td th:text="${gymMember.gymSubscription.discount}"></td>
+        <td th:text="${gymMembers.gymSubscription.type}"></td>
+        <td th:text="${gymMembers.gymSubscription.price}"></td>
+        <td th:text="${gymMembers.gymSubscription.discount}"></td>
 
 
         <td>
-            <a th:href="@{/gymmembers/} + ${gymMember?.id} + '/'">Update</a>
+            <a th:href="@{/gymmembers/} + ${gymMembers?.id} + '/'">Update</a>
         </td>
 
         <td>
-            <form th:action="@{/gymmembers/delete/} + ${gymMember?.id} + '/'" th:object="${gymMember}" method="post">
+            <form th:action="@{/gymmembers/delete/} + ${gymMembers?.id} + '/'" th:object="${gymMembers}" method="post">
                 <input type="submit" value="Delete"/>
             </form>
         </td>

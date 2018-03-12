@@ -7,21 +7,23 @@ public class GymTrainer {
     private String firstNameTrainer;
     private String lastNameTrainer;
     private int capacity;
-    private List<GymMember> gymMember;
+    private List<GymMember> gymMembers;
     private String program;
     private final int MIN_NUMBER_GYM_MEMBERS = 5;
     private final int MAX_NUMBER_GYM_MEMBERS = 20;
+    private GymLocation gymLocation;
 
     public GymTrainer() {
     }
 
 
-    public GymTrainer(String firstNameTrainer, String lastNameTrainer, int capacity, List<GymMember> gymMember, String program) {
+    public GymTrainer(String firstNameTrainer, String lastNameTrainer, int capacity, List<GymMember> gymMembers, String program, GymLocation gymLocation) {
         this.firstNameTrainer = firstNameTrainer;
         this.lastNameTrainer = lastNameTrainer;
         this.capacity = capacity;
-        this.gymMember = gymMember;
+        this.gymMembers = gymMembers;
         this.program = program;
+        this.gymLocation = gymLocation;
     }
 
     public String getFirstNameTrainer() {
@@ -56,12 +58,12 @@ public class GymTrainer {
         this.capacity = capacity;
     }
 
-    public List<GymMember> getGymMember() {
-        return gymMember;
+    public List<GymMember> getGymMembers() {
+        return gymMembers;
     }
 
-    public void setGymMember(List<GymMember> gymMember) {
-        this.gymMember = gymMember;
+    public void setGymMembers(List<GymMember> gymMembers) {
+        this.gymMembers = gymMembers;
     }
 
     public String getProgram() {
@@ -72,16 +74,25 @@ public class GymTrainer {
         this.program = program;
     }
 
+    public GymLocation getGymLocation() {
+        return gymLocation;
+    }
+
+    public void setGymLocation(GymLocation gymLocation) {
+        this.gymLocation = gymLocation;
+    }
+
     @Override
     public String toString() {
         return "GymTrainer{" +
                 "firstNameTrainer='" + firstNameTrainer + '\'' +
                 ", lastNameTrainer='" + lastNameTrainer + '\'' +
                 ", capacity=" + capacity +
-                ", gymMember=" + gymMember +
+                ", gymMembers=" + gymMembers +
                 ", program='" + program + '\'' +
                 ", MIN_NUMBER_GYM_MEMBERS=" + MIN_NUMBER_GYM_MEMBERS +
                 ", MAX_NUMBER_GYM_MEMBERS=" + MAX_NUMBER_GYM_MEMBERS +
+                ", gymLocation=" + gymLocation +
                 '}';
     }
 
@@ -99,8 +110,9 @@ public class GymTrainer {
             return false;
         if (lastNameTrainer != null ? !lastNameTrainer.equals(that.lastNameTrainer) : that.lastNameTrainer != null)
             return false;
-        if (gymMember != null ? !gymMember.equals(that.gymMember) : that.gymMember != null) return false;
-        return program != null ? program.equals(that.program) : that.program == null;
+        if (gymMembers != null ? !gymMembers.equals(that.gymMembers) : that.gymMembers != null) return false;
+        if (program != null ? !program.equals(that.program) : that.program != null) return false;
+        return gymLocation != null ? gymLocation.equals(that.gymLocation) : that.gymLocation == null;
     }
 
     @Override
@@ -108,10 +120,11 @@ public class GymTrainer {
         int result = firstNameTrainer != null ? firstNameTrainer.hashCode() : 0;
         result = 31 * result + (lastNameTrainer != null ? lastNameTrainer.hashCode() : 0);
         result = 31 * result + capacity;
-        result = 31 * result + (gymMember != null ? gymMember.hashCode() : 0);
+        result = 31 * result + (gymMembers != null ? gymMembers.hashCode() : 0);
         result = 31 * result + (program != null ? program.hashCode() : 0);
         result = 31 * result + MIN_NUMBER_GYM_MEMBERS;
         result = 31 * result + MAX_NUMBER_GYM_MEMBERS;
+        result = 31 * result + (gymLocation != null ? gymLocation.hashCode() : 0);
         return result;
     }
 }

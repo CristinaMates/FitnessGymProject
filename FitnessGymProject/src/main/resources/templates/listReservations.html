@@ -54,7 +54,7 @@
     </thead>
     <tbody>
     <tr th:each="reservation : ${reservations}">
-        <td th:text="${reservation.gymMember.email}"></td>
+        <td th:text="${reservation.gymMembers.email}"></td>
 
         <td>Gym Trainer</td>
         <td th:text="${reservation.gymTrainer.firstNameTrainer}"></td>

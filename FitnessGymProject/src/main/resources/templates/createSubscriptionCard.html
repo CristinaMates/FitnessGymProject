@@ -10,7 +10,7 @@
 
 <form action="#" th:action="@{/subscriptioncards}" th:object="${createSubscriptionCard}" method="post">
     <div>
-        <label th:for="${gymMember}">Gym member</label>
+        <label th:for="${gymMembers}">Gym member</label>
     </div>
     <div>
         <label th:for="${firstName}">Gym member first</label>
@@ -50,8 +50,8 @@
     </thead>
     <tbody>
     <tr th:each="subscriptionCard : ${subscriptionCards}">
-        <td th:text="${subscriptionCard.gymMember.firstName}"></td>
-        <td th:text="${subscriptionCard.gymMember.lastName}"></td>
+        <td th:text="${subscriptionCard.gymMembers.firstName}"></td>
+        <td th:text="${subscriptionCard.gymMembers.lastName}"></td>
 
         <td th:text="${subscriptionCard.startDate}"></td>
         <td th:text="${subscriptionCard.endDate}"></td>
