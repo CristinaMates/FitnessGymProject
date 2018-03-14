@@ -3,6 +3,7 @@ package ro.siit.fitness.gym.service;
 import org.springframework.stereotype.Service;
 import ro.siit.fitness.gym.domain.SubscriptionCard;
 
+import javax.xml.bind.ValidationException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +18,7 @@ public class SubscriptionCardServiceImpl implements SubscriptionCardService {
     }
 
     @Override
-    public void createSubscriptionCard(SubscriptionCard subscriptionCard) {
+    public void createSubscriptionCard(SubscriptionCard subscriptionCard){
         subscriptionCard.setId(System.currentTimeMillis());
         subscriptionCards.add(subscriptionCard);
 

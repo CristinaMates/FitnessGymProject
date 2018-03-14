@@ -1,5 +1,6 @@
 package ro.siit.fitness.gym.domain;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class SubscriptionCard {

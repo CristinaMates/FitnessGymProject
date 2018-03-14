@@ -5,9 +5,9 @@ import java.util.Objects;
 public class GymLocation {
 
     private int capacity;
-    GymAddress address;
-    String schedule;
-    WeekDays days;
+    private GymAddress address;
+    private String schedule;
+    private WeekDays days;
 
     public GymLocation() {
 

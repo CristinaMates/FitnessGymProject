@@ -1,14 +1,15 @@
-!DOCTYPE HTML>
+GTM MEMBER UPDATE
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
 <head>
     <title>Update Client</title>
-    <meta http-equiv="Content-Type" content="application/x-www-form-urlencoded; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="application/x-www-form-urlencoded; charset=UTF-8"/>
 </head>
 <body>
 
 
-<form action="#" th:action="@{/subscriptioncards/update/} + ${subscriptionCard_id} + '/'" th:object="${updateGymSubscriptionCard}" method="post">
+<form action="#" th:action="@{/subscriptioncards/update/} + ${subscriptionCard_id} + '/'"
+      th:object="${updateGymSubscriptionCard}" method="post">
     <div>
         <label th:for="${gymMember}">Gym member</label>
     </div>

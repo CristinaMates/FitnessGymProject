@@ -2,6 +2,7 @@ package ro.siit.fitness.gym.service;
 
 import ro.siit.fitness.gym.domain.SubscriptionCard;
 
+import javax.xml.bind.ValidationException;
 import java.util.List;
 
 public interface SubscriptionCardService {

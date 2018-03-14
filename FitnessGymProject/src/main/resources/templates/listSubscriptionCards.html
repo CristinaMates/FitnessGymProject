@@ -3,35 +3,39 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Create card</title>
+
+    <style>
+    .error {
+        color: red; font-weight: bold;
+    }
+
+    </style>
 </head>
 <body>
 
 <form action="#" th:action="@{/subscriptioncards}" th:object="${createGymSubscriptionCard}" method="post">
-    <div>
-        <label th:for="${gymMember}">Gym member</label>
-    </div>
-    <div>
+
+    <label th:for="${gymMember}">Gym member details</label>
+
+    <fieldset>
         <label th:for="${firstName}">Gym member first</label>
         <input type="text" id="firstName" name="firstName" th:value="*{firstName}"/>
-    </div>
-    <div>
+        <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</td>
+
         <label th:for="${lastName}">Gym member last name</label>
         <input type="text" id="lastName" name="lastName" th:value="*{lastName}"/>
-    </div>
-    <div>
-        <div>
-            <label th:for="${subscriptionCard}">Gym subscription card</label>
-        </div>
+        <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</td>
+
+        <label th:for="${subscriptionCard}">Gym subscription card</label>
+
         <label th:for="${startDate}">Start Date</label>
         <input type="text" id="startDate" name="startDate" th:value="*{startDate}"/>
-    </div>
-    <div>
+
         <label th:for="${endDate}">End date</label>
         <input type="text" id="endDate" name="endDate" th:value="*{endDate}"/>
-    </div>
-    <div>
+
         <input type="submit" id="doUpdate" name="save client" value="create subscription card"/>
-    </div>
+    </fieldset>
 </form>
 
 <br/>
@@ -66,11 +70,11 @@
         </td>
 
         <td>
-            <form th:action="@{/subscriptioncards/delete/} + ${subscriptionCard?.id} + '/'" th:object="${subscriptionCard}" method="post">
+            <form th:action="@{/subscriptioncards/delete/} + ${subscriptionCard?.id} + '/'"
+                  th:object="${subscriptionCard}" method="post">
                 <input type="submit" value="Delete"/>
             </form>
         </td>
-
 
         <td>
         </td>
