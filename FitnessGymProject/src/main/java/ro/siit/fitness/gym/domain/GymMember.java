@@ -9,9 +9,7 @@ import java.util.Objects;
 public class GymMember {
     private GymSubscription gymSubscription;
     private GymTrainer gymTrainer;
-    @NotNull
     private String firstName;
-    @NotNull
     private String lastName;
     private Gender gender;
     private Date birthDate;

@@ -2,14 +2,26 @@
       xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
     <title>Create card</title>
 
-    <style>
-    .error {
-        color: red; font-weight: bold;
-    }
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
 
-    </style>
+    <link href="../static/css/jquery.datetimepicker.min.css"
+          th:href="@{css/jquery.datetimepicker.min.css}" rel="stylesheet" media="screen"/>
+    <script src="jquery.datetimepicker.js"></script>
+    <script src="jquery.datetimepicker.full.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+
 </head>
 <body>
 
@@ -18,21 +30,50 @@
     <label th:for="${gymMember}">Gym member details</label>
 
     <fieldset>
-        <label th:for="${firstName}">Gym member first</label>
+        <label th:for="${firstName}">Gym member first name</label>
         <input type="text" id="firstName" name="firstName" th:value="*{firstName}"/>
         <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</td>
 
         <label th:for="${lastName}">Gym member last name</label>
         <input type="text" id="lastName" name="lastName" th:value="*{lastName}"/>
         <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</td>
+    </fieldset>
 
-        <label th:for="${subscriptionCard}">Gym subscription card</label>
+    <label th:for="${subscriptionCard}">Gym subscription card</label>
+
+    <fieldset>
 
         <label th:for="${startDate}">Start Date</label>
         <input type="text" id="startDate" name="startDate" th:value="*{startDate}"/>
+        <script>
+    $(document).ready(function(){
+        var date_input=$('input[name="startDate"]');
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'dd/mm/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        })
+    })
 
+        </script>
         <label th:for="${endDate}">End date</label>
         <input type="text" id="endDate" name="endDate" th:value="*{endDate}"/>
+        <script>
+    $(document).ready(function(){
+        var date_input=$('input[name="endDate"]');
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'dd/mm/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        })
+    })
+
+
+        </script>
 
         <input type="submit" id="doUpdate" name="save client" value="create subscription card"/>
     </fieldset>
@@ -61,8 +102,8 @@
         <td th:text="${subscriptionCard.gymMember.firstName}"></td>
         <td th:text="${subscriptionCard.gymMember.lastName}"></td>
 
-        <td th:text="${subscriptionCard.startDate}"></td>
-        <td th:text="${subscriptionCard.endDate}"></td>
+        <td th:text="${#dates.format(subscriptionCard.startDate, 'dd/mm/yyyy')}"></td>
+        <td th:text="${#dates.format(subscriptionCard.endDate, 'dd/mm/yyyy')}"></td>
         <td th:text="${subscriptionCard.id}"></td>
 
         <td>
@@ -81,6 +122,7 @@
     </tr>
     </tbody>
 </table>
+
 
 </body>
 </html>

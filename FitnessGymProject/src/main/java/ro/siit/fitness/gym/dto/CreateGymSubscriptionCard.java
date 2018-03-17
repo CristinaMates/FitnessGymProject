@@ -6,26 +6,30 @@ import ro.siit.fitness.gym.domain.GymMember;
 import ro.siit.fitness.gym.domain.SubscriptionCard;
 
 import javax.validation.constraints.NotNull;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 public class CreateGymSubscriptionCard {
-/*
-Gym member fields with added validators
- */
+    /*
+    Gym member fields with added validators
+     */
     private GymMember gymMember;
     @NotEmpty(message = "Enter gym member first name")
     private String firstName;
     @NotEmpty(message = "Enter gym member second name")
     private String lastName;
-/*
-SubscriptionCard fields with added validators
- */
+
+    /*
+    SubscriptionCard fields with added validators
+     */
     private SubscriptionCard subscriptionCard;
     private long id;
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "dd/mm/yyyy")
     @NotNull(message = "You have not selected a start date")
     private Date startDate;
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "dd/mm/yyyy")
     @NotNull(message = "You have not selected a end date")
     private Date endDate;
 

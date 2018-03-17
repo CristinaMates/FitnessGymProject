@@ -1,19 +1,10 @@
 package ro.siit.fitness.gym.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.FormatterRegistry;
-import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.MessageCodesResolver;
-import org.springframework.validation.Validator;
-import org.springframework.web.WebApplicationInitializer;
+import org.springframework.validation.*;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.method.support.HandlerMethodArgumentResolver;
-import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
-import org.springframework.web.servlet.HandlerExceptionResolver;
-import org.springframework.web.servlet.config.annotation.*;
 import ro.siit.fitness.gym.domain.GymMember;
 import ro.siit.fitness.gym.domain.SubscriptionCard;
 import ro.siit.fitness.gym.dto.CreateGymSubscriptionCard;
@@ -21,12 +12,11 @@ import ro.siit.fitness.gym.service.SubscriptionCardService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import javax.xml.bind.ValidationException;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 @Controller
-public class SubscriptionCardController implements WebMvcConfigurer {
+public class SubscriptionCardController {
     @Autowired
     private SubscriptionCardService subscriptionCardService;
 
@@ -39,10 +29,14 @@ public class SubscriptionCardController implements WebMvcConfigurer {
     }
 
     @RequestMapping(value = "/subscriptioncards", method = RequestMethod.POST)
-    public String createSubscriptionCard(@Valid CreateGymSubscriptionCard gymSubscriptionCard, Model model, BindingResult bindingResult) {
+    public String createSubscriptionCard(@Valid CreateGymSubscriptionCard gymSubscriptionCard, BindingResult bindingResult, Model model) {
         SubscriptionCard subscriptionCard = getSubscriptionCard(gymSubscriptionCard);
         subscriptionCardService.createSubscriptionCard(subscriptionCard);
+        List<FieldError> errors = bindingResult.getFieldErrors();
         if (bindingResult.hasErrors()) {
+            for (FieldError error : errors) {
+                System.out.println(error.getObjectName() + " - " + error.getDefaultMessage());
+            }
             return "listSubscriptionCards";
         }
 
@@ -58,9 +52,16 @@ public class SubscriptionCardController implements WebMvcConfigurer {
     }
 
     @RequestMapping(value = "/subscriptioncards/update/{id}", method = RequestMethod.POST)
-    public String updateSubscriptionCard(CreateGymSubscriptionCard gymSubscriptionCard, @PathVariable long id) {
+    public String updateSubscriptionCard(@Valid CreateGymSubscriptionCard gymSubscriptionCard, @PathVariable long id, BindingResult bindingResult) {
         SubscriptionCard subscriptionCard = getSubscriptionCard(gymSubscriptionCard);
         subscriptionCardService.updateGymSubscriptionCard(subscriptionCard, id);
+        List<FieldError> errors = bindingResult.getFieldErrors();
+        if (bindingResult.hasErrors()) {
+            for (FieldError error : errors) {
+                System.out.println(error.getObjectName() + " - " + error.getDefaultMessage());
+            }
+            return "updateSubscriptionCard";
+        }
         return "redirect:/subscriptioncards";
     }
 
@@ -87,6 +88,7 @@ public class SubscriptionCardController implements WebMvcConfigurer {
         subscriptionCard.setStartDate(gymSubscriptionCard.getStartDate());
         subscriptionCard.setEndDate(gymSubscriptionCard.getEndDate());
 
+
         subscriptionCard.setGymMember(gymMember);
         return subscriptionCard;
     }
@@ -110,97 +112,6 @@ public class SubscriptionCardController implements WebMvcConfigurer {
 //        }
 
         return createGymSubscriptionCard;
-    }
-
-    @Override
-    public void configurePathMatch(PathMatchConfigurer pathMatchConfigurer) {
-
-    }
-
-    @Override
-    public void configureContentNegotiation(ContentNegotiationConfigurer contentNegotiationConfigurer) {
-
-    }
-
-    @Override
-    public void configureAsyncSupport(AsyncSupportConfigurer asyncSupportConfigurer) {
-
-    }
-
-    @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer defaultServletHandlerConfigurer) {
-
-    }
-
-    @Override
-    public void addFormatters(FormatterRegistry formatterRegistry) {
-
-    }
-
-    @Override
-    public void addInterceptors(InterceptorRegistry interceptorRegistry) {
-
-    }
-
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry resourceHandlerRegistry) {
-
-    }
-
-    @Override
-    public void addCorsMappings(CorsRegistry corsRegistry) {
-
-    }
-
-    @Override
-    public void addViewControllers(ViewControllerRegistry viewControllerRegistry) {
-        viewControllerRegistry.addViewController("/subscriptioncards").setViewName("listSubscriptionCards");
-
-    }
-
-    @Override
-    public void configureViewResolvers(ViewResolverRegistry viewResolverRegistry) {
-
-    }
-
-    @Override
-    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> list) {
-
-    }
-
-    @Override
-    public void addReturnValueHandlers(List<HandlerMethodReturnValueHandler> list) {
-
-    }
-
-    @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> list) {
-
-    }
-
-    @Override
-    public void extendMessageConverters(List<HttpMessageConverter<?>> list) {
-
-    }
-
-    @Override
-    public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> list) {
-
-    }
-
-    @Override
-    public void extendHandlerExceptionResolvers(List<HandlerExceptionResolver> list) {
-
-    }
-
-    @Override
-    public Validator getValidator() {
-        return null;
-    }
-
-    @Override
-    public MessageCodesResolver getMessageCodesResolver() {
-        return null;
     }
 
     /**
