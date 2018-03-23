@@ -12,6 +12,7 @@ public class GymTrainer {
     private final int MIN_NUMBER_GYM_MEMBERS = 5;
     private final int MAX_NUMBER_GYM_MEMBERS = 20;
     private GymLocation gymLocation;
+    private long id;
 
     public GymTrainer() {
     }
@@ -126,5 +127,13 @@ public class GymTrainer {
         result = 31 * result + MAX_NUMBER_GYM_MEMBERS;
         result = 31 * result + (gymLocation != null ? gymLocation.hashCode() : 0);
         return result;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getId() {
+        return id;
     }
 }

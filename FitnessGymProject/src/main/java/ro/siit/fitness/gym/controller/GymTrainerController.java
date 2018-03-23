@@ -3,6 +3,7 @@ package ro.siit.fitness.gym.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ro.siit.fitness.gym.domain.GymLocation;
@@ -30,14 +31,40 @@ public class GymTrainerController {
 
     }
 
-    @RequestMapping(value = "/trainerprogram", method = RequestMethod.GET)
-    private String listTrainerProgram(Model model, HttpServletRequest request) {
-        String gymTrainer = gymTrainerService.getTrainerProgram();
-        model.addAttribute("gymTrainer", gymTrainer);
-        model.addAttribute("createGymTrainerProgram", new CreateGymTrainerProgram());
-        return "listTrainerProgram";
+    @RequestMapping(value = "/trainersprogram", method = RequestMethod.GET)
+    private String listTrainersProgram(Model model, HttpServletRequest request) {
+        List<GymTrainer> gymTrainers = gymTrainerService.getAll();
+        model.addAttribute("gymTrainers", gymTrainers);
+        model.addAttribute("getGymTrainerProgram", new CreateGymTrainerProgram());
+        return "listTrainersProgram";
 
     }
+
+    @RequestMapping(value = "/trainersprogram", method = RequestMethod.POST)
+    public String createGymTrainer(CreateGymTrainerProgram gymTrainerProgram, Model model) {
+        GymTrainer gymTrainer = getGymTrainerProgram(gymTrainerProgram);
+        gymTrainerService.createGymTrainer(gymTrainer);
+        return "redirect:/trainersprogram";
+    }
+
+    @RequestMapping(value = "/trainersprogram/{id}", method = RequestMethod.GET)
+    private String getGymTrainer(@PathVariable long id, Model model){
+        GymTrainer gymTrainer = gymTrainerService.getById(id);
+        model.addAttribute("updateGymTrainerProgram", getGymTrainerProgram(gymTrainer));
+        model.addAttribute("gymTrainer_id", id);
+        return "updateTrainerProgram";
+
+    }
+
+    @RequestMapping(value = "/trainersprogram/update/{id}", method = RequestMethod.POST)
+    private String updateTrainerProgram(CreateGymTrainerProgram createGymTrainerProgram,@PathVariable long id){
+        GymTrainer gymTrainer= getGymTrainerProgram(createGymTrainerProgram);
+        gymTrainerService.updateTrainer(gymTrainer,id);
+        return "redirect:/trainersprogram";
+
+    }
+
+
 
     private GymTrainer getGymTrainerProgram(CreateGymTrainerProgram createGymTrainerProgram) {
 
@@ -58,7 +85,7 @@ public class GymTrainerController {
         return gymTrainer;
     }
 
-    private CreateGymTrainerProgram createGymTrainerProgram(GymTrainer gymTrainer) {
+    private CreateGymTrainerProgram getGymTrainerProgram(GymTrainer gymTrainer) {
         CreateGymTrainerProgram createGymTrainerProgram = new CreateGymTrainerProgram();
 
         createGymTrainerProgram.setFirstNameTrainer(gymTrainer.getFirstNameTrainer());
