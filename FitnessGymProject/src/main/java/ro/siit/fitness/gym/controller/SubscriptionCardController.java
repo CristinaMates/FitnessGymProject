@@ -1,5 +1,6 @@
 package ro.siit.fitness.gym.controller;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,16 +10,22 @@ import ro.siit.fitness.gym.domain.GymMember;
 import ro.siit.fitness.gym.domain.SubscriptionCard;
 import ro.siit.fitness.gym.dto.CreateGymSubscriptionCard;
 import ro.siit.fitness.gym.service.SubscriptionCardService;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.sql.Date;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Logger;
 
 @Controller
 public class SubscriptionCardController {
     @Autowired
     private SubscriptionCardService subscriptionCardService;
+
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(SubscriptionCardController.class);
+
+    private Map<String, CreateGymSubscriptionCard> subscriptionCardMap = new HashMap<>();
 
     @RequestMapping(value = "/subscriptioncards", method = RequestMethod.GET)
     public String listCards(Model model, HttpServletRequest request) {
@@ -32,15 +39,22 @@ public class SubscriptionCardController {
     public String createSubscriptionCard(@Valid CreateGymSubscriptionCard gymSubscriptionCard, BindingResult bindingResult, Model model) {
         SubscriptionCard subscriptionCard = getSubscriptionCard(gymSubscriptionCard);
         subscriptionCardService.createSubscriptionCard(subscriptionCard);
-        List<FieldError> errors = bindingResult.getFieldErrors();
         if (bindingResult.hasErrors()) {
-            for (FieldError error : errors) {
-                System.out.println(error.getObjectName() + " - " + error.getDefaultMessage());
+            List<String> errors = new LinkedList<>();
+            for (FieldError error:
+                    bindingResult.getFieldErrors()) {
+                errors.add("rejected value: "+ error.getRejectedValue()
+                        + " for field: "+error.getField());
             }
-            return "listSubscriptionCards";
+            model.addAttribute("errors", errors);
+            model.addAttribute("createGymSubscriptionCard", gymSubscriptionCard);
+            return listCards(model, null);
+            } else {
+            SubscriptionCard subscriptionCard1 = getSubscriptionCard(gymSubscriptionCard);
+            subscriptionCardService.createSubscriptionCard(subscriptionCard1);
+            return "redirect:/subscriptioncards";
         }
 
-        return "redirect:/subscriptioncards";
     }
 
     @RequestMapping(value = "/subscriptioncards/{id}", method = RequestMethod.GET)
@@ -55,13 +69,13 @@ public class SubscriptionCardController {
     public String updateSubscriptionCard(@Valid CreateGymSubscriptionCard gymSubscriptionCard, @PathVariable long id, BindingResult bindingResult) {
         SubscriptionCard subscriptionCard = getSubscriptionCard(gymSubscriptionCard);
         subscriptionCardService.updateGymSubscriptionCard(subscriptionCard, id);
-        List<FieldError> errors = bindingResult.getFieldErrors();
-        if (bindingResult.hasErrors()) {
-            for (FieldError error : errors) {
-                System.out.println(error.getObjectName() + " - " + error.getDefaultMessage());
-            }
-            return "updateSubscriptionCard";
-        }
+//        List<FieldError> errors = bindingResult.getFieldErrors();
+//        if (bindingResult.hasErrors()) {
+//            for (FieldError error : errors) {
+//                System.out.println(error.getObjectName() + " - " + error.getDefaultMessage());
+//            }
+//            return "updateSubscriptionCard";
+//        }
         return "redirect:/subscriptioncards";
     }
 

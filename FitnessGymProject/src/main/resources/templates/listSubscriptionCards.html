@@ -1,7 +1,14 @@
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables" xmlns:background-image="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<style>
+    body {
+    background-image: url("https://i.ytimg.com/vi/1TK8bT9yk_M/maxresdefault.jpg");
+    background-color: #cccccc;
+    }
+    </style>
+
 
     <title>Create card</title>
 
@@ -14,6 +21,7 @@
     <link href="../static/css/jquery.datetimepicker.min.css"
           th:href="@{css/jquery.datetimepicker.min.css}" rel="stylesheet" media="screen"/>
     <script src="jquery.datetimepicker.js"></script>
+    <script src="main.js"></script>
     <script src="jquery.datetimepicker.full.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script type="text/javascript"
@@ -21,6 +29,14 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
+    <table th:if="${errors != null}">
+        <tr th:each="error : ${errors}">
+            <div class="alert alert-danger">
+                <strong>Missing field<td th:text="${error}"></td></strong>
+            </div>
+
+        </tr>
+    </table>
 
 </head>
 <body>
@@ -33,6 +49,7 @@
         <label th:for="${firstName}">Gym member first name</label>
         <input type="text" id="firstName" name="firstName" th:value="*{firstName}"/>
         <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</td>
+
 
         <label th:for="${lastName}">Gym member last name</label>
         <input type="text" id="lastName" name="lastName" th:value="*{lastName}"/>
@@ -54,6 +71,7 @@
             container: container,
             todayHighlight: true,
             autoclose: true,
+
         })
     })
 
@@ -71,7 +89,6 @@
             autoclose: true,
         })
     })
-
 
         </script>
 
@@ -101,7 +118,6 @@
     <tr th:each="subscriptionCard : ${subscriptionCards}">
         <td th:text="${subscriptionCard.gymMember.firstName}"></td>
         <td th:text="${subscriptionCard.gymMember.lastName}"></td>
-
         <td th:text="${#dates.format(subscriptionCard.startDate, 'dd/mm/yyyy')}"></td>
         <td th:text="${#dates.format(subscriptionCard.endDate, 'dd/mm/yyyy')}"></td>
         <td th:text="${subscriptionCard.id}"></td>
@@ -121,6 +137,7 @@
         </td>
     </tr>
     </tbody>
+
 </table>
 
 
