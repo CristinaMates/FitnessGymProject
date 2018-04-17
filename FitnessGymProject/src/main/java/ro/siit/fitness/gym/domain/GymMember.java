@@ -2,6 +2,7 @@ package ro.siit.fitness.gym.domain;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Objects;
 
@@ -13,16 +14,15 @@ public class GymMember {
     private Gender gender;
     private Date birthDate;
     private long id;
-    private long telephone;
+    private String telephone;
     private String email;
     private boolean student;
     private boolean corporate;
-    private int memberBudget;
 
     public GymMember() {
     }
 
-    public GymMember(GymSubscription gymSubscription, GymTrainer gymTrainer, String firstName, String lastName, Gender gender, Date birthDate, long id, long telephone, String email, boolean student, boolean corporate, int memberBudget) {
+    public GymMember(GymSubscription gymSubscription, GymTrainer gymTrainer, String firstName, String lastName, Gender gender, Date birthDate, long id, String telephone, String email, boolean student, boolean corporate) {
         this.gymSubscription = gymSubscription;
         this.gymTrainer = gymTrainer;
         this.firstName = firstName;
@@ -34,7 +34,6 @@ public class GymMember {
         this.email = email;
         this.student = student;
         this.corporate = corporate;
-        this.memberBudget = memberBudget;
     }
 
     public GymSubscription getGymSubscription() {
@@ -77,11 +76,11 @@ public class GymMember {
         this.id = id;
     }
 
-    public long getTelephone() {
+    public String getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(long telephone) {
+    public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 
@@ -109,14 +108,6 @@ public class GymMember {
         this.corporate = corporate;
     }
 
-    public int getMemberBudget() {
-        return memberBudget;
-    }
-
-    public void setMemberBudget(int memberBudget) {
-        this.memberBudget = memberBudget;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -136,7 +127,7 @@ public class GymMember {
     @Override
     public String toString() {
         return "GymMember{" +
-                "subscription=" + gymSubscription +
+                "gymSubscription=" + gymSubscription +
                 ", gymTrainer=" + gymTrainer +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
@@ -147,7 +138,6 @@ public class GymMember {
                 ", email='" + email + '\'' +
                 ", student=" + student +
                 ", corporate=" + corporate +
-                ", memberBudget=" + memberBudget +
                 '}';
     }
 
@@ -155,25 +145,36 @@ public class GymMember {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         GymMember gymMember = (GymMember) o;
-        return id == gymMember.id &&
-                telephone == gymMember.telephone &&
-                student == gymMember.student &&
-                corporate == gymMember.corporate &&
-                memberBudget == gymMember.memberBudget &&
-                Objects.equals(gymSubscription, gymMember.gymSubscription) &&
-                Objects.equals(gymTrainer, gymMember.gymTrainer) &&
-                Objects.equals(firstName, gymMember.firstName) &&
-                Objects.equals(lastName, gymMember.lastName) &&
-                gender == gymMember.gender &&
-                Objects.equals(birthDate, gymMember.birthDate) &&
-                Objects.equals(email, gymMember.email);
+
+        if (id != gymMember.id) return false;
+        if (student != gymMember.student) return false;
+        if (corporate != gymMember.corporate) return false;
+        if (gymSubscription != null ? !gymSubscription.equals(gymMember.gymSubscription) : gymMember.gymSubscription != null)
+            return false;
+        if (gymTrainer != null ? !gymTrainer.equals(gymMember.gymTrainer) : gymMember.gymTrainer != null) return false;
+        if (firstName != null ? !firstName.equals(gymMember.firstName) : gymMember.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(gymMember.lastName) : gymMember.lastName != null) return false;
+        if (gender != gymMember.gender) return false;
+        if (birthDate != null ? !birthDate.equals(gymMember.birthDate) : gymMember.birthDate != null) return false;
+        if (telephone != null ? !telephone.equals(gymMember.telephone) : gymMember.telephone != null) return false;
+        return email != null ? email.equals(gymMember.email) : gymMember.email == null;
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(gymSubscription, gymTrainer, firstName, lastName, gender, birthDate, id, telephone, email, student, corporate, memberBudget);
+        int result = gymSubscription != null ? gymSubscription.hashCode() : 0;
+        result = 31 * result + (gymTrainer != null ? gymTrainer.hashCode() : 0);
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (gender != null ? gender.hashCode() : 0);
+        result = 31 * result + (birthDate != null ? birthDate.hashCode() : 0);
+        result = 31 * result + (int) (id ^ (id >>> 32));
+        result = 31 * result + (telephone != null ? telephone.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (student ? 1 : 0);
+        result = 31 * result + (corporate ? 1 : 0);
+        return result;
     }
 }
-

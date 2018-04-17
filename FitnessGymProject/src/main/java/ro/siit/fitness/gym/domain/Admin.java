@@ -1,12 +1,15 @@
 package ro.siit.fitness.gym.domain;
 
-import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Admin {
-    SubscriptionCard subscriptionCard;
-    GymSubscription gymSubscription;
-    GymMember member;
-    GymTrainer trainer;
+    private SubscriptionCard subscriptionCard;
+    private GymSubscription gymSubscription;
+    private GymMember member;
+    private GymTrainer trainer;
+    private List<String> roles = new LinkedList<>();
+    private String userName;
 
     public Admin(SubscriptionCard subscriptionCard,
                  GymSubscription gymSubscription,
@@ -53,6 +56,22 @@ public class Admin {
         this.trainer = trainer;
     }
 
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     @Override
     public String toString() {
         return "Admin{" +
@@ -62,6 +81,4 @@ public class Admin {
                 ", trainer=" + trainer +
                 '}';
     }
-
-
 }

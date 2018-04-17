@@ -1,0 +1,14 @@
+package ro.siit.fitness.gym.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class ErrorController {
+    @RequestMapping("403")
+    public String on403() {
+
+        return "403";
+    }
+
+}

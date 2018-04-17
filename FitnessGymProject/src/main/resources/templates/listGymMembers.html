@@ -4,74 +4,144 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>List of gym members</title>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link href="../static/css/jquery.datetimepicker.min.css"
+          th:href="@{css/jquery.datetimepicker.min.css}" rel="stylesheet" media="screen"/>
+    <!--<script src="jquery.datetimepicker.js"></script>-->
+    <!--<script src="jquery.datetimepicker.full.js"></script>-->
+    <!--<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>-->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
 </head>
 <body>
 
+<table th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error}"></td>
+    </tr>
+
+</table>
 
 <form action="#" th:action="@{/gymmembers}" th:object="${createGymMemberRegistration}" method="post">
-    <div>
-        <label th:for="${firstName}">Gym member first name</label>
+    <fieldset>
+        <legend>Gym member details</legend>
+        <label th:for="${firstName}">First name</label>
         <input type="text" id="firstName" name="firstName" th:value="*{firstName}"/>
-    </div>
-    <div>
-        <label th:for="${lastName}">Gym member last name</label>
+
+        <label th:for="${lastName}">Last name</label>
         <input type="text" id="lastName" name="lastName" th:value="*{lastName}"/>
-    </div>
-    <div>
-        <label th:for="${gender}">Gym member gender</label>
-        <input type="text" id="gender" name="gender" th:value="*{gender}"/>
-    </div>
-    <div>
-        <label th:for="${birthDate}">Gym membe birth date</label>
+
+        <label th:for="${gender}">Gender</label>
+        <select id="gender" name="gender">
+            <option value="NONE">--- Select ---</option>
+            <option value="MALE">MALE</option>
+            <option value="FEMALE">FEMALE</option>
+            <option value="UNSPECIFIED">UNSPECIFIED</option>
+        </select>
+
+        <label th:for="${birthDate}">Birth date</label>
         <input type="text" id="birthDate" name="birthDate" th:value="*{birthDate}"/>
-    </div>
-    <div>
-        <label th:for="${telephone}">Gym member telephone</label>
+        <td th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}">Birth date error</td>
+
+        <label th:for="${telephone}">Telephone</label>
         <input type="text" id="telephone" name="telephone" th:value="*{telephone}"/>
-    </div>
-    <div>
-        <label th:for="${email}">Gym member email</label>
+
+        <label th:for="${email}">E-mail</label>
         <input type="text" id="email" name="email" th:value="*{email}"/>
-    </div>
-    <div>
-        <label th:for="${student}">Gym member student</label>
-        <input type="text" id="student" name="student" th:value="*{student}"/>
-    </div>
-    <div>
-        <label th:for="${corporate}">Gym member corporate</label>
-        <input type="text" id="corporate" name="corporate" th:value="*{corporate}"/>
-    </div>
-    <div>
-        <label th:for="${gymTrainer}">Gym trainer</label>
-    </div>
-    <div>
+
+        <label th:for="${student}">Student</label>
+        <select id="student" name="student">
+            <option value="NONE">--- Select ---</option>
+            <option value="true">True</option>
+            <option value="false">False</option>
+        </select>
+
+        <label th:for="${corporate}">Corporate</label>
+        <select id="corporate" name="corporate">
+            <option value="NONE">--- Select ---</option>
+            <option value="true">True</option>
+            <option value="false">False</option>
+        </select>
+    </fieldset>
+
+        <fieldset>
+            <legend>Gym trainer details</legend>
+
         <label th:for="${firstNameTrainer}">Trainer first name</label>
         <input type="text" id="firstNameTrainer" name="firstNameTrainer" th:value="*{firstNameTrainer}"/>
-    </div>
-    <div>
+
         <label th:for="${lastNameTrainer}">Trainer last name</label>
         <input type="text" id="lastNameTrainer" name="lastNameTrainer" th:value="*{lastNameTrainer}"/>
-    </div>
-    <div>
-        <label th:for="${program}">Trainer program</label>
-        <input type="text" id="program" name="program" th:value="*{program}"/>
-    </div>
 
-    <div>
-        <label th:for="${gymSubscription}">Gym subscription</label>
-    </div>
-    <div>
-        <label th:for="${type}">Gym subcription type</label>
-        <input type="text" id="type" name="type" th:value="*{type}"/>
-    </div>
-    <div>
-        <label th:for="${price}">Gym subcription price</label>
-        <input type="text" id="price" name="price" th:value="*{price}"/>
-    </div>
-    <div>
+        <label th:for="${program}">Trainer program</label>
+            <select id="program" name="program">
+                <option value="NONE">--- Select ---</option>
+                <option value="Pilates">Pilates</option>
+                <option value="Yoga">Yoga</option>
+                <option value="Zumba">Zumba</option>
+                <option value="Kick-box">Kick-box</option>
+                <option value="TRX">TRX</option>
+                <option value="Fitball">Fitball</option>
+            </select>
+        </fieldset>
+
+        <fieldset>
+            <legend>Gym subscription details</legend>
+
+        <label th:for="${type}">Type</label>
+        <select id="type" name="type">
+            <option value="NONE">--- Select ---</option>
+            <option value="Daily">Daily</option>
+            <option value="Weekly">Weekly</option>
+            <option value="Monthly">Monthly</option>
+            <option value="3 months">3 months</option>
+            <option value="6 months">6 months</option>
+            <option value="1 year">1 year</option>
+        </select>
+
         <label th:for="${discount}">Discount</label>
         <input type="text" id="discount" name="discount" th:value="*{discount}"/>
-    </div>
+
+            <label th:for="${startDate}">Start Date</label>
+            <input type="text" id="startDate" name="startDate" th:value="*{startDate}"/>
+            <script>
+    $(document).ready(function(){
+        var date_input=$('input[name="startDate"]');
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'dd/mm/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        })
+    })
+        </script>
+                <label th:for="${endDate}">End date</label>
+                <input type="text" id="endDate" name="endDate" th:value="*{endDate}"/>
+                <script>
+    $(document).ready(function(){
+        var date_input=$('input[name="endDate"]');
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'dd/mm/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        })
+    })
+    </script>
+        <label th:for="${price}">Price</label>
+        <input type="text" id="price" name="price" th:value="*{price}"/>
+        </fieldset>
 
     <div>
         <input type="submit" id="doUpdate" name="save client" value="create gym member"/>
@@ -100,10 +170,12 @@
         <th>Trainer last name</th>
         <th>Trainer program</th>
 
-        <th>Gym subcription</th>
+        <th>Gym subscription</th>
         <th>Type</th>
-        <th>Price</th>
         <th>Discount</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>Price</th>
         <th>Update</th>
         <th>Delete</th>
     </tr>
@@ -128,8 +200,10 @@
 
         <td>Gym Subsctiption</td>
         <td th:text="${gymMember.gymSubscription.type}"></td>
-        <td th:text="${gymMember.gymSubscription.price}"></td>
         <td th:text="${gymMember.gymSubscription.discount}"></td>
+        <td th:text="${#dates.format(gymMember.gymSubscription.startDate, 'dd/mm/yyyy')}"></td>
+        <td th:text="${#dates.format(gymMember.gymSubscription.endDate, 'dd/mm/yyyy')}"></td>
+        <td th:text="${gymMember.gymSubscription.price}"></td>
 
 
         <td>
