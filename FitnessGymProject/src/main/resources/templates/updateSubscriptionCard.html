@@ -1,7 +1,14 @@
-GTY MEMBER UPDATE
+
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
 <head>
+    <style>
+    body {
+    background-image: url(/img/img1.jpeg);
+    background-color: #cccccc
+    color: #FFFFFF;
+    }
+    </style>
     <title>Update Client</title>
 
     <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
@@ -26,23 +33,23 @@ GTY MEMBER UPDATE
 
 <form action="#" th:action="@{/subscriptioncards/update/} + ${subscriptionCard_id} + '/'"
       th:object="${updateGymSubscriptionCard}" method="post">
-    <label th:for="${gymMember}">Gym member details</label>
+    <label th:for="${gymMember}" style="color:white">Gym member details</label>
 
-    <fieldset>
-        <label th:for="${firstName}">Gym member first name</label>
+    <fieldset style="text-align:left">
+        <label th:for="${firstName}" style="color:white">Gym member first name</label>
         <input type="text" id="firstName" name="firstName" th:value="*{firstName}"/>
         <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</td>
 
-        <label th:for="${lastName}">Gym member last name</label>
+        <label th:for="${lastName}" style="color:white">Gym member last name</label>
         <input type="text" id="lastName" name="lastName" th:value="*{lastName}"/>
         <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</td>
     </fieldset>
 
-    <label th:for="${subscriptionCard}">Gym subscription card</label>
+    <label th:for="${subscriptionCard}" style="color:white">Gym subscription card</label>
 
-    <fieldset>
+    <fieldset style="text-align:left;">
 
-        <label th:for="${startDate}">Start Date</label>
+        <label th:for="${startDate}" style="color:white"><St></St>Start Date</label>
         <input type="text" id="startDate" name="startDate" th:value="*{startDate}"/>
         <script>
     $(document).ready(function(){
@@ -58,7 +65,7 @@ GTY MEMBER UPDATE
 
 
         </script>
-        <label th:for="${endDate}">End date</label>
+        <label th:for="${endDate}" style="color:white">End date</label>
         <input type="text" id="endDate" name="endDate" th:value="*{endDate}"/>
         <script>
     $(document).ready(function(){

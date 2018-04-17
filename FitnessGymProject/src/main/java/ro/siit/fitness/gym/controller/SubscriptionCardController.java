@@ -43,7 +43,7 @@ public class SubscriptionCardController {
             List<String> errors = new LinkedList<>();
             for (FieldError error:
                     bindingResult.getFieldErrors()) {
-                errors.add("rejected value: "+ error.getRejectedValue()
+                errors.add("missing value: "+ error.getRejectedValue()
                         + " for field: "+error.getField());
             }
             model.addAttribute("errors", errors);

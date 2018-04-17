@@ -4,11 +4,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <style>
     body {
-    background-image: url("https://i.ytimg.com/vi/1TK8bT9yk_M/maxresdefault.jpg");
-    background-color: #cccccc;
+    background-image: url(/img/img1.jpeg);
+    background-color: #cccccc
+    color: #FFFFFF;
     }
     </style>
-
+    <style>
+            select {
+              height: 30px;
+              color: #ffffff;
+            }
+        </style>
 
     <title>Create card</title>
 
@@ -32,7 +38,7 @@
     <table th:if="${errors != null}">
         <tr th:each="error : ${errors}">
             <div class="alert alert-danger">
-                <strong>Missing field<td th:text="${error}"></td></strong>
+                <strong>Missing field<td th:text="${error}" style="color:red"></td></strong>
             </div>
 
         </tr>
@@ -42,25 +48,25 @@
 <body>
 
 <form action="#" th:action="@{/subscriptioncards}" th:object="${createGymSubscriptionCard}" method="post">
+    <legend style="color:white"><b>Gym member details</b></legend>
+    <label th:for="${gymMember}"></label>
+    <fieldset style="text-align:left;">
 
-    <label th:for="${gymMember}">Gym member details</label>
-
-    <fieldset>
-        <label th:for="${firstName}">Gym member first name</label>
+        <label th:for="${firstName}" style="color:white">Gym member first name</label>
         <input type="text" id="firstName" name="firstName" th:value="*{firstName}"/>
         <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</td>
 
 
-        <label th:for="${lastName}">Gym member last name</label>
+        <label th:for="${lastName}" style="color:white">Gym member last name</label>
         <input type="text" id="lastName" name="lastName" th:value="*{lastName}"/>
         <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</td>
     </fieldset>
 
-    <label th:for="${subscriptionCard}">Gym subscription card</label>
+    <label th:for="${subscriptionCard}" style="color:white">Gym subscription card</label>
 
-    <fieldset>
+    <fieldset style="text-align:left;">
 
-        <label th:for="${startDate}">Start Date</label>
+        <label th:for="${startDate}" style="color:white">Start Date</label>
         <input type="text" id="startDate" name="startDate" th:value="*{startDate}"/>
         <script>
     $(document).ready(function(){
@@ -76,7 +82,7 @@
     })
 
         </script>
-        <label th:for="${endDate}">End date</label>
+        <label th:for="${endDate}" style="color:white">End date</label>
         <input type="text" id="endDate" name="endDate" th:value="*{endDate}"/>
         <script>
     $(document).ready(function(){
@@ -92,7 +98,7 @@
 
         </script>
 
-        <input type="submit" id="doUpdate" name="save client" value="create subscription card"/>
+        <input type="submit" id="doUpdate" name="save client" value="create subscription card" style="color:"/>
     </fieldset>
 </form>
 
@@ -100,36 +106,40 @@
 <br/>
 
 
-<table id="myTableId" dt:table="true">
+<table align="left|right|center" id="myTableId" dt:table="true">
     <thead>
-    <tr>
-        <th>Gym member</th>
-        <th>First Name</th>
-        <th>Last Name</th>
+    <tr style="color:white">
 
-        <th>Start date</th>
-        <th>End date</th>
-        <th>ID</th>
-        <th>Update</th>
+        <th>First Name | </th>
+
+        <th>Last Name | </th>
+
+        <th>Start date | </th>
+
+        <th>End date | </th>
+
+        <th>   ID |</th>
+        <th>Update | </th>
+
         <th>Delete</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="subscriptionCard : ${subscriptionCards}">
-        <td th:text="${subscriptionCard.gymMember.firstName}"></td>
-        <td th:text="${subscriptionCard.gymMember.lastName}"></td>
-        <td th:text="${#dates.format(subscriptionCard.startDate, 'dd/mm/yyyy')}"></td>
-        <td th:text="${#dates.format(subscriptionCard.endDate, 'dd/mm/yyyy')}"></td>
+    <tr th:each="subscriptionCard : ${subscriptionCards}" style="color:white">
+        <td th:text="${subscriptionCard.gymMember.firstName}" style="color:green"></td>
+        <td th:text="${subscriptionCard.gymMember.lastName}" style="color:green"></td>
+        <td th:text="${#dates.format(subscriptionCard.startDate, 'dd/mm/yyyy')}" style="color:green"></td>
+        <td th:text="${#dates.format(subscriptionCard.endDate, 'dd/mm/yyyy')}" style="color:green"></td>
         <td th:text="${subscriptionCard.id}"></td>
 
         <td>
-            <a th:href="@{/subscriptioncards/} + ${subscriptionCard?.id} + '/'">Update</a>
+            <a th:href="@{/subscriptioncards/} + ${subscriptionCard?.id} + '/'" style="color:green">Update</a>
         </td>
 
         <td>
             <form th:action="@{/subscriptioncards/delete/} + ${subscriptionCard?.id} + '/'"
                   th:object="${subscriptionCard}" method="post">
-                <input type="submit" value="Delete"/>
+                <input type="submit" value="Delete" style="color:red"/>
             </form>
         </td>
 
@@ -143,3 +153,4 @@
 
 </body>
 </html>
+
