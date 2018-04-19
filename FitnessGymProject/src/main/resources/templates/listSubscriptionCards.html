@@ -1,0 +1,148 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables" xmlns:background-image="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<style>
+    body {
+    background-image: url(/img/img1.jpeg);
+    background-color: #cccccc
+    }
+    </style>
+    <style>
+            select {
+              height: 30px;
+              color: #ffffff;
+            }
+        </style>
+
+    <title>Create card</title>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link href="../static/css/jquery.datetimepicker.min.css"
+          th:href="@{css/jquery.datetimepicker.min.css}" rel="stylesheet" media="screen"/>
+    <script src="jquery.datetimepicker.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+    <table th:if="${errors != null}">
+        <tr th:each="error : ${errors}">
+            <div class="alert alert-danger">
+                <strong>Missing field<td th:text="${error}" style="color:red"></td></strong>
+            </div>
+
+        </tr>
+    </table>
+
+</head>
+<body>
+
+<form action="#" th:action="@{/subscriptioncards}" th:object="${createGymSubscriptionCard}" method="post">
+    <legend style="color:white"><b>Gym member details</b></legend>
+    <label th:for="${gymMember}"></label>
+    <fieldset style="text-align:left;">
+
+        <label th:for="${firstName}" style="color:white">Gym member first name</label>
+        <input type="text" id="firstName" name="firstName" th:value="*{firstName}"/>
+        <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</td>
+
+
+        <label th:for="${lastName}" style="color:white">Gym member last name</label>
+        <input type="text" id="lastName" name="lastName" th:value="*{lastName}"/>
+        <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</td>
+    </fieldset>
+
+    <label th:for="${subscriptionCard}" style="color:white">Gym subscription card</label>
+
+    <fieldset style="text-align:left;">
+
+        <label th:for="${startDate}" style="color:white">Start Date</label>
+        <input type="text" id="startDate" name="startDate" th:value="*{startDate}"/>
+        <script>
+    $(document).ready(function(){
+        var date_input=$('input[name="startDate"]');
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'dd/mm/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+
+        })
+    })
+
+        </script>
+        <label th:for="${endDate}" style="color:white">End date</label>
+        <input type="text" id="endDate" name="endDate" th:value="*{endDate}"/>
+        <script>
+    $(document).ready(function(){
+        var date_input=$('input[name="endDate"]');
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'dd/mm/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        })
+    })
+
+        </script>
+
+        <input type="submit" id="doUpdate" name="save client" value="create subscription card" style="color:"/>
+    </fieldset>
+</form>
+
+<br/>
+<br/>
+
+
+<table align="floate:right" id="myTableId" dt:table="true">
+    <thead>
+    <tr style="color:white">
+
+        <th>First Name | </th>
+        <th>Last Name | </th>
+        <th>Start date | </th>
+        <th>End date   | </th>
+        <th>ID |</th>
+        <th>Update | </th>
+
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="subscriptionCard : ${subscriptionCards}" style="color:white">
+        <td th:text="${subscriptionCard.gymMember.firstName}" style="color:white"></td>
+        <td th:text="${subscriptionCard.gymMember.lastName}" style="color:white"></td>
+        <td th:text="${#dates.format(subscriptionCard.startDate, 'dd/mm/yyyy')}" style="color:white"></td>
+        <td th:text="${#dates.format(subscriptionCard.endDate, 'dd/mm/yyyy')}" style="color:white"></td>
+        <td th:text="${subscriptionCard.id}"></td>
+
+        <td>
+            <a th:href="@{/subscriptioncards/} + ${subscriptionCard?.id} + '/'" type="submit" style="color:green">Update</a>
+        </td>
+
+        <td>
+            <form th:action="@{/subscriptioncards/delete/} + ${subscriptionCard?.id} + '/'"
+                  th:object="${subscriptionCard}" method="post">
+                <input type="submit" value="Delete" style="color:red"/>
+            </form>
+        </td>
+
+        <td>
+        </td>
+    </tr>
+    </tbody>
+
+</table>
+
+</body>
+</html>
+

@@ -1,22 +1,22 @@
 package ro.siit.fitness.gym.domain;
 
-import java.util.List;
-
 public class GymTrainer {
 
+    private long id;
     private String firstNameTrainer;
     private String lastNameTrainer;
     private int capacity;
-    private List<GymMember> gymMember;
+    private GymMember gymMember;
     private String program;
     private final int MIN_NUMBER_GYM_MEMBERS = 5;
     private final int MAX_NUMBER_GYM_MEMBERS = 20;
+    private long gymMemberId;
 
     public GymTrainer() {
     }
 
 
-    public GymTrainer(String firstNameTrainer, String lastNameTrainer, int capacity, List<GymMember> gymMember, String program) {
+    public GymTrainer(String firstNameTrainer, String lastNameTrainer, int capacity, GymMember gymMember, String program) {
         this.firstNameTrainer = firstNameTrainer;
         this.lastNameTrainer = lastNameTrainer;
         this.capacity = capacity;
@@ -56,11 +56,11 @@ public class GymTrainer {
         this.capacity = capacity;
     }
 
-    public List<GymMember> getGymMember() {
+    public GymMember getGymMember() {
         return gymMember;
     }
 
-    public void setGymMember(List<GymMember> gymMember) {
+    public void setGymMember(GymMember gymMember) {
         this.gymMember = gymMember;
     }
 
@@ -70,6 +70,22 @@ public class GymTrainer {
 
     public void setProgram(String program) {
         this.program = program;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getGymMemberId() {
+        return gymMemberId;
+    }
+
+    public void setGymMemberId(long gymMemberId) {
+        this.gymMemberId = gymMemberId;
     }
 
     @Override

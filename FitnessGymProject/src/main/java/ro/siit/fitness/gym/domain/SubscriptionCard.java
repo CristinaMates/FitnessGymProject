@@ -8,6 +8,7 @@ public class SubscriptionCard {
     private Date startDate;
     private Date endDate;
     private GymMember gymMember;
+    private long gymMemberId;
 
 
     public SubscriptionCard() {
@@ -50,6 +51,14 @@ public class SubscriptionCard {
 
     public void setGymMember(GymMember gymMember) {
         this.gymMember = gymMember;
+    }
+
+    public long getGymMemberId() {
+        return gymMemberId;
+    }
+
+    public void setGymMemberId(long gymMemberId) {
+        this.gymMemberId = gymMemberId;
     }
 
     @Override

@@ -4,6 +4,10 @@ import java.util.Objects;
 
 public class GymLocation {
 
+<<<<<<< HEAD
+=======
+    private int capacity;
+>>>>>>> 629b5e2c654ecad6d6040992045b78c18bd26eaa
     private GymAddress address;
     private String schedule;
     private WeekDays days;
