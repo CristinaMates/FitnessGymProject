@@ -6,7 +6,6 @@
     body {
     background-image: url(/img/img1.jpeg);
     background-color: #cccccc
-    color: #FFFFFF;
     }
     </style>
     <style>
@@ -27,8 +26,6 @@
     <link href="../static/css/jquery.datetimepicker.min.css"
           th:href="@{css/jquery.datetimepicker.min.css}" rel="stylesheet" media="screen"/>
     <script src="jquery.datetimepicker.js"></script>
-    <script src="main.js"></script>
-    <script src="jquery.datetimepicker.full.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
@@ -106,19 +103,15 @@
 <br/>
 
 
-<table align="left|right|center" id="myTableId" dt:table="true">
+<table align="floate:right" id="myTableId" dt:table="true">
     <thead>
     <tr style="color:white">
 
         <th>First Name | </th>
-
         <th>Last Name | </th>
-
         <th>Start date | </th>
-
-        <th>End date | </th>
-
-        <th>   ID |</th>
+        <th>End date   | </th>
+        <th>ID |</th>
         <th>Update | </th>
 
         <th>Delete</th>
@@ -126,14 +119,14 @@
     </thead>
     <tbody>
     <tr th:each="subscriptionCard : ${subscriptionCards}" style="color:white">
-        <td th:text="${subscriptionCard.gymMember.firstName}" style="color:green"></td>
-        <td th:text="${subscriptionCard.gymMember.lastName}" style="color:green"></td>
-        <td th:text="${#dates.format(subscriptionCard.startDate, 'dd/mm/yyyy')}" style="color:green"></td>
-        <td th:text="${#dates.format(subscriptionCard.endDate, 'dd/mm/yyyy')}" style="color:green"></td>
+        <td th:text="${subscriptionCard.gymMember.firstName}" style="color:white"></td>
+        <td th:text="${subscriptionCard.gymMember.lastName}" style="color:white"></td>
+        <td th:text="${#dates.format(subscriptionCard.startDate, 'dd/mm/yyyy')}" style="color:white"></td>
+        <td th:text="${#dates.format(subscriptionCard.endDate, 'dd/mm/yyyy')}" style="color:white"></td>
         <td th:text="${subscriptionCard.id}"></td>
 
         <td>
-            <a th:href="@{/subscriptioncards/} + ${subscriptionCard?.id} + '/'" style="color:green">Update</a>
+            <a th:href="@{/subscriptioncards/} + ${subscriptionCard?.id} + '/'" type="submit" style="color:green">Update</a>
         </td>
 
         <td>
@@ -149,7 +142,6 @@
     </tbody>
 
 </table>
-
 
 </body>
 </html>
