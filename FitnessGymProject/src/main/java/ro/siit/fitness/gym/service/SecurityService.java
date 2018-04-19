@@ -16,4 +16,8 @@ public class SecurityService {
         return this.currentUser != null ?
                 this.currentUser.get() : null;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 7b0f2c648a8eab772cfdf8ca8a0c80fb58e4b157

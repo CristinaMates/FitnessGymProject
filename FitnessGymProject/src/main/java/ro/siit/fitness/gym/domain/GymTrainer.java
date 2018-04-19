@@ -6,22 +6,36 @@ public class GymTrainer {
     private String firstNameTrainer;
     private String lastNameTrainer;
     private int capacity;
+<<<<<<< HEAD
     private GymMember gymMember;
     private String program;
     private final int MIN_NUMBER_GYM_MEMBERS = 5;
     private final int MAX_NUMBER_GYM_MEMBERS = 20;
     private long gymMemberId;
+=======
+    private List<GymMember> gymMembers;
+    private String program;
+    private final int MIN_NUMBER_GYM_MEMBERS = 5;
+    private final int MAX_NUMBER_GYM_MEMBERS = 20;
+    private GymLocation gymLocation;
+    private long id;
+>>>>>>> 7b0f2c648a8eab772cfdf8ca8a0c80fb58e4b157
 
     public GymTrainer() {
     }
 
 
+<<<<<<< HEAD
     public GymTrainer(String firstNameTrainer, String lastNameTrainer, int capacity, GymMember gymMember, String program) {
+=======
+    public GymTrainer(String firstNameTrainer, String lastNameTrainer, int capacity, List<GymMember> gymMembers, String program, GymLocation gymLocation) {
+>>>>>>> 7b0f2c648a8eab772cfdf8ca8a0c80fb58e4b157
         this.firstNameTrainer = firstNameTrainer;
         this.lastNameTrainer = lastNameTrainer;
         this.capacity = capacity;
-        this.gymMember = gymMember;
+        this.gymMembers = gymMembers;
         this.program = program;
+        this.gymLocation = gymLocation;
     }
 
     public String getFirstNameTrainer() {
@@ -56,12 +70,21 @@ public class GymTrainer {
         this.capacity = capacity;
     }
 
+<<<<<<< HEAD
     public GymMember getGymMember() {
         return gymMember;
     }
 
     public void setGymMember(GymMember gymMember) {
         this.gymMember = gymMember;
+=======
+    public List<GymMember> getGymMembers() {
+        return gymMembers;
+    }
+
+    public void setGymMembers(List<GymMember> gymMembers) {
+        this.gymMembers = gymMembers;
+>>>>>>> 7b0f2c648a8eab772cfdf8ca8a0c80fb58e4b157
     }
 
     public String getProgram() {
@@ -72,6 +95,7 @@ public class GymTrainer {
         this.program = program;
     }
 
+<<<<<<< HEAD
     public long getId() {
         return id;
     }
@@ -86,6 +110,14 @@ public class GymTrainer {
 
     public void setGymMemberId(long gymMemberId) {
         this.gymMemberId = gymMemberId;
+=======
+    public GymLocation getGymLocation() {
+        return gymLocation;
+    }
+
+    public void setGymLocation(GymLocation gymLocation) {
+        this.gymLocation = gymLocation;
+>>>>>>> 7b0f2c648a8eab772cfdf8ca8a0c80fb58e4b157
     }
 
     @Override
@@ -94,10 +126,11 @@ public class GymTrainer {
                 "firstNameTrainer='" + firstNameTrainer + '\'' +
                 ", lastNameTrainer='" + lastNameTrainer + '\'' +
                 ", capacity=" + capacity +
-                ", gymMember=" + gymMember +
+                ", gymMembers=" + gymMembers +
                 ", program='" + program + '\'' +
                 ", MIN_NUMBER_GYM_MEMBERS=" + MIN_NUMBER_GYM_MEMBERS +
                 ", MAX_NUMBER_GYM_MEMBERS=" + MAX_NUMBER_GYM_MEMBERS +
+                ", gymLocation=" + gymLocation +
                 '}';
     }
 
@@ -115,8 +148,9 @@ public class GymTrainer {
             return false;
         if (lastNameTrainer != null ? !lastNameTrainer.equals(that.lastNameTrainer) : that.lastNameTrainer != null)
             return false;
-        if (gymMember != null ? !gymMember.equals(that.gymMember) : that.gymMember != null) return false;
-        return program != null ? program.equals(that.program) : that.program == null;
+        if (gymMembers != null ? !gymMembers.equals(that.gymMembers) : that.gymMembers != null) return false;
+        if (program != null ? !program.equals(that.program) : that.program != null) return false;
+        return gymLocation != null ? gymLocation.equals(that.gymLocation) : that.gymLocation == null;
     }
 
     @Override
@@ -124,10 +158,19 @@ public class GymTrainer {
         int result = firstNameTrainer != null ? firstNameTrainer.hashCode() : 0;
         result = 31 * result + (lastNameTrainer != null ? lastNameTrainer.hashCode() : 0);
         result = 31 * result + capacity;
-        result = 31 * result + (gymMember != null ? gymMember.hashCode() : 0);
+        result = 31 * result + (gymMembers != null ? gymMembers.hashCode() : 0);
         result = 31 * result + (program != null ? program.hashCode() : 0);
         result = 31 * result + MIN_NUMBER_GYM_MEMBERS;
         result = 31 * result + MAX_NUMBER_GYM_MEMBERS;
+        result = 31 * result + (gymLocation != null ? gymLocation.hashCode() : 0);
         return result;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getId() {
+        return id;
     }
 }
