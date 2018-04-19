@@ -23,6 +23,12 @@
 </head>
 <body>
 
+<table th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error}"></td>
+    </tr>
+
+</table>
 
 <form action="#" th:action="@{/reservations}" th:object="${createGymMemberReservation}" method="post">
     <fieldset>
