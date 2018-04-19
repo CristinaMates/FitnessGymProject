@@ -1,15 +1,36 @@
 package ro.siit.fitness.gym.domain;
 
+import java.util.Date;
+
 public class Reservation {
     private GymMember gymMember;
-    private String period;
+    private Date period;
     private GymTrainer gymTrainer;
     private long id;
+    private long gymMemberID;
+    private long gymTrainerID;
+
+    public long getGymMemberID() {
+        return gymMemberID;
+    }
+
+    public void setGymMemberID(long gymMemberID) {
+        this.gymMemberID = gymMemberID;
+    }
+
+    public long getGymTrainerID() {
+        return gymTrainerID;
+    }
+
+    public void setGymTrainerID(long gymTrainerID) {
+        this.gymTrainerID = gymTrainerID;
+    }
+
 
     public Reservation() {
     }
 
-    public Reservation(GymMember gymMember, String period, GymTrainer gymTrainer, long id) {
+    public Reservation(GymMember gymMember, Date period, GymTrainer gymTrainer, long id) {
         this.gymMember = gymMember;
         this.period = period;
         this.gymTrainer = gymTrainer;
@@ -24,11 +45,11 @@ public class Reservation {
         this.gymMember = gymMember;
     }
 
-    public String getPeriod() {
+    public Date getPeriod() {
         return period;
     }
 
-    public void setPeriod(String period) {
+    public void setPeriod(Date period) {
         this.period = period;
     }
 

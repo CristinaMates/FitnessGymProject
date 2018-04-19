@@ -3,19 +3,34 @@ package ro.siit.fitness.gym;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+<<<<<<< HEAD
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+=======
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+>>>>>>> dadc4fc6fd74d13d69d0434ba1dad2c16be43025
 import org.springframework.stereotype.Component;
 import ro.siit.fitness.gym.service.SecurityService;
 
 import javax.annotation.security.RolesAllowed;
 
+<<<<<<< HEAD
 @Aspect
 @Component
 public class SecurityAspect {
 
     private static final Logger LOGGER= LoggerFactory.getLogger(SecurityAspect.class);
+=======
+
+@Aspect
+@Component
+public class SecurityAspect {
+    private static final Logger LOGGER= (Logger) LoggerFactory.getLogger(SecurityAspect.class);
+>>>>>>> dadc4fc6fd74d13d69d0434ba1dad2c16be43025
     //&& @annotation(auditable)
     //&& @annotation(monitoring)
 

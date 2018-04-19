@@ -1,23 +1,37 @@
 package ro.siit.fitness.gym.dto;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 import ro.siit.fitness.gym.domain.GymMember;
 import ro.siit.fitness.gym.domain.GymTrainer;
 import ro.siit.fitness.gym.domain.Reservation;
 
+import java.util.Date;
 import java.util.List;
 
 public class CreateGymMemberReservation {
 
     private GymMember gymMember;
+
+    @Email
     private String email;
 
     private GymTrainer gymtrainer;
+
+    @NotBlank
     private String firstNameTrainer;
+
+    @NotBlank
     private String lastNameTrainer;
+
+    @NotBlank
     private String program;
 
     private Reservation reservations;
-    private String period;
+
+    @DateTimeFormat(pattern = "dd/mm/yyyy")
+    private Date period;
 
     public GymMember getGymMember() {
         return gymMember;
@@ -75,11 +89,11 @@ public class CreateGymMemberReservation {
         this.reservations = reservations;
     }
 
-    public String getPeriod() {
+    public Date getPeriod() {
         return period;
     }
 
-    public void setPeriod(String period) {
+    public void setPeriod(Date period) {
         this.period = period;
     }
 }

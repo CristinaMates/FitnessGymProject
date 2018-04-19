@@ -4,33 +4,80 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>List of reservations</title>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link href="../static/css/jquery.datetimepicker.min.css"
+          th:href="@{css/jquery.datetimepicker.min.css}" rel="stylesheet" media="screen"/>
+    <script src="jquery.datetimepicker.js"></script>
+    <script src="jquery.datetimepicker.full.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 </head>
 <body>
 
+<table th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error}"></td>
+    </tr>
+
+</table>
 
 <form action="#" th:action="@{/reservations}" th:object="${createGymMemberReservation}" method="post">
-    <div>
+    <fieldset>
+        <legend>Reservation details</legend>
         <label th:for="${email}">Gym member email</label>
         <input type="text" id="email" name="email" th:value="*{email}"/>
-    </div>
-    <div>
+
+
         <label th:for="${firstNameTrainer}">Gym trainer first name</label>
         <input type="text" id="firstNameTrainer" name="firstNameTrainer" th:value="*{firstNameTrainer}"/>
-    </div>
-    <div>
+
+
         <label th:for="${lastNameTrainer}">Gym trainer last name</label>
         <input type="text" id="lastNameTrainer" name="lastNameTrainer" th:value="*{lastNameTrainer}"/>
-    </div>
-    <div>
+
+
         <label th:for="${program}">Gym trainer program</label>
-        <input type="text" id="program" name="program" th:value="*{program}"/>
-    </div>
-    <div>
+        <select id="program" name="program">
+            <option value="NONE">---Select---</option>
+            <option value="Pilates">Pilates</option>
+            <option value="Yoga">Yoga</option>
+            <option value="Zumba">Zumba</option>
+            <option value="Kick-box">Kick-box</option>
+            <option value="TRX">TRX</option>
+            <option value="Fitball">Fitball</option>
+
+        </select>
+
+        <div>
         <label th:for="${period}">Gym trainer period</label>
         <input type="text" id="period" name="period" th:value="*{period}"/>
-    </div>
+            <script>
+    $(document).ready(function(){
+        var date_input=$('input[name="period"]');
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'dd/mm/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        })
+    })
+        </script>
+  
+        </div>
+    </fieldset>
+
     <div>
-        <input type="submit" id="doUpdate" name="save client" value="create new reservation"/>
+        <input type="submit" id="doUpdate" name="save reservation" value="create new reservation"/>
     </div>
 </form>
 
