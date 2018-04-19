@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
 <head>
-    <title>Update gym member</title>
+    <title>Update GymMember</title>
     <meta http-equiv="Content-Type" content="application/x-www-form-urlencoded; charset=UTF-8" />
 
     <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
@@ -23,9 +23,14 @@
 </head>
 <body>
 
+<table th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error}"></td>
+    </tr>
 
+</table>
 
-<form action="#" th:action="@{/gymmembers/update/} + ${gymMember_id} + '/'" th:object="${updateGymMemberRegistration}" method="post">
+<form action="#" th:action="@{/gymmembers/update/} + ${gymmember_id} + '/'" th:object="${updateGymMemberRegistration}" method="post">
     <fieldset>
         <legend>Gym member details</legend>
         <label th:for="${firstName}">First name</label>
@@ -68,16 +73,15 @@
 
     <fieldset>
         <legend>Gym trainer details</legend>
-
         <label th:for="${firstNameTrainer}">Trainer first name</label>
         <input type="text" id="firstNameTrainer" name="firstNameTrainer" th:value="*{firstNameTrainer}"/>
 
         <label th:for="${lastNameTrainer}">Trainer last name</label>
         <input type="text" id="lastNameTrainer" name="lastNameTrainer" th:value="*{lastNameTrainer}"/>
 
-        <label th:for="${program}">Trainer program</label>
+        <label th:for="${program}">Gym trainer program</label>
         <select id="program" name="program">
-            <option value="NONE">--- Select ---</option>
+            <option value ="NONE">--- Select ---</option>
             <option value="Pilates">Pilates</option>
             <option value="Yoga">Yoga</option>
             <option value="Zumba">Zumba</option>

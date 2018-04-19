@@ -11,18 +11,20 @@ public class GymMember {
     private GymTrainer gymTrainer;
     private String firstName;
     private String lastName;
-    private Gender gender;
+    private String gender;
     private Date birthDate;
     private long id;
     private String telephone;
     private String email;
     private boolean student;
     private boolean corporate;
+    private long gymSubscriptionID;
+    private long gymTrainerID;
 
     public GymMember() {
     }
 
-    public GymMember(GymSubscription gymSubscription, GymTrainer gymTrainer, String firstName, String lastName, Gender gender, Date birthDate, long id, String telephone, String email, boolean student, boolean corporate) {
+    public GymMember(GymSubscription gymSubscription, GymTrainer gymTrainer, String firstName, String lastName, String gender, Date birthDate, long id, String telephone, String email, boolean student, boolean corporate) {
         this.gymSubscription = gymSubscription;
         this.gymTrainer = gymTrainer;
         this.firstName = firstName;
@@ -52,11 +54,11 @@ public class GymMember {
         this.gymTrainer = gymTrainer;
     }
 
-    public Gender getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -122,6 +124,22 @@ public class GymMember {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public long getGymSubscriptionID() {
+        return gymSubscriptionID;
+    }
+
+    public void setGymSubscriptionID(long gymSubscriptionID) {
+        this.gymSubscriptionID = gymSubscriptionID;
+    }
+
+    public long getGymTrainerID() {
+        return gymTrainerID;
+    }
+
+    public void setGymTrainerID(long gymTrainerID) {
+        this.gymTrainerID = gymTrainerID;
     }
 
     @Override
