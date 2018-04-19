@@ -1,24 +1,31 @@
 package ro.siit.fitness.gym.dto;
 
+import org.hibernate.validator.constraints.NotBlank;
 import ro.siit.fitness.gym.domain.GymAddress;
 import ro.siit.fitness.gym.domain.GymLocation;
 import ro.siit.fitness.gym.domain.GymMember;
 import ro.siit.fitness.gym.domain.WeekDays;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class CreateGymTrainerProgram {
-
+    @NotBlank
     private String firstNameTrainer;
+    @NotBlank
     private String lastNameTrainer;
+    @NotNull
     private int capacity;
     private List<GymMember> gymMembers;
+    @NotBlank
     private String program;
     private final int MIN_NUMBER_GYM_MEMBERS = 5;
     private final int MAX_NUMBER_GYM_MEMBERS = 20;
-
+    @NotBlank
     private GymLocation gymLocation;
+    @NotBlank
     GymAddress address;
+    @NotBlank
     String schedule;
     WeekDays days;
 
