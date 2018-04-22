@@ -1,5 +1,4 @@
-package ro.siit.fitness.gym.service;
-
+package ro.siit.fitness.gym;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -39,7 +38,7 @@ public class ApplicationConfiguration implements TransactionManagementConfigurer
                 .append(":")
                 .append("5432")
                 .append("/")
-                .append("db-name")
+                .append("fitness-gym-project")
                 .append("?user=")
                 .append("postgres")
                 .append("&password=")
