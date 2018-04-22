@@ -23,7 +23,7 @@ public class GymTrainerDAOImpl implements GymTrainerDAO {
             public GymTrainer mapRow(ResultSet resultSet, int i) throws SQLException {
 
                 GymTrainer result = new GymTrainer();
-                result.setId(resultSet.getInt(1));
+                result.setId(resultSet.getLong(1));
                 result.setFirstNameTrainer(resultSet.getString(2));
                 result.setLastNameTrainer(resultSet.getString(3));
                 result.setCapacity(resultSet.getInt(4));

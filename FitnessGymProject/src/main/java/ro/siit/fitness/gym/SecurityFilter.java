@@ -1,14 +1,8 @@
 package ro.siit.fitness.gym;
 
-<<<<<<< HEAD
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import ro.siit.fitness.gym.domain.Admin;
-=======
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
->>>>>>> dadc4fc6fd74d13d69d0434ba1dad2c16be43025
 import ro.siit.fitness.gym.domain.User;
 import ro.siit.fitness.gym.service.SecurityService;
 
@@ -74,7 +68,4 @@ public class SecurityFilter implements javax.servlet.Filter {
 
     }
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> dadc4fc6fd74d13d69d0434ba1dad2c16be43025

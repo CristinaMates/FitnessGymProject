@@ -1,5 +1,6 @@
 package ro.siit.fitness.gym.dao;
 
+import org.springframework.jdbc.core.JdbcTemplate;
 import ro.siit.fitness.gym.domain.Reservation;
 
 import javax.sql.DataSource;
@@ -11,14 +12,15 @@ import java.util.List;
 public class ReservationDAOImpl implements ReservationDAO {
     private JdbcTemplate jdbcTemplate;
 
-    public ReservationDAOImpl (DataSource dataSource) {jdbcTemplate = new JdbcTemplate (dataSource); }
+    public ReservationDAOImpl (DataSource dataSource) {jdbcTemplate = new JdbcTemplate(dataSource); }
 
     @Override
     public List<Reservation> getAll() {
 
-        return jdbcTemplate.query("select * from reservations", new RowMapper<Reservation>(){
+        return jdbcTemplate.query("select * from reservations", new org.springframework.jdbc.core.RowMapper<Reservation>() {
+
             @Override
-            public Reservation mapRow (ResultSet resultSet, int i) throws SQLException {
+            public Reservation mapRow(ResultSet resultSet, int i) throws SQLException {
 
                 Reservation result = new Reservation();
                 result.setPeriod(resultSet.getDate(1));
@@ -29,7 +31,7 @@ public class ReservationDAOImpl implements ReservationDAO {
 
             }
         });
-
+    }
     @Override
     public Reservation create(Reservation reservation) {
 

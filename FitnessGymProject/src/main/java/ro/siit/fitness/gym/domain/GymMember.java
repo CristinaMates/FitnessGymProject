@@ -9,6 +9,7 @@ import java.util.Objects;
 public class GymMember {
     private GymSubscription gymSubscription;
     private GymTrainer gymTrainer;
+    private Program program;
     private String firstName;
     private String lastName;
     private String gender;
@@ -20,13 +21,15 @@ public class GymMember {
     private boolean corporate;
     private long gymSubscriptionID;
     private long gymTrainerID;
+    private long programID;
 
     public GymMember() {
     }
 
-    public GymMember(GymSubscription gymSubscription, GymTrainer gymTrainer, String firstName, String lastName, String gender, Date birthDate, long id, String telephone, String email, boolean student, boolean corporate) {
+    public GymMember(GymSubscription gymSubscription, GymTrainer gymTrainer, Program program, String firstName, String lastName, String gender, Date birthDate, long id, String telephone, String email, boolean student, boolean corporate, long gymSubscriptionID, long gymTrainerID, long programID) {
         this.gymSubscription = gymSubscription;
         this.gymTrainer = gymTrainer;
+        this.program = program;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -36,6 +39,25 @@ public class GymMember {
         this.email = email;
         this.student = student;
         this.corporate = corporate;
+        this.gymSubscriptionID = gymSubscriptionID;
+        this.gymTrainerID = gymTrainerID;
+        this.programID = programID;
+    }
+
+    public Program getProgram() {
+        return program;
+    }
+
+    public void setProgram(Program program) {
+        this.program = program;
+    }
+
+    public long getProgramID() {
+        return programID;
+    }
+
+    public void setProgramID(long programID) {
+        this.programID = programID;
     }
 
     public GymSubscription getGymSubscription() {
@@ -147,15 +169,19 @@ public class GymMember {
         return "GymMember{" +
                 "gymSubscription=" + gymSubscription +
                 ", gymTrainer=" + gymTrainer +
+                ", program=" + program +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", gender=" + gender +
+                ", gender='" + gender + '\'' +
                 ", birthDate=" + birthDate +
                 ", id=" + id +
-                ", telephone=" + telephone +
+                ", telephone='" + telephone + '\'' +
                 ", email='" + email + '\'' +
                 ", student=" + student +
                 ", corporate=" + corporate +
+                ", gymSubscriptionID=" + gymSubscriptionID +
+                ", gymTrainerID=" + gymTrainerID +
+                ", programID=" + programID +
                 '}';
     }
 
@@ -169,12 +195,16 @@ public class GymMember {
         if (id != gymMember.id) return false;
         if (student != gymMember.student) return false;
         if (corporate != gymMember.corporate) return false;
+        if (gymSubscriptionID != gymMember.gymSubscriptionID) return false;
+        if (gymTrainerID != gymMember.gymTrainerID) return false;
+        if (programID != gymMember.programID) return false;
         if (gymSubscription != null ? !gymSubscription.equals(gymMember.gymSubscription) : gymMember.gymSubscription != null)
             return false;
         if (gymTrainer != null ? !gymTrainer.equals(gymMember.gymTrainer) : gymMember.gymTrainer != null) return false;
+        if (program != null ? !program.equals(gymMember.program) : gymMember.program != null) return false;
         if (firstName != null ? !firstName.equals(gymMember.firstName) : gymMember.firstName != null) return false;
         if (lastName != null ? !lastName.equals(gymMember.lastName) : gymMember.lastName != null) return false;
-        if (gender != gymMember.gender) return false;
+        if (gender != null ? !gender.equals(gymMember.gender) : gymMember.gender != null) return false;
         if (birthDate != null ? !birthDate.equals(gymMember.birthDate) : gymMember.birthDate != null) return false;
         if (telephone != null ? !telephone.equals(gymMember.telephone) : gymMember.telephone != null) return false;
         return email != null ? email.equals(gymMember.email) : gymMember.email == null;
@@ -184,6 +214,7 @@ public class GymMember {
     public int hashCode() {
         int result = gymSubscription != null ? gymSubscription.hashCode() : 0;
         result = 31 * result + (gymTrainer != null ? gymTrainer.hashCode() : 0);
+        result = 31 * result + (program != null ? program.hashCode() : 0);
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (gender != null ? gender.hashCode() : 0);
@@ -193,6 +224,9 @@ public class GymMember {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (student ? 1 : 0);
         result = 31 * result + (corporate ? 1 : 0);
+        result = 31 * result + (int) (gymSubscriptionID ^ (gymSubscriptionID >>> 32));
+        result = 31 * result + (int) (gymTrainerID ^ (gymTrainerID >>> 32));
+        result = 31 * result + (int) (programID ^ (programID >>> 32));
         return result;
     }
 }

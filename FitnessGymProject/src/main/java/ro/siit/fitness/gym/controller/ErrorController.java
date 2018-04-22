@@ -10,8 +10,4 @@ public class ErrorController {
 
         return "403";
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> dadc4fc6fd74d13d69d0434ba1dad2c16be43025
 }

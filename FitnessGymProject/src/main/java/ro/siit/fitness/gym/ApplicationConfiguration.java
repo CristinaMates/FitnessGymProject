@@ -2,38 +2,38 @@ package ro.siit.fitness.gym;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-<<<<<<< HEAD
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
-import ro.siit.fitness.gym.dao.GymMemberDAO;
-import ro.siit.fitness.gym.dao.GymMemberDAOImpl;
-import ro.siit.fitness.gym.domain.GymMember;
-import ro.siit.fitness.gym.domain.GymTrainer;
-=======
-import ro.siit.fitness.gym.dao.ReservationDAO;
-import ro.siit.fitness.gym.dao.ReservationDAOImpl;
->>>>>>> dadc4fc6fd74d13d69d0434ba1dad2c16be43025
+import ro.siit.fitness.gym.dao.*;
 
 import javax.sql.DataSource;
 
 @EnableTransactionManagement
 @Configuration
 public class ApplicationConfiguration implements TransactionManagementConfigurer {
-<<<<<<< HEAD
 
     @Bean
-    public GymMemberDAO gymMemberDAO() {
-        return new GymMemberDAOImpl((dataSource()));
-=======
-    @Bean
-    public ReservationDAO reservationDao_2() {
-        return new ReservationDAOImpl(dataSource()));
->>>>>>> dadc4fc6fd74d13d69d0434ba1dad2c16be43025
+    public GymMemberDAO gymMemberDAO(){
+        return new GymMemberDAOImpl(dataSource());
     }
 
+    @Bean
+    public SubscriptionCardDAO subscriptionCardDAO(){
+        return new SubscriptionCardDAOImpl(dataSource());
+    }
+
+    @Bean
+    public GymTrainerDAO gymTrainerDAO(){
+        return new GymTrainerDAOImpl(dataSource());
+    }
+
+    @Bean
+    public ReservationDAO reservationDAO() {
+        return new ReservationDAOImpl(dataSource());
+    }
 
     @Bean
     public DataSource dataSource() {
@@ -65,9 +65,6 @@ public class ApplicationConfiguration implements TransactionManagementConfigurer
         return txName();
     }
 
-}
-<<<<<<< HEAD
-=======
+    }
 
-}
->>>>>>> dadc4fc6fd74d13d69d0434ba1dad2c16be43025
+

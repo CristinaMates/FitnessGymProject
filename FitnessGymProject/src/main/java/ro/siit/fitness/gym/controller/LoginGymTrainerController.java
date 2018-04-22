@@ -29,7 +29,6 @@ public class LoginGymTrainerController {
     @RequestMapping("/onLogin")
     public ModelAndView onLogin(String username, String pass, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-        ///use UserService to check the login
         boolean loginWithSuccess =  true;
         if (loginWithSuccess) {
             User user = new User();

@@ -38,7 +38,7 @@ public class GymTrainerController {
     @RequestMapping(value = "/trainersmember", method = RequestMethod.GET)
     public String listTrainerMembers(Model model, HttpServletRequest request) {
         GymTrainer gymTrainer = new GymTrainer();
-        List<GymMember> gymMembers = gymTrainer.getGymMembers();
+        List<GymMember> gymMembers = gymTrainer.getGymMember();
         model.addAttribute("gymMembers", gymMembers);
         if(!model.containsAttribute("getGymTrainerProgram")){
             model.addAttribute("getGymTrainerProgram", new CreateGymTrainerProgram());
