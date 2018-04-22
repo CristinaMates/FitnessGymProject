@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import ro.siit.fitness.gym.domain.Gender;
 import ro.siit.fitness.gym.domain.GymSubscription;
 import ro.siit.fitness.gym.domain.GymTrainer;
+import ro.siit.fitness.gym.domain.Program;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -19,7 +20,7 @@ public class CreateGymMemberRegistration {
     @NotBlank
     private String lastName;
 
-    private String gender;
+    private Gender gender = Gender.MALE;
 
     @DateTimeFormat(pattern = "dd/mm/yyyy")
     private Date birthDate;
@@ -41,8 +42,12 @@ public class CreateGymMemberRegistration {
     @NotBlank
     private String lastNameTrainer;
 
+    private Program program;
+
+    private String classes;
+
     @NotBlank
-    private String program;
+    private long programID;
 
     private GymSubscription gymSubscription;
 
@@ -68,30 +73,6 @@ public class CreateGymMemberRegistration {
         this.gymTrainer = gymTrainer;
     }
 
-    public String getFirstNameTrainer() {
-        return firstNameTrainer;
-    }
-
-    public void setFirstNameTrainer(String firstNameTrainer) {
-        this.firstNameTrainer = firstNameTrainer;
-    }
-
-    public String getLastNameTrainer() {
-        return lastNameTrainer;
-    }
-
-    public void setLastNameTrainer(String lastNameTrainer) {
-        this.lastNameTrainer = lastNameTrainer;
-    }
-
-    public GymSubscription getGymSubscription() {
-        return gymSubscription;
-    }
-
-    public void setGymSubscription(GymSubscription gymSubscription) {
-        this.gymSubscription = gymSubscription;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -108,11 +89,11 @@ public class CreateGymMemberRegistration {
         this.lastName = lastName;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -156,12 +137,60 @@ public class CreateGymMemberRegistration {
         this.corporate = corporate;
     }
 
-    public String getProgram() {
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getFirstNameTrainer() {
+        return firstNameTrainer;
+    }
+
+    public void setFirstNameTrainer(String firstNameTrainer) {
+        this.firstNameTrainer = firstNameTrainer;
+    }
+
+    public String getLastNameTrainer() {
+        return lastNameTrainer;
+    }
+
+    public void setLastNameTrainer(String lastNameTrainer) {
+        this.lastNameTrainer = lastNameTrainer;
+    }
+
+    public Program getProgram() {
         return program;
     }
 
-    public void setProgram(String program) {
+    public void setProgram(Program program) {
         this.program = program;
+    }
+
+    public long getProgramID() {
+        return programID;
+    }
+
+    public void setProgramID(long programID) {
+        this.programID = programID;
+    }
+
+    public String getClasses() {
+        return classes;
+    }
+
+    public void setClasses(String classes) {
+        this.classes = classes;
+    }
+
+    public GymSubscription getGymSubscription() {
+        return gymSubscription;
+    }
+
+    public void setGymSubscription(GymSubscription gymSubscription) {
+        this.gymSubscription = gymSubscription;
     }
 
     public String getType() {
@@ -170,30 +199,6 @@ public class CreateGymMemberRegistration {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
-    }
-
-    public float getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(float discount) {
-        this.discount = discount;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public Date getStartDate() {
@@ -210,5 +215,21 @@ public class CreateGymMemberRegistration {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public float getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(float discount) {
+        this.discount = discount;
     }
 }

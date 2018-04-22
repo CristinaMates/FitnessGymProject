@@ -3,8 +3,8 @@ package ro.siit.fitness.gym.domain;
 public class GymTrainer {
 
     private long id;
-    private String firstName;
-    private String lastName;
+    private String firstNameTrainer;
+    private String lastNameTrainer;
 
 
     public GymTrainer() {
@@ -12,8 +12,8 @@ public class GymTrainer {
 
     public GymTrainer(long id, String firstName, String lastName) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstNameTrainer = firstName;
+        this.lastNameTrainer = lastName;
     }
 
     public long getId() {
@@ -24,20 +24,20 @@ public class GymTrainer {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstNameTrainer() {
+        return firstNameTrainer;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstNameTrainer(String firstName) {
+        this.firstNameTrainer = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastNameTrainer() {
+        return lastNameTrainer;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastNameTrainer(String lastName) {
+        this.lastNameTrainer = lastName;
     }
 
     @Override
@@ -48,15 +48,15 @@ public class GymTrainer {
         GymTrainer that = (GymTrainer) o;
 
         if (id != that.id) return false;
-        if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
-        return lastName != null ? lastName.equals(that.lastName) : that.lastName == null;
+        if (firstNameTrainer != null ? !firstNameTrainer.equals(that.firstNameTrainer) : that.firstNameTrainer != null) return false;
+        return lastNameTrainer != null ? lastNameTrainer.equals(that.lastNameTrainer) : that.lastNameTrainer == null;
     }
 
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (firstNameTrainer != null ? firstNameTrainer.hashCode() : 0);
+        result = 31 * result + (lastNameTrainer != null ? lastNameTrainer.hashCode() : 0);
         return result;
     }
 }

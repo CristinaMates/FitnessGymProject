@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import ro.siit.fitness.gym.domain.GymMember;
 import ro.siit.fitness.gym.domain.GymSubscription;
 import ro.siit.fitness.gym.domain.GymTrainer;
+import ro.siit.fitness.gym.domain.Program;
 import ro.siit.fitness.gym.dto.CreateGymMemberRegistration;
 import ro.siit.fitness.gym.service.AdminService;
 
@@ -102,7 +103,9 @@ public class AdminController extends AbstractController{
         GymTrainer gymTrainer = new GymTrainer();
         gymTrainer.setFirstNameTrainer(gymMemberRegistration.getFirstNameTrainer());
         gymTrainer.setLastNameTrainer(gymMemberRegistration.getLastNameTrainer());
-        gymTrainer.setProgram(gymMemberRegistration.getProgram());
+
+        Program program = new Program();
+        program.setClasses(gymMemberRegistration.getClasses());
 
         GymSubscription gymSubscription = new GymSubscription();
         gymSubscription.setType(gymMemberRegistration.getType());
@@ -113,6 +116,7 @@ public class AdminController extends AbstractController{
 
         gymMember.setGymTrainer(gymTrainer);
         gymMember.setGymSubscription(gymSubscription);
+        gymMember.setProgram(program);
 
         return gymMember;
     }
@@ -138,7 +142,8 @@ public class AdminController extends AbstractController{
 
         createGymMemberRegistration.setFirstNameTrainer(gymMember.getGymTrainer().getFirstNameTrainer());
         createGymMemberRegistration.setLastNameTrainer(gymMember.getGymTrainer().getLastNameTrainer());
-        createGymMemberRegistration.setProgram(gymMember.getGymTrainer().getProgram());
+
+        createGymMemberRegistration.setClasses(gymMember.getProgram().getClasses());
 
         createGymMemberRegistration.setType(gymMember.getGymSubscription().getType());
         createGymMemberRegistration.setPrice(gymMember.getGymSubscription().getPrice());

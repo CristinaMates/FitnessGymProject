@@ -4,15 +4,19 @@ public class Program {
 
     private long id;
     private GymTrainer gymTrainer;
-    private String program;
+    private String classes;
+    private int numberOfGymMembers;
     private final int MIN_NUMBER_GYM_MEMBERS = 5;
     private final int MAX_NUMBER_GYM_MEMBERS = 20;
 
+    public Program() {
+    }
 
-    public Program(long id, GymTrainer gymTrainer, String program) {
+    public Program(long id, GymTrainer gymTrainer, String program, int numberOfGymMembers) {
         this.id = id;
         this.gymTrainer = gymTrainer;
-        this.program = program;
+        this.classes = program;
+        this.numberOfGymMembers = numberOfGymMembers;
     }
 
     public long getId() {
@@ -23,12 +27,20 @@ public class Program {
         this.id = id;
     }
 
-    public String getProgram() {
-        return program;
+    public String getClasses() {
+        return classes;
     }
 
-    public void setProgram(String program) {
-        this.program = program;
+    public void setClasses(String classes) {
+        this.classes = classes;
+    }
+
+    public int getNumberOfGymMembers() {
+        return numberOfGymMembers;
+    }
+
+    public void setNumberOfGymMembers(int numberOfGymMembers) {
+        this.numberOfGymMembers = numberOfGymMembers;
     }
 
     public int getMIN_NUMBER_GYM_MEMBERS() {
@@ -58,14 +70,14 @@ public class Program {
         if (MIN_NUMBER_GYM_MEMBERS != program1.MIN_NUMBER_GYM_MEMBERS) return false;
         if (MAX_NUMBER_GYM_MEMBERS != program1.MAX_NUMBER_GYM_MEMBERS) return false;
         if (gymTrainer != null ? !gymTrainer.equals(program1.gymTrainer) : program1.gymTrainer != null) return false;
-        return program != null ? program.equals(program1.program) : program1.program == null;
+        return classes != null ? classes.equals(program1.classes) : program1.classes == null;
     }
 
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (gymTrainer != null ? gymTrainer.hashCode() : 0);
-        result = 31 * result + (program != null ? program.hashCode() : 0);
+        result = 31 * result + (classes != null ? classes.hashCode() : 0);
         result = 31 * result + MIN_NUMBER_GYM_MEMBERS;
         result = 31 * result + MAX_NUMBER_GYM_MEMBERS;
         return result;

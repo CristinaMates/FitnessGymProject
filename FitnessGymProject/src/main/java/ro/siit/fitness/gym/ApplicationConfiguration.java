@@ -47,9 +47,9 @@ public class ApplicationConfiguration implements TransactionManagementConfigurer
                 .append("/")
                 .append("fitness-gym-project")
                 .append("?user=")
-                .append("test")
+                .append("postgres")
                 .append("&password=")
-                .append("test").toString();
+                .append("CristaMates").toString();
 
         return  new SingleConnectionDataSource(url, false);
     }
