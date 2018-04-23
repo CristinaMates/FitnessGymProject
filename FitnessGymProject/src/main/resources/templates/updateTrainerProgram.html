@@ -1,0 +1,80 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
+<head>
+    <title>Update Trainers Program</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<form action="#" th:action="@{/trainersprogram/update/} + ${gymTrainer_{id}} + '/'" th:object="${createGymTrainerProgram}" method="post">
+
+    <div>
+        <label th:for="${firstNameTrainer}">Gym Trainer first name</label>
+        <input type="text" id="firstNameTrainer" name="firstNameTrainer" th:value="*{firstNameTrainer}"/>
+    </div>
+    <div>
+        <label th:for="${lastNameTrainer}">Gym Trainer last name</label>
+        <input type="text" id="lastNameTrainer" name="lastNameTrainer" th:value="*{lastNameTrainer}"/>
+    </div>
+    <div>
+        <label th:for="${capacity}">Class capacity</label>
+        <input type="text" id="capacity" name="capacity" th:value="*{capacity}"/>
+    </div>
+    <div>
+        <label th:for="${program}">Program</label>
+        <input type="text" id="program" name="program" th:value="*{program}"/>
+    </div>
+    <div>
+        <label th:for="${gymLocation}">Gym</label>
+        <input type="text" id="gymLocation" name="gymLocation" th:value="*{gymLocation}"/>
+    </div>
+    <div>
+        <label th:for="${adress}">Gym Location adress</label>
+        <input type="text" id="adress" name="adress" th:value="*{adress}"/>
+    </div>
+    <div>
+        <label th:for="${schedule}">Gym schedule</label>
+        <input type="text" id="schedule" name="schedule" th:value="*{schedule}"/>
+    </div>
+    <div>
+        <label th:for="${days}">Gym schedule days</label>
+        <input type="text" id="days" name="days" th:value="*{days}"/>
+    </div>
+
+    <div>
+        <input type="submit" id="doUpdate" name="update gym trainer" value="Update gym trainer"/>
+    </div>
+</form>
+
+
+<table id="myTableId" dt:table="true">
+    <thead>
+    <tr>
+        <th>Trainer First Name</th>
+        <th>Trainer Last Name</th>
+        <th>Capacity</th>
+        <th>Prpgram</th>
+        <th>GymLocation</th>
+        <th>Adress</th>
+        <th>Schedule</th>
+        <th>Days</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="gymTrainer : ${gymTrainers}">
+        <td th:text="${gymTrainer.firstNameTrainer}"></td>
+        <td th:text="${gymTrainer.lastNameTrainer}"></td>
+        <td th:text="${gymTrainer.capacity}"></td>
+        <td th:text="${gymTrainer.program}"></td>
+        <td th:text="${gymTrainer.gymLocation}"></td>
+        <td th:text="${gymTrainer.adress}"></td>
+        <td th:text="${gymTrainer.schedule}"></td>
+        <td th:text="${gymTrainer.days}"></td>
+
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

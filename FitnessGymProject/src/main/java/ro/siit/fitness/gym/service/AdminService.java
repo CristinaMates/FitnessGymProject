@@ -1,12 +1,16 @@
 package ro.siit.fitness.gym.service;
 
 import ro.siit.fitness.gym.domain.GymMember;
+import ro.siit.fitness.gym.domain.GymSubscription;
+
 
 import java.util.List;
 
-public interface GymMemberService {
+public interface AdminService {
 
     List<GymMember> getAll();
+
+    List<GymSubscription> getAllTypes();
 
     void createGymMember(GymMember gymMembers);
 
@@ -16,5 +20,6 @@ public interface GymMemberService {
 
     GymMember getById(long id);
 
-
+    float getDiscountedPrice(float price);
 }
+

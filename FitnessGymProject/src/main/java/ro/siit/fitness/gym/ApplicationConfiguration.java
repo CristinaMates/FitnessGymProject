@@ -40,7 +40,7 @@ public class ApplicationConfiguration implements TransactionManagementConfigurer
                 .append("/")
                 .append("fitness-gym-project")
                 .append("?user=")
-                .append("postgres")
+                .append("postgres") 
                 .append("&password=")
                 .append("test").toString();
 

@@ -3,6 +3,8 @@ package ro.siit.fitness.gym.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,10 +15,12 @@ import ro.siit.fitness.gym.dto.CreateGymMemberReservation;
 import ro.siit.fitness.gym.service.ReservationService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
-public class ReservationController {
+public class ReservationController extends AbstractController{
     @Autowired
     private ReservationService reservationService;
 
@@ -24,15 +28,28 @@ public class ReservationController {
     public String listReservations(Model model, HttpServletRequest request) {
         List<Reservation> reservations = reservationService.getAll();
         model.addAttribute("reservations", reservations);
+        if(!model.containsAttribute("createGymMemberReservation"))
         model.addAttribute("createGymMemberReservation", new CreateGymMemberReservation());
 
         return "listReservations";
     }
 
     @RequestMapping(value = "/reservations", method = RequestMethod.POST)
-    public String createReservation(CreateGymMemberReservation gymMemberReservation, Model model) {
-        Reservation reservation = getReservation(gymMemberReservation);
-        reservationService.createReservation(reservation);
+    public String createReservation(@Valid CreateGymMemberReservation gymMemberReservation, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()){
+            List<String> errors = new LinkedList<>();
+            for (FieldError error: bindingResult.getFieldErrors()){
+                errors.add("rejected value: "+ error.getRejectedValue() + "for field: "+error.getField());
+            }
+            model.addAttribute("errors",errors);
+            model.addAttribute("createGymMemberReservation", gymMemberReservation);
+            return listReservations(model, null);
+
+        } else {
+            Reservation reservation = getReservation(gymMemberReservation);
+            reservationService.createReservation(reservation);
+
+        }
         return "redirect:/reservations";
     }
 

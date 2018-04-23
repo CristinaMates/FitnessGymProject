@@ -32,7 +32,26 @@ public class GymTrainerDAOImpl implements GymTrainerDAO {
 
     @Override
     public List<GymTrainer> getAll() {
+<<<<<<< HEAD
         return jdbcTemplate.query("select * from gym_trainer", GYMTRAINER_ROW_MAPPER);
+=======
+        return jdbcTemplate.query("select * from gym_trainers", new org.springframework.jdbc.core.RowMapper<GymTrainer>() {
+            @Override
+            public GymTrainer mapRow(ResultSet resultSet, int i) throws SQLException {
+
+                GymTrainer result = new GymTrainer();
+                result.setId(resultSet.getLong(1));
+                result.setFirstNameTrainer(resultSet.getString(2));
+                result.setLastNameTrainer(resultSet.getString(3));
+                result.setCapacity(resultSet.getInt(4));
+                result.setProgram(resultSet.getString(5));
+                result.setGymMemberId(resultSet.getLong(6));
+                return result;
+            }
+        });
+
+
+>>>>>>> 754de52607da0867f71f75a8979530726dee7181
     }
 
     @Override

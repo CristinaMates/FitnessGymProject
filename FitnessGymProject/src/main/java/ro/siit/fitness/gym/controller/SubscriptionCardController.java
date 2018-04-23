@@ -120,26 +120,6 @@ public class SubscriptionCardController {
         createGymSubscriptionCard.setLastName(subscriptionCard.getGymMember().getLastName());
         createGymSubscriptionCard.setId(subscriptionCard.getId());
 
-//        if (checkCardAvailability(subscriptionCard)) {
-//            subscriptionCard.setStartDate(createGymSubscriptionCard.getStartDate());
-//            subscriptionCard.setEndDate(createGymSubscriptionCard.getEndDate());
-//        }
-
         return createGymSubscriptionCard;
     }
-
-    /**
-     * created a method to check the expiration date of the card
-     * @param subscriptionCard
-     * @return permission to enter th gym
-     */
-//    private boolean checkCardAvailability(SubscriptionCard subscriptionCard) {
-//        Date currentDate = new Date();
-//        if (subscriptionCard.getEndDate().before(currentDate)) {
-//            return true;
-//        }
-//        return false;
-//
-//    }
-
 }

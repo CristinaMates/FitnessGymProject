@@ -9,23 +9,27 @@ import java.util.Objects;
 public class GymMember {
     private GymSubscription gymSubscription;
     private GymTrainer gymTrainer;
+    private Program program;
     private String firstName;
     private String lastName;
-    private Gender gender;
+    private String gender;
     private Date birthDate;
     private long id;
-    private long telephone;
+    private String telephone;
     private String email;
     private boolean student;
     private boolean corporate;
-    private int memberBudget;
+    private long gymSubscriptionID;
+    private long gymTrainerID;
+    private long programID;
 
     public GymMember() {
     }
 
-    public GymMember(GymSubscription gymSubscription, GymTrainer gymTrainer, String firstName, String lastName, Gender gender, Date birthDate, long id, long telephone, String email, boolean student, boolean corporate, int memberBudget) {
+    public GymMember(GymSubscription gymSubscription, GymTrainer gymTrainer, Program program, String firstName, String lastName, String gender, Date birthDate, long id, String telephone, String email, boolean student, boolean corporate, long gymSubscriptionID, long gymTrainerID, long programID) {
         this.gymSubscription = gymSubscription;
         this.gymTrainer = gymTrainer;
+        this.program = program;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -35,7 +39,25 @@ public class GymMember {
         this.email = email;
         this.student = student;
         this.corporate = corporate;
-        this.memberBudget = memberBudget;
+        this.gymSubscriptionID = gymSubscriptionID;
+        this.gymTrainerID = gymTrainerID;
+        this.programID = programID;
+    }
+
+    public Program getProgram() {
+        return program;
+    }
+
+    public void setProgram(Program program) {
+        this.program = program;
+    }
+
+    public long getProgramID() {
+        return programID;
+    }
+
+    public void setProgramID(long programID) {
+        this.programID = programID;
     }
 
     public GymSubscription getGymSubscription() {
@@ -54,11 +76,11 @@ public class GymMember {
         this.gymTrainer = gymTrainer;
     }
 
-    public Gender getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -78,11 +100,11 @@ public class GymMember {
         this.id = id;
     }
 
-    public long getTelephone() {
+    public String getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(long telephone) {
+    public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 
@@ -110,14 +132,6 @@ public class GymMember {
         this.corporate = corporate;
     }
 
-    public int getMemberBudget() {
-        return memberBudget;
-    }
-
-    public void setMemberBudget(int memberBudget) {
-        this.memberBudget = memberBudget;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -134,21 +148,40 @@ public class GymMember {
         this.lastName = lastName;
     }
 
+    public long getGymSubscriptionID() {
+        return gymSubscriptionID;
+    }
+
+    public void setGymSubscriptionID(long gymSubscriptionID) {
+        this.gymSubscriptionID = gymSubscriptionID;
+    }
+
+    public long getGymTrainerID() {
+        return gymTrainerID;
+    }
+
+    public void setGymTrainerID(long gymTrainerID) {
+        this.gymTrainerID = gymTrainerID;
+    }
+
     @Override
     public String toString() {
         return "GymMember{" +
-                "subscription=" + gymSubscription +
+                "gymSubscription=" + gymSubscription +
                 ", gymTrainer=" + gymTrainer +
+                ", program=" + program +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", gender=" + gender +
+                ", gender='" + gender + '\'' +
                 ", birthDate=" + birthDate +
                 ", id=" + id +
-                ", telephone=" + telephone +
+                ", telephone='" + telephone + '\'' +
                 ", email='" + email + '\'' +
                 ", student=" + student +
                 ", corporate=" + corporate +
-                ", memberBudget=" + memberBudget +
+                ", gymSubscriptionID=" + gymSubscriptionID +
+                ", gymTrainerID=" + gymTrainerID +
+                ", programID=" + programID +
                 '}';
     }
 
@@ -156,25 +189,44 @@ public class GymMember {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         GymMember gymMember = (GymMember) o;
-        return id == gymMember.id &&
-                telephone == gymMember.telephone &&
-                student == gymMember.student &&
-                corporate == gymMember.corporate &&
-                memberBudget == gymMember.memberBudget &&
-                Objects.equals(gymSubscription, gymMember.gymSubscription) &&
-                Objects.equals(gymTrainer, gymMember.gymTrainer) &&
-                Objects.equals(firstName, gymMember.firstName) &&
-                Objects.equals(lastName, gymMember.lastName) &&
-                gender == gymMember.gender &&
-                Objects.equals(birthDate, gymMember.birthDate) &&
-                Objects.equals(email, gymMember.email);
+
+        if (id != gymMember.id) return false;
+        if (student != gymMember.student) return false;
+        if (corporate != gymMember.corporate) return false;
+        if (gymSubscriptionID != gymMember.gymSubscriptionID) return false;
+        if (gymTrainerID != gymMember.gymTrainerID) return false;
+        if (programID != gymMember.programID) return false;
+        if (gymSubscription != null ? !gymSubscription.equals(gymMember.gymSubscription) : gymMember.gymSubscription != null)
+            return false;
+        if (gymTrainer != null ? !gymTrainer.equals(gymMember.gymTrainer) : gymMember.gymTrainer != null) return false;
+        if (program != null ? !program.equals(gymMember.program) : gymMember.program != null) return false;
+        if (firstName != null ? !firstName.equals(gymMember.firstName) : gymMember.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(gymMember.lastName) : gymMember.lastName != null) return false;
+        if (gender != null ? !gender.equals(gymMember.gender) : gymMember.gender != null) return false;
+        if (birthDate != null ? !birthDate.equals(gymMember.birthDate) : gymMember.birthDate != null) return false;
+        if (telephone != null ? !telephone.equals(gymMember.telephone) : gymMember.telephone != null) return false;
+        return email != null ? email.equals(gymMember.email) : gymMember.email == null;
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(gymSubscription, gymTrainer, firstName, lastName, gender, birthDate, id, telephone, email, student, corporate, memberBudget);
+        int result = gymSubscription != null ? gymSubscription.hashCode() : 0;
+        result = 31 * result + (gymTrainer != null ? gymTrainer.hashCode() : 0);
+        result = 31 * result + (program != null ? program.hashCode() : 0);
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (gender != null ? gender.hashCode() : 0);
+        result = 31 * result + (birthDate != null ? birthDate.hashCode() : 0);
+        result = 31 * result + (int) (id ^ (id >>> 32));
+        result = 31 * result + (telephone != null ? telephone.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (student ? 1 : 0);
+        result = 31 * result + (corporate ? 1 : 0);
+        result = 31 * result + (int) (gymSubscriptionID ^ (gymSubscriptionID >>> 32));
+        result = 31 * result + (int) (gymTrainerID ^ (gymTrainerID >>> 32));
+        result = 31 * result + (int) (programID ^ (programID >>> 32));
+        return result;
     }
 }
-

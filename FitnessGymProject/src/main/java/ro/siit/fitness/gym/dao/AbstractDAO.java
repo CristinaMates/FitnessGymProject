@@ -5,7 +5,8 @@ import java.util.List;
 public interface AbstractDAO<T> {
     List<T> getAll();
 
-    T create(T c);
+    T create(T gymMember);
 
-    T update(T c);
+    T update(T gymMember);
+
 }
