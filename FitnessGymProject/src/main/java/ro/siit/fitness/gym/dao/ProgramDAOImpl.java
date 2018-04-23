@@ -15,7 +15,7 @@ public class ProgramDAOImpl implements ProgramDAO {
         public Program mapRow(ResultSet resultSet, int i) throws SQLException {
             Program result = new Program();
             result.setId(resultSet.getLong("id"));
-            result.setProgram(resultSet.getString("program"));
+            //result.setProgram(resultSet.getString("program"));
             result.setNumberOfGymMembers(resultSet.getInt("number_gym_member"));
 
 
@@ -43,7 +43,8 @@ public class ProgramDAOImpl implements ProgramDAO {
 
                         return resultSet.getLong(1);
                     }
-                }, program.getProgram(), program.getNumberOfGymMembers());
+                }//, program.getProgram()
+                , program.getNumberOfGymMembers());
 
 
         program.setId(newProgramId);

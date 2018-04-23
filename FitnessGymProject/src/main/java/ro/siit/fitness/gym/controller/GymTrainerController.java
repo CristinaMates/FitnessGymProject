@@ -101,6 +101,7 @@ public class GymTrainerController {
         GymTrainer gymTrainer = new GymTrainer();
         gymTrainer.setFirstNameTrainer(createGymTrainerProgram.getFirstNameTrainer());
         gymTrainer.setLastNameTrainer(createGymTrainerProgram.getLastNameTrainer());
+        gymTrainer.setProgram(createGymTrainerProgram.getProgram());
 //        gymTrainer.setGymMembers(createGymTrainerProgram.getGymMembers());
 //        gymTrainer.setProgram(createGymTrainerProgram.getProgram());
 //
