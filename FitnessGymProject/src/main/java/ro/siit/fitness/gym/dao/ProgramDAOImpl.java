@@ -44,6 +44,7 @@ public class ProgramDAOImpl implements ProgramDAO {
 
                         return resultSet.getLong(1);
                     }
+
                 }, program.getNumberOfGymMembers(), program.getClasses());
 
 

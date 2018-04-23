@@ -18,7 +18,7 @@ public class SubscriptionCardDAOImpl implements SubscriptionCardDAO {
             result.setId(resultSet.getLong("id"));
             result.setStartDate(resultSet.getDate("start_date"));
             result.setEndDate(resultSet.getDate("end_date"));
-            result.setGymMemberId(resultSet.getLong("gym_member_id"));
+           // result.setGymMemberId(resultSet.getLong("gym_member_id"));
 
 
             return result;
@@ -38,14 +38,14 @@ public class SubscriptionCardDAOImpl implements SubscriptionCardDAO {
 
     @Override
     public SubscriptionCard create(SubscriptionCard subscriptionCard) {
-        long newSubscriptionCardId =  jdbcTemplate.queryForObject("insert into subscription_card(start_date, end_date, gym_member_id) values(?, ?, ?) returning id",
+        long newSubscriptionCardId =  jdbcTemplate.queryForObject("insert into subscription_card(start_date, end_date) values(?, ?) returning id",
                 new RowMapper<Long>() {
                     @Override
                     public Long mapRow(ResultSet resultSet, int i) throws SQLException {
 
                         return resultSet.getLong(1);
                     }
-                }, subscriptionCard.getStartDate(), subscriptionCard.getEndDate(),subscriptionCard.getGymMember().getId());
+                }, subscriptionCard.getStartDate(), subscriptionCard.getEndDate());
 
 
         subscriptionCard.setId(newSubscriptionCardId);
@@ -65,37 +65,5 @@ public class SubscriptionCardDAOImpl implements SubscriptionCardDAO {
                 SUBSCRIPTION_CARD_ROW_MAPPER, id);
     }
 
-//    private JdbcTemplate jdbcTemplate;
-//
-//    public SubscriptionCardDAOImpl (DataSource dataSource){
-//        jdbcTemplate = new JdbcTemplate(dataSource);
-//    }
-//
-//    @Override
-//    public List<SubscriptionCard> getAll() {
-//        return jdbcTemplate.query("select * from subscription_cards", new org.springframework.jdbc.core.RowMapper<SubscriptionCard>() {
-//        @Override
-//        public SubscriptionCard mapRow(ResultSet resultSet, int i) throws SQLException {
-//
-//            SubscriptionCard result = new SubscriptionCard();
-//            result.setId(resultSet.getInt(1));
-//            result.setStartDate(resultSet.getDate(2));
-//            result.setEndDate(resultSet.getDate(3));
-//            result.setGymMemberId(resultSet.getLong(4));
-//            return result;
-//        }
-//    });
-//    }
-//
-//    @Override
-//    public SubscriptionCard create(SubscriptionCard s) {
-//        jdbcTemplate.update("insert into subscription_cards(first_name, last_name, start_date, end_date, gym_member_id) values(?, ?, ?, ?, ?)",
-//            s.getStartDate(), s.getEndDate(), s.getGymMemberId());
-//        return s;
-//    }
-//
-//    @Override
-//    public SubscriptionCard update(SubscriptionCard s) {
-//        return null;
-//    }
+
 }

@@ -17,9 +17,9 @@ public class ReservationDAOImpl implements ReservationDAO {
             Reservation result = new Reservation();
             result.setId(resultSet.getLong("id"));
             result.setPeriod(resultSet.getDate("period"));
-            result.setGymMemberID(resultSet.getLong("gym_member_id"));
-            result.setGymTrainerID(resultSet.getLong("gym_trainer_id"));
-            result.setProgramID(resultSet.getLong("program_id"));
+//            result.setGymMemberID(resultSet.getLong("gym_member_id"));
+//            result.setGymTrainerID(resultSet.getLong("gym_trainer_id"));
+//            result.setProgramID(resultSet.getLong("program_id"));
 
             return result;
         }
@@ -38,14 +38,14 @@ public class ReservationDAOImpl implements ReservationDAO {
 
     @Override
     public Reservation create(Reservation reservation) {
-        long newReservationId =  jdbcTemplate.queryForObject("insert into reservation(period, gym_member_id, gym_trainer_id, program_id) values(?, ?, ?, ?) returning id",
+        long newReservationId =  jdbcTemplate.queryForObject("insert into reservation(period) values(?) returning id",
                 new org.springframework.jdbc.core.RowMapper<Long>() {
                     @Override
                     public Long mapRow(ResultSet resultSet, int i) throws SQLException {
 
                         return resultSet.getLong(1);
                     }
-                }, reservation.getPeriod(), reservation.getGymMemberID(), reservation.getGymTrainer().getId(), reservation.getProgramID());
+                }, reservation.getPeriod());
 
 
         reservation.setId(newReservationId);

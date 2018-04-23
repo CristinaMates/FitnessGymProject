@@ -13,10 +13,8 @@ public class CreateGymTrainerProgram {
     @NotBlank
     private String lastNameTrainer;
 
-    private Program programs;
-
     @NotBlank
-    private String program;
+    private Program program;
     private final int MIN_NUMBER_GYM_MEMBERS = 5;
     private final int MAX_NUMBER_GYM_MEMBERS = 20;
 
@@ -37,19 +35,11 @@ public class CreateGymTrainerProgram {
         this.lastNameTrainer = lastNameTrainer;
     }
 
-    public Program getPrograms() {
-        return programs;
-    }
-
-    public void setPrograms(Program programs) {
-        this.programs = programs;
-    }
-
-    public String getProgram() {
+    public Program getProgram() {
         return program;
     }
 
-    public void setProgram(String program) {
+    public void setProgram(Program program) {
         this.program = program;
     }
 

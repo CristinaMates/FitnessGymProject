@@ -12,10 +12,10 @@ public class Program {
     public Program() {
     }
 
-    public Program(long id, GymTrainer gymTrainer, String program, int numberOfGymMembers) {
+    public Program(long id, GymTrainer gymTrainer, String classes, int numberOfGymMembers) {
         this.id = id;
         this.gymTrainer = gymTrainer;
-        this.classes = program;
+        this.classes = classes;
         this.numberOfGymMembers = numberOfGymMembers;
     }
 

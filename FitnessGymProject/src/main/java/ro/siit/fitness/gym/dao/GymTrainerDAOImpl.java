@@ -3,6 +3,7 @@ package ro.siit.fitness.gym.dao;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import ro.siit.fitness.gym.domain.GymTrainer;
+import ro.siit.fitness.gym.domain.Program;
 
 
 import javax.sql.DataSource;
@@ -18,6 +19,7 @@ public class GymTrainerDAOImpl implements GymTrainerDAO {
             GymTrainer result = new GymTrainer();
             result.setFirstNameTrainer(resultSet.getString("first_name"));
             result.setLastNameTrainer(resultSet.getString("last_name"));
+            //result.setProgramId(resultSet.getLong("program_id"));
             result.setId(resultSet.getLong("id"));
 
 

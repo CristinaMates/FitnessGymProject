@@ -2,6 +2,7 @@ package ro.siit.fitness.gym.service;
 
 import org.springframework.stereotype.Service;
 import ro.siit.fitness.gym.domain.GymTrainer;
+import ro.siit.fitness.gym.domain.Program;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +17,12 @@ public class GymTrainerServiceImpl implements GymTrainerService {
         return gymTrainers;
     }
 
-//    @Override
-//    public String getTrainerProgram() {
-////        GymTrainer gymTrainer = new GymTrainer();
-////        return gymTrainer.getProgram();
-//    }
+
+    @Override
+    public Program getTrainerProgram() {
+        GymTrainer gymTrainer = new GymTrainer();
+        return gymTrainer.getProgram();
+    }
 
     @Override
     public GymTrainer getTrainer() {
