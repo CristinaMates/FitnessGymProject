@@ -36,6 +36,16 @@ public class ApplicationConfiguration implements TransactionManagementConfigurer
     }
 
     @Bean
+    public GymSubscriptionDAO gymSubscriptionDAO(){
+        return new GymSubscriptionDAOImpl(dataSource());
+
+    }
+    @Bean
+    public ProgramDAO programDAO(){
+        return new ProgramDAOImpl(dataSource());
+    }
+
+    @Bean
     public DataSource dataSource() {
         String url = new StringBuilder()
                 .append("jdbc:")
@@ -49,7 +59,7 @@ public class ApplicationConfiguration implements TransactionManagementConfigurer
                 .append("?user=")
                 .append("postgres")
                 .append("&password=")
-                .append("CristaMates").toString();
+                .append("CristinaMates").toString();
 
         return  new SingleConnectionDataSource(url, false);
     }

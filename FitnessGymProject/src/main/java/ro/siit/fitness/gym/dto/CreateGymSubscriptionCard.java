@@ -20,6 +20,8 @@ public class CreateGymSubscriptionCard {
     private String firstName;
     @NotEmpty(message = "Enter gym member second name")
     private String lastName;
+    private long gymMemberID;
+
 
     /*
     SubscriptionCard fields with added validators
@@ -87,5 +89,13 @@ public class CreateGymSubscriptionCard {
 
     public void setGymMember(GymMember gymMember) {
         this.gymMember = gymMember;
+    }
+
+    public long getGymMemberID() {
+        return gymMemberID;
+    }
+
+    public void setGymMemberID(long gymMemberID) {
+        this.gymMemberID = gymMemberID;
     }
 }

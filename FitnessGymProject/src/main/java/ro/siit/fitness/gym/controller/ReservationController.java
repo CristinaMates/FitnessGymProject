@@ -92,7 +92,7 @@ public class ReservationController extends AbstractController{
         gymTrainer.setLastNameTrainer(createGymMemberReservation.getLastNameTrainer());
 
         Program program = new Program();
-        program.setProgram(createGymMemberReservation.getProgram());
+        program.setClasses(createGymMemberReservation.getClasses());
 
         GymMember gymMember = new GymMember();
         gymMember.setEmail(createGymMemberReservation.getEmail());
@@ -114,7 +114,7 @@ public class ReservationController extends AbstractController{
         createGymMemberReservation.setEmail(reservation.getGymMember().getEmail());
         createGymMemberReservation.setFirstNameTrainer(reservation.getGymTrainer().getFirstNameTrainer());
         createGymMemberReservation.setLastNameTrainer(reservation.getGymTrainer().getLastNameTrainer());
-        createGymMemberReservation.setProgram(reservation.getProgram().getProgram());
+        createGymMemberReservation.setClasses(reservation.getProgram().getClasses());
         createGymMemberReservation.setPeriod(reservation.getPeriod());
 
         return createGymMemberReservation;

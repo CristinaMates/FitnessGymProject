@@ -11,7 +11,7 @@ public interface SubscriptionCardService {
 
     void createSubscriptionCard(SubscriptionCard subscriptionCard);
 
-    SubscriptionCard getById(long id);
+    SubscriptionCard findById(long id);
 
     void updateGymSubscriptionCard(SubscriptionCard subscriptionCard, long id);
 

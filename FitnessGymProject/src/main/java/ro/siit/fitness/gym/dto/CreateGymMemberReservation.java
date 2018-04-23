@@ -29,7 +29,7 @@ public class CreateGymMemberReservation {
     private Program programs;
 
     @NotBlank
-    private String program;
+    private String classes;
 
     private Reservation reservation;
 
@@ -76,12 +76,12 @@ public class CreateGymMemberReservation {
         this.lastNameTrainer = lastNameTrainer;
     }
 
-    public String getProgram() {
-        return program;
+    public String getClasses() {
+        return classes;
     }
 
-    public void setProgram(String program) {
-        this.program = program;
+    public void setClasses(String classes) {
+        this.classes = classes;
     }
 
     public Reservation getReservation() {

@@ -4,30 +4,21 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
-import ro.siit.fitness.gym.domain.Gender;
-import ro.siit.fitness.gym.domain.GymSubscription;
-import ro.siit.fitness.gym.domain.GymTrainer;
-import ro.siit.fitness.gym.domain.Program;
+import ro.siit.fitness.gym.domain.*;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class CreateGymMemberRegistration {
-
     @NotBlank
     private String firstName;
-
     @NotBlank
     private String lastName;
-
     private Gender gender = Gender.MALE;
-
     @DateTimeFormat(pattern = "dd/mm/yyyy")
     private Date birthDate;
-
     @Length(min=5, max=10)
     private String telephone;
-
     @Email
     private String email;
     private boolean student;
@@ -35,34 +26,29 @@ public class CreateGymMemberRegistration {
     private long id;
 
     private GymTrainer gymTrainer;
-
+    private long gymTrainerId;
     @NotBlank
     private String firstNameTrainer;
-
     @NotBlank
     private String lastNameTrainer;
 
     private Program program;
-
     private String classes;
-
-    @NotBlank
     private long programID;
 
-    private GymSubscription gymSubscription;
 
     @NotBlank
     private String type;
-
     @DateTimeFormat(pattern = "dd/mm/yyyy")
     private Date startDate;
-
     @DateTimeFormat(pattern = "dd/mm/yyyy")
     private Date endDate;
-
     @NotNull
     private float price;
     private float discount;
+
+    private SubscriptionCard subscriptionCard;
+    private long subscriptionCardId;
 
 
     public GymTrainer getGymTrainer() {
@@ -177,6 +163,12 @@ public class CreateGymMemberRegistration {
         this.programID = programID;
     }
 
+    public void setGymTrainerId(long gymTrainerId) {
+        this.gymTrainerId = gymTrainerId;
+    }
+
+
+
     public String getClasses() {
         return classes;
     }
@@ -185,13 +177,6 @@ public class CreateGymMemberRegistration {
         this.classes = classes;
     }
 
-    public GymSubscription getGymSubscription() {
-        return gymSubscription;
-    }
-
-    public void setGymSubscription(GymSubscription gymSubscription) {
-        this.gymSubscription = gymSubscription;
-    }
 
     public String getType() {
         return type;
@@ -231,5 +216,26 @@ public class CreateGymMemberRegistration {
 
     public void setDiscount(float discount) {
         this.discount = discount;
+    }
+
+    public long getGymTrainerId() {
+        return gymTrainerId;
+    }
+
+
+    public SubscriptionCard getSubscriptionCard() {
+        return subscriptionCard;
+    }
+
+    public void setSubscriptionCard(SubscriptionCard subscriptionCard) {
+        this.subscriptionCard = subscriptionCard;
+    }
+
+    public long getSubscriptionCardId() {
+        return subscriptionCardId;
+    }
+
+    public void setSubscriptionCardId(long subscriptionCardId) {
+        this.subscriptionCardId = subscriptionCardId;
     }
 }

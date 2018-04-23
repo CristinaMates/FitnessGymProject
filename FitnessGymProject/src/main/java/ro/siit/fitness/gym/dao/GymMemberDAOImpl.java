@@ -31,6 +31,7 @@ public class GymMemberDAOImpl implements GymMemberDAO {
             result.setGymSubscriptionID(resultSet.getLong("gym_subscription_id"));
 
 
+
             return result;
         }
     };
@@ -56,7 +57,7 @@ public class GymMemberDAOImpl implements GymMemberDAO {
 
                         return resultSet.getLong(1);
                     }
-                }, gymMember.getFirstName(), gymMember.getLastName(), gymMember.getGender(), gymMember.getBirthDate(),
+                }, gymMember.getFirstName(), gymMember.getLastName(), gymMember.getGender().name(), gymMember.getBirthDate(),
                 gymMember.getTelephone(), gymMember.getEmail(), gymMember.isStudent(), gymMember.isCorporate(),
                 gymMember.getGymTrainer().getId(), gymMember.getProgram().getId(), gymMember.getGymSubscription().getId());
 

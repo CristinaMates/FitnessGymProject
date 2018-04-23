@@ -38,7 +38,7 @@ public class SubscriptionCardDAOImpl implements SubscriptionCardDAO {
 
     @Override
     public SubscriptionCard create(SubscriptionCard subscriptionCard) {
-        long newSubscriptionCardId =  jdbcTemplate.queryForObject("insert into gym_member(start_date, end_date, gym_member_id) values(?, ?, ?) returning id",
+        long newSubscriptionCardId =  jdbcTemplate.queryForObject("insert into subscription_card(start_date, end_date, gym_member_id) values(?, ?, ?) returning id",
                 new RowMapper<Long>() {
                     @Override
                     public Long mapRow(ResultSet resultSet, int i) throws SQLException {

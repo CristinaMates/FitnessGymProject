@@ -60,7 +60,7 @@ public class AdminController extends AbstractController{
 
     @RequestMapping(value = "/gymmembers/{id}", method = RequestMethod.GET)
     public String getGymMember(@PathVariable long id, Model model) {
-        GymMember gymMember = adminService.getById(id);
+        GymMember gymMember = adminService.findById(id);
         model.addAttribute("updateGymMemberRegistration", getGymMemberRegistration(gymMember));
         model.addAttribute("gymMember_id", id);
         return "updateGymMember";
