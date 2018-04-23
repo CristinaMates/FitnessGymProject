@@ -26,7 +26,7 @@ public class CreateGymMemberReservation {
     @NotBlank
     private String lastNameTrainer;
 
-    private Program programs;
+    private Program program;
 
     @NotBlank
     private String classes;

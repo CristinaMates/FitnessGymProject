@@ -16,10 +16,10 @@ public class ReservationDAOImpl implements ReservationDAO {
         public Reservation mapRow(ResultSet resultSet, int i) throws SQLException {
             Reservation result = new Reservation();
             result.setId(resultSet.getLong("id"));
+            result.setPeriod(resultSet.getDate("period"));
             result.setGymMemberID(resultSet.getLong("gym_member_id"));
             result.setGymTrainerID(resultSet.getLong("gym_trainer_id"));
             result.setProgramID(resultSet.getLong("program_id"));
-            result.setPeriod(resultSet.getDate("period"));
 
             return result;
         }
@@ -45,8 +45,7 @@ public class ReservationDAOImpl implements ReservationDAO {
 
                         return resultSet.getLong(1);
                     }
-                }, reservation.getPeriod(), reservation.getGymMemberID(), reservation.getGymTrainer().getId(),
-                reservation.getProgram().getId());
+                }, reservation.getPeriod(), reservation.getGymMemberID(), reservation.getGymTrainer().getId(), reservation.getProgramID());
 
 
         reservation.setId(newReservationId);
@@ -65,39 +64,5 @@ public class ReservationDAOImpl implements ReservationDAO {
 
                 RESERVATION_ROW_MAPPER, id);
     }
-//    private JdbcTemplate jdbcTemplate;
-//
-//    public ReservationDAOImpl (DataSource dataSource) {jdbcTemplate = new JdbcTemplate(dataSource); }
-//
-//    @Override
-//    public List<Reservation> getAll() {
-//
-//        return jdbcTemplate.query("select * from reservations", new org.springframework.jdbc.core.RowMapper<Reservation>() {
-//
-//            @Override
-//            public Reservation mapRow(ResultSet resultSet, int i) throws SQLException {
-//
-//                Reservation result = new Reservation();
-//                result.setPeriod(resultSet.getDate(1));
-//                result.setId(resultSet.getLong(2));
-//                result.setGymMemberID(resultSet.getLong(3));
-//                result.setGymTrainerID(resultSet.getLong(4));
-//                return result;
-//
-//            }
-//        });
-//    }
-//    @Override
-//    public Reservation create(Reservation reservation) {
-//
-//        jdbcTemplate.update ("insert into reservations (period, id, gym_member_id, gym_trainer_id) values (?, ?, ?, ?)",
-//                reservation.getPeriod(), reservation.getId(), reservation.getGymMemberID(), reservation.getGymTrainerID());
-//            return reservation;
-//    }
-//
-//    @Override
-//    public Reservation update(Reservation reservation) {
-//        return null;
-//    }
 }
 
