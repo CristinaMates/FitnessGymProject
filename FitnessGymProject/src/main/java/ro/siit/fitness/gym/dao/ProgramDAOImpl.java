@@ -15,8 +15,9 @@ public class ProgramDAOImpl implements ProgramDAO {
         public Program mapRow(ResultSet resultSet, int i) throws SQLException {
             Program result = new Program();
             result.setId(resultSet.getLong("id"));
-            result.setClasses(resultSet.getString("program"));
             result.setNumberOfGymMembers(resultSet.getInt("number_gym_member"));
+            result.setClasses(resultSet.getString("program"));
+
 
 
             return result;
@@ -31,19 +32,20 @@ public class ProgramDAOImpl implements ProgramDAO {
 
     @Override
     public List<Program> getAll() {
-        return jdbcTemplate.query("select * from gym_subscription", PROGRAM_ROW_MAPPER);
+        return jdbcTemplate.query("select * from program", PROGRAM_ROW_MAPPER);
     }
 
     @Override
     public Program create(Program program) {
-        long newProgramId =  jdbcTemplate.queryForObject("insert into program(program, number_gym_member) values(?, ?) returning id",
+        long newProgramId =  jdbcTemplate.queryForObject("insert into program(number_gym_member, program) values(?, ?) returning id",
                 new RowMapper<Long>() {
                     @Override
                     public Long mapRow(ResultSet resultSet, int i) throws SQLException {
 
                         return resultSet.getLong(1);
                     }
-                }, program.getClasses(), program.getNumberOfGymMembers());
+
+                }, program.getNumberOfGymMembers(), program.getClasses());
 
 
         program.setId(newProgramId);

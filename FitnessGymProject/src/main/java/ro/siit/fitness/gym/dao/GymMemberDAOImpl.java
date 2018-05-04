@@ -78,5 +78,4 @@ public class GymMemberDAOImpl implements GymMemberDAO {
 
                 GYM_MEMBER_ROW_MAPPER, id);
     }
-
 }

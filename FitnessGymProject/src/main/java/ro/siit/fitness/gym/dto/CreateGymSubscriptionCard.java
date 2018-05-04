@@ -34,6 +34,7 @@ public class CreateGymSubscriptionCard {
     @DateTimeFormat(pattern = "dd/mm/yyyy")
     @NotNull(message = "You have not selected a end date")
     private Date endDate;
+    private long subscriptionCardId;
 
     public SubscriptionCard getSubscriptionCard() {
         return subscriptionCard;
@@ -97,5 +98,13 @@ public class CreateGymSubscriptionCard {
 
     public void setGymMemberID(long gymMemberID) {
         this.gymMemberID = gymMemberID;
+    }
+
+    public long getSubscriptionCardId() {
+        return subscriptionCardId;
+    }
+
+    public void setSubscriptionCardId(long subscriptionCardId) {
+        this.subscriptionCardId = subscriptionCardId;
     }
 }

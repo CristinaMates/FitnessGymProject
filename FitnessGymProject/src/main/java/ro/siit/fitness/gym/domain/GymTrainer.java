@@ -5,15 +5,26 @@ public class GymTrainer {
     private long id;
     private String firstNameTrainer;
     private String lastNameTrainer;
-
+    private Program program;
+    private long programId;
 
     public GymTrainer() {
     }
 
-    public GymTrainer(long id, String firstName, String lastName) {
+    public GymTrainer(long id, String firstNameTrainer, String lastNameTrainer, Program program, long programId) {
         this.id = id;
-        this.firstNameTrainer = firstName;
-        this.lastNameTrainer = lastName;
+        this.firstNameTrainer = firstNameTrainer;
+        this.lastNameTrainer = lastNameTrainer;
+        this.program = program;
+        this.programId = programId;
+    }
+
+    public long getProgramId() {
+        return programId;
+    }
+
+    public void setProgramId(long programId) {
+        this.programId = programId;
     }
 
     public long getId() {
@@ -40,6 +51,14 @@ public class GymTrainer {
         this.lastNameTrainer = lastName;
     }
 
+    public Program getProgram() {
+        return program;
+    }
+
+    public void setProgram(Program program) {
+        this.program = program;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -48,8 +67,11 @@ public class GymTrainer {
         GymTrainer that = (GymTrainer) o;
 
         if (id != that.id) return false;
-        if (firstNameTrainer != null ? !firstNameTrainer.equals(that.firstNameTrainer) : that.firstNameTrainer != null) return false;
-        return lastNameTrainer != null ? lastNameTrainer.equals(that.lastNameTrainer) : that.lastNameTrainer == null;
+        if (firstNameTrainer != null ? !firstNameTrainer.equals(that.firstNameTrainer) : that.firstNameTrainer != null)
+            return false;
+        if (lastNameTrainer != null ? !lastNameTrainer.equals(that.lastNameTrainer) : that.lastNameTrainer != null)
+            return false;
+        return program != null ? program.equals(that.program) : that.program == null;
     }
 
     @Override
@@ -57,6 +79,9 @@ public class GymTrainer {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (firstNameTrainer != null ? firstNameTrainer.hashCode() : 0);
         result = 31 * result + (lastNameTrainer != null ? lastNameTrainer.hashCode() : 0);
+        result = 31 * result + (program != null ? program.hashCode() : 0);
         return result;
     }
+
+
 }

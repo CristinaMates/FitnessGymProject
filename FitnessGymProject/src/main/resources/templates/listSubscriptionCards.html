@@ -26,23 +26,26 @@
     <link href="../static/css/jquery.datetimepicker.min.css"
           th:href="@{css/jquery.datetimepicker.min.css}" rel="stylesheet" media="screen"/>
     <script src="jquery.datetimepicker.js"></script>
+    <script src="jquery.datetimepicker.full.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
-    <table th:if="${errors != null}">
-        <tr th:each="error : ${errors}">
-            <div class="alert alert-danger">
-                <strong>Missing field<td th:text="${error}" style="color:red"></td></strong>
-            </div>
-
-        </tr>
-    </table>
 
 </head>
 <body>
+
+<table th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <div class="alert alert-danger">
+            <strong>Missing field<td th:text="${error}" style="color:red"></td></strong>
+        </div>
+
+    </tr>
+</table>
+
 
 <form action="#" th:action="@{/subscriptioncards}" th:object="${createGymSubscriptionCard}" method="post">
     <legend style="color:white"><b>Gym member details</b></legend>
@@ -59,13 +62,12 @@
         <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</td>
     </fieldset>
 
+    <fieldset>
     <label th:for="${subscriptionCard}" style="color:white">Gym subscription card</label>
 
-    <fieldset style="text-align:left;">
-
-        <label th:for="${startDate}" style="color:white">Start Date</label>
-        <input type="text" id="startDate" name="startDate" th:value="*{startDate}"/>
-        <script>
+    <label th:for="${startDate}" style="color:white">Start Date</label>
+    <input type="text" id="startDate" name="startDate" th:value="*{startDate}"/>
+    <script>
     $(document).ready(function(){
         var date_input=$('input[name="startDate"]');
         var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
@@ -74,14 +76,12 @@
             container: container,
             todayHighlight: true,
             autoclose: true,
-
         })
     })
-
         </script>
-        <label th:for="${endDate}" style="color:white">End date</label>
-        <input type="text" id="endDate" name="endDate" th:value="*{endDate}"/>
-        <script>
+    <label th:for="${endDate}" style="color:white">End date</label>
+    <input type="text" id="endDate" name="endDate" th:value="*{endDate}"/>
+    <script>
     $(document).ready(function(){
         var date_input=$('input[name="endDate"]');
         var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
@@ -92,11 +92,10 @@
             autoclose: true,
         })
     })
-
-        </script>
-
-        <input type="submit" id="doUpdate" name="save client" value="create subscription card" style="color:"/>
+    </script>
     </fieldset>
+        <input type="submit" id="doUpdate" name="save client" value="create subscription card" style="color:"/>
+
 </form>
 
 <br/>

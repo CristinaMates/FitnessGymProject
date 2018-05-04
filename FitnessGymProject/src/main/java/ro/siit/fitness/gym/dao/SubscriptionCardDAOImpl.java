@@ -18,7 +18,7 @@ public class SubscriptionCardDAOImpl implements SubscriptionCardDAO {
             result.setId(resultSet.getLong("id"));
             result.setStartDate(resultSet.getDate("start_date"));
             result.setEndDate(resultSet.getDate("end_date"));
-            result.setGymMemberId(resultSet.getLong("gym_member_id"));
+           // result.setGymMemberId(resultSet.getLong("gym_member_id"));
 
 
             return result;
@@ -38,14 +38,14 @@ public class SubscriptionCardDAOImpl implements SubscriptionCardDAO {
 
     @Override
     public SubscriptionCard create(SubscriptionCard subscriptionCard) {
-        long newSubscriptionCardId =  jdbcTemplate.queryForObject("insert into subscription_card(start_date, end_date, gym_member_id) values(?, ?, ?) returning id",
+        long newSubscriptionCardId =  jdbcTemplate.queryForObject("insert into subscription_card(start_date, end_date) values(?, ?) returning id",
                 new RowMapper<Long>() {
                     @Override
                     public Long mapRow(ResultSet resultSet, int i) throws SQLException {
 
                         return resultSet.getLong(1);
                     }
-                }, subscriptionCard.getStartDate(), subscriptionCard.getEndDate(),subscriptionCard.getGymMember().getId());
+                }, subscriptionCard.getStartDate(), subscriptionCard.getEndDate());
 
 
         subscriptionCard.setId(newSubscriptionCardId);
@@ -64,5 +64,6 @@ public class SubscriptionCardDAOImpl implements SubscriptionCardDAO {
 
                 SUBSCRIPTION_CARD_ROW_MAPPER, id);
     }
+
 
 }
