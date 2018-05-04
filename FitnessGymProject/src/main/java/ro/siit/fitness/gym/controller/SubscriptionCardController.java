@@ -69,13 +69,6 @@ public class SubscriptionCardController {
     public String updateSubscriptionCard(@Valid CreateGymSubscriptionCard gymSubscriptionCard, @PathVariable long id, BindingResult bindingResult) {
         SubscriptionCard subscriptionCard = getSubscriptionCard(gymSubscriptionCard);
         subscriptionCardService.updateGymSubscriptionCard(subscriptionCard, id);
-//        List<FieldError> errors = bindingResult.getFieldErrors();
-//        if (bindingResult.hasErrors()) {
-//            for (FieldError error : errors) {
-//                System.out.println(error.getObjectName() + " - " + error.getDefaultMessage());
-//            }
-//            return "updateSubscriptionCard";
-//        }
         return "redirect:/subscriptioncards";
     }
 

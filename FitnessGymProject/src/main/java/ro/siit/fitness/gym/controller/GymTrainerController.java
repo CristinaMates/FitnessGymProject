@@ -3,21 +3,14 @@ package ro.siit.fitness.gym.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.AbstractController;
-import ro.siit.fitness.gym.domain.GymLocation;
-import ro.siit.fitness.gym.domain.GymMember;
 import ro.siit.fitness.gym.domain.GymTrainer;
 import ro.siit.fitness.gym.dto.CreateGymTrainerProgram;
 import ro.siit.fitness.gym.service.GymTrainerService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -66,25 +59,6 @@ public class GymTrainerController {
 
     }
 
-    //    @RequestMapping(value = "/trainersmember", method = RequestMethod.POST)
-//    public String createGymMember(@Valid CreateGymMemberRegistration gymMemberRegistration, BindingResult bindingResult, Model model) {
-//
-//        if (bindingResult.hasErrors()) {
-//            List<String> errors = new LinkedList<>();
-//            for (FieldError error: bindingResult.getFieldErrors()) {
-//                errors.add("rejected value: "+ error.getRejectedValue() + " for field: "+error.getField());
-//            }
-//            model.addAttribute("errors", errors);
-//            model.addAttribute("createGymMemberRegistration", gymMemberRegistration);
-//            return listGymMembers(model, null);
-//
-//        } else {
-//            GymMember gymMember = getGymMember(gymMemberRegistration);
-//            adminService.createGymMember(gymMember);
-//        }
-//
-//        return "redirect:/gymmembers";
-//    }
 
     @RequestMapping(value = "/trainersprogram/update/{id}", method = RequestMethod.POST)
     private String updateTrainerProgram(CreateGymTrainerProgram createGymTrainerProgram,@PathVariable long id){
@@ -101,15 +75,6 @@ public class GymTrainerController {
         GymTrainer gymTrainer = new GymTrainer();
         gymTrainer.setFirstNameTrainer(createGymTrainerProgram.getFirstNameTrainer());
         gymTrainer.setLastNameTrainer(createGymTrainerProgram.getLastNameTrainer());
-//        gymTrainer.setGymMembers(createGymTrainerProgram.getGymMembers());
-//        gymTrainer.setProgram(createGymTrainerProgram.getProgram());
-//
-//        GymLocation gymLocation = new GymLocation();
-//        gymLocation.setAddress(createGymTrainerProgram.getAddress());
-//        gymLocation.setSchedule(createGymTrainerProgram.getSchedule());
-//        gymLocation.setDays(createGymTrainerProgram.getDays());
-//
-//        gymTrainer.setGymLocation(gymLocation);
 
         return gymTrainer;
     }
@@ -117,15 +82,6 @@ public class GymTrainerController {
     private CreateGymTrainerProgram getGymTrainerProgram(GymTrainer gymTrainer) {
         CreateGymTrainerProgram createGymTrainerProgram = new CreateGymTrainerProgram();
 
-//        createGymTrainerProgram.setFirstNameTrainer(gymTrainer.getFirstNameTrainer());
-//        createGymTrainerProgram.setLastNameTrainer(gymTrainer.getLastNameTrainer());
-//        createGymTrainerProgram.setCapacity(gymTrainer.getCapacity());
-//        createGymTrainerProgram.setGymMembers(gymTrainer.getGymMembers());
-//        createGymTrainerProgram.setProgram(gymTrainer.getProgram());
-//
-//        createGymTrainerProgram.setAddress(gymTrainer.getGymLocation().getAddress());
-//        createGymTrainerProgram.setSchedule(gymTrainer.getGymLocation().getSchedule());
-//        createGymTrainerProgram.setDays(gymTrainer.getGymLocation().getDays());
 
         return createGymTrainerProgram;
     }
