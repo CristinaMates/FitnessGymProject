@@ -1,4 +1,5 @@
 package ro.siit.fitness.gym;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -6,27 +7,43 @@ import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
-import ro.siit.fitness.gym.dao.GymTrainerDAO;
-import ro.siit.fitness.gym.dao.GymTrainerDAOImpl;
-import ro.siit.fitness.gym.dao.SubscriptionCardDAO;
-import ro.siit.fitness.gym.dao.SubscriptionCardDAOImpl;
-import ro.siit.fitness.gym.domain.GymMember;
+import ro.siit.fitness.gym.dao.*;
 
 import javax.sql.DataSource;
+
 @EnableTransactionManagement
 @Configuration
 public class ApplicationConfiguration implements TransactionManagementConfigurer {
 
     @Bean
-    public SubscriptionCardDAO subscriptionCardDAO() {
+    public GymMemberDAO gymMemberDAO(){
+        return new GymMemberDAOImpl(dataSource());
+    }
+
+    @Bean
+    public SubscriptionCardDAO subscriptionCardDAO(){
         return new SubscriptionCardDAOImpl(dataSource());
     }
 
-
-   @Bean
-   public GymTrainerDAO gymTrainerDAO () {
+    @Bean
+    public GymTrainerDAO gymTrainerDAO(){
         return new GymTrainerDAOImpl(dataSource());
-   }
+    }
+
+    @Bean
+    public ReservationDAO reservationDAO() {
+        return new ReservationDAOImpl(dataSource());
+    }
+
+    @Bean
+    public GymSubscriptionDAO gymSubscriptionDAO(){
+        return new GymSubscriptionDAOImpl(dataSource());
+
+    }
+    @Bean
+    public ProgramDAO programDAO(){
+        return new ProgramDAOImpl(dataSource());
+    }
 
     @Bean
     public DataSource dataSource() {
@@ -40,7 +57,7 @@ public class ApplicationConfiguration implements TransactionManagementConfigurer
                 .append("/")
                 .append("fitness-gym-project")
                 .append("?user=")
-                .append("postgres") 
+                .append("postgres")
                 .append("&password=")
                 .append("test").toString();
 
@@ -58,6 +75,6 @@ public class ApplicationConfiguration implements TransactionManagementConfigurer
         return txName();
     }
 
-}
+    }
 
 

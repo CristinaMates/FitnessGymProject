@@ -26,20 +26,11 @@ public class GymTrainerController {
     @Autowired
     private GymTrainerService gymTrainerService;
 
-//    @RequestMapping(value = "/trainersmember", method = RequestMethod.GET)
-//    public String listTrainerMembers(Model model, HttpServletRequest request) {
-//        GymTrainer gymTrainer = new GymTrainer();
-//        List<GymMember> gymMembers = gymTrainer.getGymMembers();
-//        model.addAttribute("gymMembers", gymMembers);
-//        return "listTrainerMembers";
-//
-//    }
 
     @RequestMapping(value = "/trainersmember", method = RequestMethod.GET)
     public String listTrainerMembers(Model model, HttpServletRequest request) {
-        GymTrainer gymTrainer = new GymTrainer();
-        List<GymMember> gymMembers = gymTrainer.getGymMember();
-        model.addAttribute("gymMembers", gymMembers);
+        List<GymTrainer> gymTrainers = gymTrainerService.getAll();
+        model.addAttribute("gymTrainers", gymTrainers);
         if(!model.containsAttribute("getGymTrainerProgram")){
             model.addAttribute("getGymTrainerProgram", new CreateGymTrainerProgram());
         }
@@ -110,16 +101,15 @@ public class GymTrainerController {
         GymTrainer gymTrainer = new GymTrainer();
         gymTrainer.setFirstNameTrainer(createGymTrainerProgram.getFirstNameTrainer());
         gymTrainer.setLastNameTrainer(createGymTrainerProgram.getLastNameTrainer());
-        gymTrainer.setCapacity(createGymTrainerProgram.getCapacity());
-        gymTrainer.setGymMembers(createGymTrainerProgram.getGymMembers());
-        gymTrainer.setProgram(createGymTrainerProgram.getProgram());
-
-        GymLocation gymLocation = new GymLocation();
-        gymLocation.setAddress(createGymTrainerProgram.getAddress());
-        gymLocation.setSchedule(createGymTrainerProgram.getSchedule());
-        gymLocation.setDays(createGymTrainerProgram.getDays());
-
-        gymTrainer.setGymLocation(gymLocation);
+//        gymTrainer.setGymMembers(createGymTrainerProgram.getGymMembers());
+//        gymTrainer.setProgram(createGymTrainerProgram.getProgram());
+//
+//        GymLocation gymLocation = new GymLocation();
+//        gymLocation.setAddress(createGymTrainerProgram.getAddress());
+//        gymLocation.setSchedule(createGymTrainerProgram.getSchedule());
+//        gymLocation.setDays(createGymTrainerProgram.getDays());
+//
+//        gymTrainer.setGymLocation(gymLocation);
 
         return gymTrainer;
     }
@@ -127,15 +117,15 @@ public class GymTrainerController {
     private CreateGymTrainerProgram getGymTrainerProgram(GymTrainer gymTrainer) {
         CreateGymTrainerProgram createGymTrainerProgram = new CreateGymTrainerProgram();
 
-        createGymTrainerProgram.setFirstNameTrainer(gymTrainer.getFirstNameTrainer());
-        createGymTrainerProgram.setLastNameTrainer(gymTrainer.getLastNameTrainer());
-        createGymTrainerProgram.setCapacity(gymTrainer.getCapacity());
-        createGymTrainerProgram.setGymMembers(gymTrainer.getGymMembers());
-        createGymTrainerProgram.setProgram(gymTrainer.getProgram());
-
-        createGymTrainerProgram.setAddress(gymTrainer.getGymLocation().getAddress());
-        createGymTrainerProgram.setSchedule(gymTrainer.getGymLocation().getSchedule());
-        createGymTrainerProgram.setDays(gymTrainer.getGymLocation().getDays());
+//        createGymTrainerProgram.setFirstNameTrainer(gymTrainer.getFirstNameTrainer());
+//        createGymTrainerProgram.setLastNameTrainer(gymTrainer.getLastNameTrainer());
+//        createGymTrainerProgram.setCapacity(gymTrainer.getCapacity());
+//        createGymTrainerProgram.setGymMembers(gymTrainer.getGymMembers());
+//        createGymTrainerProgram.setProgram(gymTrainer.getProgram());
+//
+//        createGymTrainerProgram.setAddress(gymTrainer.getGymLocation().getAddress());
+//        createGymTrainerProgram.setSchedule(gymTrainer.getGymLocation().getSchedule());
+//        createGymTrainerProgram.setDays(gymTrainer.getGymLocation().getDays());
 
         return createGymTrainerProgram;
     }

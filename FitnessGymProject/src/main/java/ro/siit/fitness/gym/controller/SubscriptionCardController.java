@@ -59,7 +59,7 @@ public class SubscriptionCardController {
 
     @RequestMapping(value = "/subscriptioncards/{id}", method = RequestMethod.GET)
     public String getSubscriptionCard(@PathVariable long id, Model model) {
-        SubscriptionCard subscriptionCard = subscriptionCardService.getById(id);
+        SubscriptionCard subscriptionCard = subscriptionCardService.findById(id);
         model.addAttribute("updateGymSubscriptionCard", getGymSubcriptionCard(subscriptionCard));
         model.addAttribute("subscriptionCard_id", id);
         return "updateSubscriptionCard";

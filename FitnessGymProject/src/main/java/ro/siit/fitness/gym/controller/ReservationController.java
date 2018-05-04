@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ro.siit.fitness.gym.domain.GymMember;
 import ro.siit.fitness.gym.domain.GymTrainer;
+import ro.siit.fitness.gym.domain.Program;
 import ro.siit.fitness.gym.domain.Reservation;
 import ro.siit.fitness.gym.dto.CreateGymMemberReservation;
 import ro.siit.fitness.gym.service.ReservationService;
@@ -89,7 +90,9 @@ public class ReservationController extends AbstractController{
         GymTrainer gymTrainer = new GymTrainer();
         gymTrainer.setFirstNameTrainer(createGymMemberReservation.getFirstNameTrainer());
         gymTrainer.setLastNameTrainer(createGymMemberReservation.getLastNameTrainer());
-        gymTrainer.setProgram(createGymMemberReservation.getProgram());
+
+        Program program = new Program();
+        program.setClasses(createGymMemberReservation.getClasses());
 
         GymMember gymMember = new GymMember();
         gymMember.setEmail(createGymMemberReservation.getEmail());
@@ -111,7 +114,7 @@ public class ReservationController extends AbstractController{
         createGymMemberReservation.setEmail(reservation.getGymMember().getEmail());
         createGymMemberReservation.setFirstNameTrainer(reservation.getGymTrainer().getFirstNameTrainer());
         createGymMemberReservation.setLastNameTrainer(reservation.getGymTrainer().getLastNameTrainer());
-        createGymMemberReservation.setProgram(reservation.getGymTrainer().getProgram());
+        createGymMemberReservation.setClasses(reservation.getProgram().getClasses());
         createGymMemberReservation.setPeriod(reservation.getPeriod());
 
         return createGymMemberReservation;

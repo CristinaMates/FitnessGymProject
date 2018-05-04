@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 import ro.siit.fitness.gym.domain.GymMember;
 import ro.siit.fitness.gym.domain.GymTrainer;
+import ro.siit.fitness.gym.domain.Program;
 import ro.siit.fitness.gym.domain.Reservation;
 
 import java.util.Date;
@@ -25,10 +26,12 @@ public class CreateGymMemberReservation {
     @NotBlank
     private String lastNameTrainer;
 
-    @NotBlank
-    private String program;
+    private Program programs;
 
-    private Reservation reservations;
+    @NotBlank
+    private String classes;
+
+    private Reservation reservation;
 
     @DateTimeFormat(pattern = "dd/mm/yyyy")
     private Date period;
@@ -73,20 +76,20 @@ public class CreateGymMemberReservation {
         this.lastNameTrainer = lastNameTrainer;
     }
 
-    public String getProgram() {
-        return program;
+    public String getClasses() {
+        return classes;
     }
 
-    public void setProgram(String program) {
-        this.program = program;
+    public void setClasses(String classes) {
+        this.classes = classes;
     }
 
-    public Reservation getReservations() {
-        return reservations;
+    public Reservation getReservation() {
+        return reservation;
     }
 
-    public void setReservations(Reservation reservations) {
-        this.reservations = reservations;
+    public void setReservation(Reservation reservations) {
+        this.reservation = reservations;
     }
 
     public Date getPeriod() {

@@ -2,6 +2,7 @@ package ro.siit.fitness.gym.dao;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import ro.siit.fitness.gym.domain.Gender;
 import ro.siit.fitness.gym.domain.GymMember;
 
 import javax.sql.DataSource;
@@ -10,6 +11,30 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class GymMemberDAOImpl implements GymMemberDAO {
+
+
+    public static final RowMapper<GymMember> GYM_MEMBER_ROW_MAPPER = new RowMapper<GymMember>() {
+        @Override
+        public GymMember mapRow(ResultSet resultSet, int i) throws SQLException {
+            GymMember result = new GymMember();
+            result.setFirstName(resultSet.getString("first_name"));
+            result.setLastName(resultSet.getString("last_name"));
+            result.setGender(resultSet.getString("gender") != null? Gender.valueOf(resultSet.getString("gender")) : Gender.MALE);
+            result.setBirthDate(resultSet.getDate("birth_date"));
+            result.setTelephone(resultSet.getString("telephone"));
+            result.setEmail(resultSet.getString("email"));
+            result.setStudent(resultSet.getBoolean("student"));
+            result.setCorporate(resultSet.getBoolean("corporate"));
+            result.setId(resultSet.getLong("id"));
+            result.setGymTrainerID(resultSet.getLong("gym_trainer_id"));
+            result.setProgramID(resultSet.getLong("program_id"));
+            result.setGymSubscriptionID(resultSet.getLong("gym_subscription_id"));
+
+
+
+            return result;
+        }
+    };
     private JdbcTemplate jdbcTemplate;
 
 
@@ -19,34 +44,26 @@ public class GymMemberDAOImpl implements GymMemberDAO {
 
     @Override
     public List<GymMember> getAll() {
-        return jdbcTemplate.query("select * from gym_members", new RowMapper<GymMember>() {
-            @Override
-            public GymMember mapRow(ResultSet resultSet, int i) throws SQLException {
-
-                GymMember result = new GymMember();
-                result.setFirstName(resultSet.getString(1));
-                result.setLastName(resultSet.getString(2));
-                result.setGender(resultSet.getString(3));
-                result.setBirthDate(resultSet.getDate(4));
-                result.setId(resultSet.getLong(5));
-                result.setTelephone(resultSet.getString(6));
-                result.setEmail(resultSet.getString(7));
-                result.setStudent(resultSet.getBoolean(8));
-                result.setCorporate(resultSet.getBoolean(9));
-                result.setGymTrainerID(resultSet.getLong(10));
-                result.setGymSubscriptionID(resultSet.getLong(11));
-
-                return result;
-            }
-        });
+        return jdbcTemplate.query("select * from gym_member", GYM_MEMBER_ROW_MAPPER);
     }
 
     @Override
     public GymMember create(GymMember gymMember) {
-        jdbcTemplate.update("insert into gym_members(first_name, last_name, gender, birth_date, telephone, email, student, corporate, gym_trainer_id, gym_subscription_id)" +
-                        " values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                gymMember.getFirstName(), gymMember.getLastName(), gymMember.getGender(), gymMember.getBirthDate(), gymMember.getId(),
-                gymMember.getEmail(), gymMember.isStudent(), gymMember.isCorporate(), gymMember.getGymTrainerID(), gymMember.getGymSubscriptionID());
+        long newGymMemberId =  jdbcTemplate.queryForObject("insert into gym_member(first_name, last_name, gender, birth_date," +
+                        " telephone, email, student, corporate, gym_trainer_id, program_id, gym_subscription_id) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) returning id",
+                new RowMapper<Long>() {
+                    @Override
+                    public Long mapRow(ResultSet resultSet, int i) throws SQLException {
+
+                        return resultSet.getLong(1);
+                    }
+                }, gymMember.getFirstName(), gymMember.getLastName(), gymMember.getGender().name(), gymMember.getBirthDate(),
+                gymMember.getTelephone(), gymMember.getEmail(), gymMember.isStudent(), gymMember.isCorporate(),
+                gymMember.getGymTrainer().getId(), gymMember.getProgram().getId(), gymMember.getGymSubscription().getId());
+
+
+        gymMember.setId(newGymMemberId);
+
         return gymMember;
     }
 
@@ -54,5 +71,58 @@ public class GymMemberDAOImpl implements GymMemberDAO {
     public GymMember update(GymMember gymMember) {
         return null;
     }
+
+    @Override
+    public GymMember findById(long id) {
+        return jdbcTemplate.queryForObject("select * from gym_member where id = ?",
+
+                GYM_MEMBER_ROW_MAPPER, id);
+    }
+
+
+//    private JdbcTemplate jdbcTemplate;
+//
+//
+//    public GymMemberDAOImpl(DataSource dataSource) {
+//        jdbcTemplate = new JdbcTemplate(dataSource);
+//    }
+//
+//    @Override
+//    public List<GymMember> getAll() {
+//        return jdbcTemplate.query("select * from gym_members", new RowMapper<GymMember>() {
+//            @Override
+//            public GymMember mapRow(ResultSet resultSet, int i) throws SQLException {
+//
+//                GymMember result = new GymMember();
+//                result.setFirstName(resultSet.getString(1));
+//                result.setLastName(resultSet.getString(2));
+//                result.setGender(resultSet.getString(3));
+//                result.setBirthDate(resultSet.getDate(4));
+//                result.setId(resultSet.getLong(5));
+//                result.setTelephone(resultSet.getString(6));
+//                result.setEmail(resultSet.getString(7));
+//                result.setStudent(resultSet.getBoolean(8));
+//                result.setCorporate(resultSet.getBoolean(9));
+//                result.setGymTrainerID(resultSet.getLong(10));
+//                result.setGymSubscriptionID(resultSet.getLong(11));
+//
+//                return result;
+//            }
+//        });
+//    }
+//
+//    @Override
+//    public GymMember create(GymMember gymMember) {
+//        jdbcTemplate.update("insert into gym_members(first_name, last_name, gender, birth_date, telephone, email, student, corporate, gym_trainer_id, gym_subscription_id)" +
+//                        " values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+//                gymMember.getFirstName(), gymMember.getLastName(), gymMember.getGender(), gymMember.getBirthDate(), gymMember.getId(),
+//                gymMember.getEmail(), gymMember.isStudent(), gymMember.isCorporate(), gymMember.getGymTrainerID(), gymMember.getGymSubscriptionID());
+//        return gymMember;
+//    }
+//
+//    @Override
+//    public GymMember update(GymMember gymMember) {
+//        return null;
+//    }
 
 }

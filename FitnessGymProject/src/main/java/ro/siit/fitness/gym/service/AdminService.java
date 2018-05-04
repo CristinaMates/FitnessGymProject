@@ -10,15 +10,13 @@ public interface AdminService {
 
     List<GymMember> getAll();
 
-    List<GymSubscription> getAllTypes();
-
     void createGymMember(GymMember gymMembers);
 
     void updateGymMember(GymMember gymMember, long id);
 
     void removeGymMember(long id);
 
-    GymMember getById(long id);
+    GymMember findById(long id);
 
     float getDiscountedPrice(float price);
 }

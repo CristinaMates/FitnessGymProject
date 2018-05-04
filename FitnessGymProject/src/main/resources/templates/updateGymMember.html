@@ -78,9 +78,14 @@
         <label th:for="${lastNameTrainer}">Trainer last name</label>
         <input type="text" id="lastNameTrainer" name="lastNameTrainer" th:value="*{lastNameTrainer}"/>
 
-        <label th:for="${program}">Gym trainer program</label>
-        <select id="program" name="program">
-            <option value ="NONE">--- Select ---</option>
+    </fieldset>
+
+    <fieldset>
+
+        <legend>Program</legend>
+        <label th:for="${classes}">Class</label>
+        <select id="classes" name="classes">
+            <option value="NONE">--- Select ---</option>
             <option value="Pilates">Pilates</option>
             <option value="Yoga">Yoga</option>
             <option value="Zumba">Zumba</option>

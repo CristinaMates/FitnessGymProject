@@ -16,11 +16,11 @@ public class GymTrainerServiceImpl implements GymTrainerService {
         return gymTrainers;
     }
 
-    @Override
-    public String getTrainerProgram() {
-        GymTrainer gymTrainer = new GymTrainer();
-        return gymTrainer.getProgram();
-    }
+//    @Override
+//    public String getTrainerProgram() {
+////        GymTrainer gymTrainer = new GymTrainer();
+////        return gymTrainer.getProgram();
+//    }
 
     @Override
     public GymTrainer getTrainer() {

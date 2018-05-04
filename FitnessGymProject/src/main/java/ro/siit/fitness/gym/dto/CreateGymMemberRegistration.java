@@ -4,29 +4,21 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
-import ro.siit.fitness.gym.domain.Gender;
-import ro.siit.fitness.gym.domain.GymSubscription;
-import ro.siit.fitness.gym.domain.GymTrainer;
+import ro.siit.fitness.gym.domain.*;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class CreateGymMemberRegistration {
-
     @NotBlank
     private String firstName;
-
     @NotBlank
     private String lastName;
-
-    private String gender;
-
+    private Gender gender = Gender.MALE;
     @DateTimeFormat(pattern = "dd/mm/yyyy")
     private Date birthDate;
-
     @Length(min=5, max=10)
     private String telephone;
-
     @Email
     private String email;
     private boolean student;
@@ -34,30 +26,29 @@ public class CreateGymMemberRegistration {
     private long id;
 
     private GymTrainer gymTrainer;
-
+    private long gymTrainerId;
     @NotBlank
     private String firstNameTrainer;
-
     @NotBlank
     private String lastNameTrainer;
 
-    @NotBlank
-    private String program;
+    private Program program;
+    private String classes;
+    private long programID;
 
-    private GymSubscription gymSubscription;
 
     @NotBlank
     private String type;
-
     @DateTimeFormat(pattern = "dd/mm/yyyy")
     private Date startDate;
-
     @DateTimeFormat(pattern = "dd/mm/yyyy")
     private Date endDate;
-
     @NotNull
     private float price;
     private float discount;
+
+    private SubscriptionCard subscriptionCard;
+    private long subscriptionCardId;
 
 
     public GymTrainer getGymTrainer() {
@@ -66,30 +57,6 @@ public class CreateGymMemberRegistration {
 
     public void setGymTrainer(GymTrainer gymTrainer) {
         this.gymTrainer = gymTrainer;
-    }
-
-    public String getFirstNameTrainer() {
-        return firstNameTrainer;
-    }
-
-    public void setFirstNameTrainer(String firstNameTrainer) {
-        this.firstNameTrainer = firstNameTrainer;
-    }
-
-    public String getLastNameTrainer() {
-        return lastNameTrainer;
-    }
-
-    public void setLastNameTrainer(String lastNameTrainer) {
-        this.lastNameTrainer = lastNameTrainer;
-    }
-
-    public GymSubscription getGymSubscription() {
-        return gymSubscription;
-    }
-
-    public void setGymSubscription(GymSubscription gymSubscription) {
-        this.gymSubscription = gymSubscription;
     }
 
     public String getFirstName() {
@@ -108,11 +75,11 @@ public class CreateGymMemberRegistration {
         this.lastName = lastName;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -156,13 +123,60 @@ public class CreateGymMemberRegistration {
         this.corporate = corporate;
     }
 
-    public String getProgram() {
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getFirstNameTrainer() {
+        return firstNameTrainer;
+    }
+
+    public void setFirstNameTrainer(String firstNameTrainer) {
+        this.firstNameTrainer = firstNameTrainer;
+    }
+
+    public String getLastNameTrainer() {
+        return lastNameTrainer;
+    }
+
+    public void setLastNameTrainer(String lastNameTrainer) {
+        this.lastNameTrainer = lastNameTrainer;
+    }
+
+    public Program getProgram() {
         return program;
     }
 
-    public void setProgram(String program) {
+    public void setProgram(Program program) {
         this.program = program;
     }
+
+    public long getProgramID() {
+        return programID;
+    }
+
+    public void setProgramID(long programID) {
+        this.programID = programID;
+    }
+
+    public void setGymTrainerId(long gymTrainerId) {
+        this.gymTrainerId = gymTrainerId;
+    }
+
+
+
+    public String getClasses() {
+        return classes;
+    }
+
+    public void setClasses(String classes) {
+        this.classes = classes;
+    }
+
 
     public String getType() {
         return type;
@@ -170,6 +184,22 @@ public class CreateGymMemberRegistration {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public float getPrice() {
@@ -188,27 +218,24 @@ public class CreateGymMemberRegistration {
         this.discount = discount;
     }
 
-    public long getId() {
-        return id;
+    public long getGymTrainerId() {
+        return gymTrainerId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+
+    public SubscriptionCard getSubscriptionCard() {
+        return subscriptionCard;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public void setSubscriptionCard(SubscriptionCard subscriptionCard) {
+        this.subscriptionCard = subscriptionCard;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public long getSubscriptionCardId() {
+        return subscriptionCardId;
     }
 
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setSubscriptionCardId(long subscriptionCardId) {
+        this.subscriptionCardId = subscriptionCardId;
     }
 }

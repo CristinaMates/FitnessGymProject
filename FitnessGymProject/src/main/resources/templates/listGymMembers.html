@@ -3,6 +3,18 @@
       xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+    body {
+    background-image: url(/img/img2.jpg);
+    background-color: #cccccc
+    }
+    </style>
+    <style>
+            select {
+              height: 30px;
+              color: #ffffff;
+            }
+        </style>
     <title>List of gym members</title>
 
     <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
@@ -33,14 +45,14 @@
 
 <form action="#" th:action="@{/gymmembers}" th:object="${createGymMemberRegistration}" method="post">
     <fieldset>
-        <legend>Gym member details</legend>
-        <label th:for="${firstName}">First name</label>
+        <legend style="color:white">Gym member details</legend>
+        <label th:for="${firstName}" style="color:white">First name</label>
         <input type="text" id="firstName" name="firstName" th:value="*{firstName}"/>
 
-        <label th:for="${lastName}">Last name</label>
+        <label th:for="${lastName}" style="color:white">Last name</label>
         <input type="text" id="lastName" name="lastName" th:value="*{lastName}"/>
 
-        <label th:for="${gender}">Gender</label>
+        <label th:for="${gender}" style="color:white">Gender</label>
         <select id="gender" name="gender">
             <option value="NONE">--- Select ---</option>
             <option value="MALE">MALE</option>
@@ -48,24 +60,24 @@
             <option value="UNSPECIFIED">UNSPECIFIED</option>
         </select>
 
-        <label th:for="${birthDate}">Birth date</label>
+        <label th:for="${birthDate}" style="color:white">Birth date</label>
         <input type="text" id="birthDate" name="birthDate" th:value="*{birthDate}"/>
         <td th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}">Birth date error</td>
 
-        <label th:for="${telephone}">Telephone</label>
+        <label th:for="${telephone}" style="color:white">Telephone</label>
         <input type="text" id="telephone" name="telephone" th:value="*{telephone}"/>
 
-        <label th:for="${email}">E-mail</label>
+        <label th:for="${email}" style="color:white">E-mail</label>
         <input type="text" id="email" name="email" th:value="*{email}"/>
 
-        <label th:for="${student}">Student</label>
+        <label th:for="${student}" style="color:white">Student</label>
         <select id="student" name="student">
             <option value="NONE">--- Select ---</option>
             <option value="true">True</option>
             <option value="false">False</option>
         </select>
 
-        <label th:for="${corporate}">Corporate</label>
+        <label th:for="${corporate}" style="color:white">Corporate</label>
         <select id="corporate" name="corporate">
             <option value="NONE">--- Select ---</option>
             <option value="true">True</option>
@@ -74,16 +86,21 @@
     </fieldset>
 
         <fieldset>
-            <legend>Gym trainer details</legend>
+            <legend style="color:white">Gym trainer details</legend>
 
-        <label th:for="${firstNameTrainer}">Trainer first name</label>
+        <label th:for="${firstNameTrainer}" style="color:white">Trainer first name</label>
         <input type="text" id="firstNameTrainer" name="firstNameTrainer" th:value="*{firstNameTrainer}"/>
 
-        <label th:for="${lastNameTrainer}">Trainer last name</label>
+        <label th:for="${lastNameTrainer}" style="color:white">Trainer last name</label>
         <input type="text" id="lastNameTrainer" name="lastNameTrainer" th:value="*{lastNameTrainer}"/>
 
-        <label th:for="${program}">Trainer program</label>
-            <select id="program" name="program">
+        </fieldset>
+
+    <fieldset>
+
+        <legend style="color:white">Program</legend>
+        <label th:for="${classes}" style="color:white">Class</label>
+            <select id="classes" name="classes">
                 <option value="NONE">--- Select ---</option>
                 <option value="Pilates">Pilates</option>
                 <option value="Yoga">Yoga</option>
@@ -92,12 +109,12 @@
                 <option value="TRX">TRX</option>
                 <option value="Fitball">Fitball</option>
             </select>
-        </fieldset>
+    </fieldset>
 
         <fieldset>
-            <legend>Gym subscription details</legend>
+            <legend style="color:white">Gym subscription details</legend>
 
-        <label th:for="${type}">Type</label>
+        <label th:for="${type}" style="color:white">Type</label>
         <select id="type" name="type">
             <option value="NONE">--- Select ---</option>
             <option value="Daily">Daily</option>
@@ -108,10 +125,10 @@
             <option value="1 year">1 year</option>
         </select>
 
-        <label th:for="${discount}">Discount</label>
+        <label th:for="${discount}" style="color:white">Discount</label>
         <input type="text" id="discount" name="discount" th:value="*{discount}"/>
 
-            <label th:for="${startDate}">Start Date</label>
+            <label th:for="${startDate}" style="color:white">Start Date</label>
             <input type="text" id="startDate" name="startDate" th:value="*{startDate}"/>
             <script>
     $(document).ready(function(){
@@ -125,7 +142,7 @@
         })
     })
         </script>
-                <label th:for="${endDate}">End date</label>
+                <label th:for="${endDate}" style="color:white">End date</label>
                 <input type="text" id="endDate" name="endDate" th:value="*{endDate}"/>
                 <script>
     $(document).ready(function(){
@@ -139,7 +156,7 @@
         })
     })
     </script>
-        <label th:for="${price}">Price</label>
+        <label th:for="${price}" style="color:white">Price</label>
         <input type="text" id="price" name="price" th:value="*{price}"/>
         </fieldset>
 
@@ -153,35 +170,37 @@
 
 
 <table id="myTableId" dt:table="true">
-    <thead>
-    <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Gender</th>
-        <th>Birth date</th>
-        <th>Telephone</th>
-        <th>Email</th>
-        <th>Student</th>
-        <th>Corporate</th>
-        <th>ID</th>
+    <!--<thead>-->
+    <!--<tr>-->
+        <!--<th>First Name</th>-->
+        <!--<th>Last Name</th>-->
+        <!--<th>Gender</th>-->
+        <!--<th>Birth date</th>-->
+        <!--<th>Telephone</th>-->
+        <!--<th>Email</th>-->
+        <!--<th>Student</th>-->
+        <!--<th>Corporate</th>-->
+        <!--<th>ID</th>-->
 
-        <th>Gym Trainer</th>
-        <th>Trainer first name</th>
-        <th>Trainer last name</th>
-        <th>Trainer program</th>
+        <!--<th>Gym Trainer</th>-->
+        <!--<th>Trainer first name</th>-->
+        <!--<th>Trainer last name</th>-->
 
-        <th>Gym subscription</th>
-        <th>Type</th>
-        <th>Discount</th>
-        <th>Start date</th>
-        <th>End date</th>
-        <th>Price</th>
-        <th>Update</th>
-        <th>Delete</th>
-    </tr>
-    </thead>
+        <!--<th>Program</th>-->
+        <!--<th>Class</th>-->
+
+        <!--<th>Gym subscription</th>-->
+        <!--<th>Type</th>-->
+        <!--<th>Discount</th>-->
+        <!--<th>Start date</th>-->
+        <!--<th>End date</th>-->
+        <!--<th>Price</th>-->
+        <!--<th>Update</th>-->
+        <!--<th>Delete</th>-->
+    <!--</tr>-->
+    <!--</thead>-->
     <tbody>
-    <tr th:each="gymMembers : ${gymMembers}">
+    <tr th:each="gymMembers : ${gymMember}">
         <td th:text="${gymMembers.firstName}"></td>
         <td th:text="${gymMembers.lastName}"></td>
         <td th:text="${gymMembers.gender}"></td>
@@ -196,20 +215,16 @@
         <td>Gym Trainer</td>
         <td th:text="${gymMembers.gymTrainer.firstNameTrainer}"></td>
         <td th:text="${gymMembers.gymTrainer.lastNameTrainer}"></td>
-        <td th:text="${gymMembers.gymTrainer.program}"></td>
+
+        <td>Program</td>
+        <td th:text="${gymMembers.Program.classes}"></td>
 
         <td>Gym Subsctiption</td>
-<<<<<<< HEAD
         <td th:text="${gymMember.gymSubscription.type}"></td>
         <td th:text="${gymMember.gymSubscription.discount}"></td>
         <td th:text="${#dates.format(gymMember.gymSubscription.startDate, 'dd/mm/yyyy')}"></td>
         <td th:text="${#dates.format(gymMember.gymSubscription.endDate, 'dd/mm/yyyy')}"></td>
         <td th:text="${gymMember.gymSubscription.price}"></td>
-=======
-        <td th:text="${gymMembers.gymSubscription.type}"></td>
-        <td th:text="${gymMembers.gymSubscription.price}"></td>
-        <td th:text="${gymMembers.gymSubscription.discount}"></td>
->>>>>>> 7b0f2c648a8eab772cfdf8ca8a0c80fb58e4b157
 
 
         <td>

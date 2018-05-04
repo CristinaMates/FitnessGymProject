@@ -12,7 +12,7 @@ public class GymMember {
     private Program program;
     private String firstName;
     private String lastName;
-    private String gender;
+    private Gender gender = Gender.MALE;
     private Date birthDate;
     private long id;
     private String telephone;
@@ -26,7 +26,7 @@ public class GymMember {
     public GymMember() {
     }
 
-    public GymMember(GymSubscription gymSubscription, GymTrainer gymTrainer, Program program, String firstName, String lastName, String gender, Date birthDate, long id, String telephone, String email, boolean student, boolean corporate, long gymSubscriptionID, long gymTrainerID, long programID) {
+    public GymMember(GymSubscription gymSubscription, GymTrainer gymTrainer, Program program, String firstName, String lastName, Gender gender, Date birthDate, long id, String telephone, String email, boolean student, boolean corporate, long gymSubscriptionID, long gymTrainerID, long programID) {
         this.gymSubscription = gymSubscription;
         this.gymTrainer = gymTrainer;
         this.program = program;
@@ -41,22 +41,6 @@ public class GymMember {
         this.corporate = corporate;
         this.gymSubscriptionID = gymSubscriptionID;
         this.gymTrainerID = gymTrainerID;
-        this.programID = programID;
-    }
-
-    public Program getProgram() {
-        return program;
-    }
-
-    public void setProgram(Program program) {
-        this.program = program;
-    }
-
-    public long getProgramID() {
-        return programID;
-    }
-
-    public void setProgramID(long programID) {
         this.programID = programID;
     }
 
@@ -76,11 +60,35 @@ public class GymMember {
         this.gymTrainer = gymTrainer;
     }
 
-    public String getGender() {
+    public Program getProgram() {
+        return program;
+    }
+
+    public void setProgram(Program program) {
+        this.program = program;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -132,22 +140,6 @@ public class GymMember {
         this.corporate = corporate;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public long getGymSubscriptionID() {
         return gymSubscriptionID;
     }
@@ -164,25 +156,12 @@ public class GymMember {
         this.gymTrainerID = gymTrainerID;
     }
 
-    @Override
-    public String toString() {
-        return "GymMember{" +
-                "gymSubscription=" + gymSubscription +
-                ", gymTrainer=" + gymTrainer +
-                ", program=" + program +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", gender='" + gender + '\'' +
-                ", birthDate=" + birthDate +
-                ", id=" + id +
-                ", telephone='" + telephone + '\'' +
-                ", email='" + email + '\'' +
-                ", student=" + student +
-                ", corporate=" + corporate +
-                ", gymSubscriptionID=" + gymSubscriptionID +
-                ", gymTrainerID=" + gymTrainerID +
-                ", programID=" + programID +
-                '}';
+    public long getProgramID() {
+        return programID;
+    }
+
+    public void setProgramID(long programID) {
+        this.programID = programID;
     }
 
     @Override
@@ -204,7 +183,7 @@ public class GymMember {
         if (program != null ? !program.equals(gymMember.program) : gymMember.program != null) return false;
         if (firstName != null ? !firstName.equals(gymMember.firstName) : gymMember.firstName != null) return false;
         if (lastName != null ? !lastName.equals(gymMember.lastName) : gymMember.lastName != null) return false;
-        if (gender != null ? !gender.equals(gymMember.gender) : gymMember.gender != null) return false;
+        if (gender != gymMember.gender) return false;
         if (birthDate != null ? !birthDate.equals(gymMember.birthDate) : gymMember.birthDate != null) return false;
         if (telephone != null ? !telephone.equals(gymMember.telephone) : gymMember.telephone != null) return false;
         return email != null ? email.equals(gymMember.email) : gymMember.email == null;

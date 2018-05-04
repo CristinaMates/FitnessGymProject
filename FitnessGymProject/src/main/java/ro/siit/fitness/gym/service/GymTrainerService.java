@@ -8,7 +8,7 @@ public interface GymTrainerService {
 
     List<GymTrainer> getAll();
 
-    String getTrainerProgram();
+   // String getTrainerProgram();
 
     GymTrainer getTrainer();
 
