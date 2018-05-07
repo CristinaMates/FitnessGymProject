@@ -1,0 +1,55 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
+<head>
+    <title>Update Trainers Program</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<form action="#" th:action="@{/trainersprogram/update/} + ${gymTrainer_{id}} + '/'" th:object="${createGymTrainerProgram}" method="post">
+
+    <div>
+        <label th:for="${firstNameTrainer}">Gym Trainer first name</label>
+        <input type="text" id="firstNameTrainer" name="firstNameTrainer" th:value="*{firstNameTrainer}"/>
+    </div>
+    <div>
+        <label th:for="${lastNameTrainer}">Gym Trainer last name</label>
+        <input type="text" id="lastNameTrainer" name="lastNameTrainer" th:value="*{lastNameTrainer}"/>
+    </div>
+    <div>
+        <label th:for="${program}">Program</label>
+        <input type="text" id="program" name="program" th:value="*{program}"/>
+    </div>
+
+
+    <div>
+        <input type="submit" id="doUpdate" name="update gym trainer" value="Update gym trainer"/>
+    </div>
+</form>
+
+
+<table id="myTableId" dt:table="true">
+    <thead>
+    <tr>
+        <th>Trainer First Name</th>
+        <th>Trainer Last Name</th>
+        <th>Capacity</th>
+        <th>Prpgram</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="gymTrainer : ${gymTrainers}">
+        <td th:text="${gymTrainer.firstNameTrainer}"></td>
+        <td th:text="${gymTrainer.lastNameTrainer}"></td>
+        <td th:text="${gymTrainer.capacity}"></td>
+        <td th:text="${gymTrainer.program}"></td>
+
+
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

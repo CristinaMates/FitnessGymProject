@@ -1,0 +1,84 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+    body {
+    background-image: url(/img/img2.jpg);
+    background-color: #cccccc
+    }
+    </style>
+    <style>
+            select {
+              height: 30px;
+              color: #ffffff;
+            }
+        </style>
+    <title>List Trainers Program</title>
+</head>
+<body>
+
+
+<!--<form action="#" th:action="@{/trainersprogram}   " th:object="${createGymTrainerProgram}" method="post">-->
+
+    <!--<div>-->
+        <!--<label th:for="${firstNameTrainer}">Gym Trainer first name</label>-->
+        <!--<input type="text" id="firstNameTrainer" name="firstNameTrainer" th:value="*{firstNameTrainer}"/>-->
+    <!--</div>-->
+    <!--<div>-->
+        <!--<label th:for="${lastNameTrainer}">Gym Trainer last name</label>-->
+        <!--<input type="text" id="lastNameTrainer" name="lastNameTrainer" th:value="*{lastNameTrainer}"/>-->
+    <!--</div>-->
+    <!--<div>-->
+        <!--<label th:for="${capacity}">Class capacity</label>-->
+        <!--<input type="text" id="capacity" name="capacity" th:value="*{capacity}"/>-->
+    <!--</div>-->
+    <!--<div>-->
+        <!--<label th:for="${program}">Program</label>-->
+        <!--<input type="text" id="program" name="program" th:value="*{program}"/>-->
+    <!--</div>-->
+    <!--<div>-->
+        <!--<label th:for="${gymLocation}">Gym</label>-->
+        <!--<input type="text" id="gymLocation" name="gymLocation" th:value="*{gymLocation}"/>-->
+    <!--</div>-->
+    <!--<div>-->
+        <!--<label th:for="${adress}">Gym Location adress</label>-->
+        <!--<input type="text" id="adress" name="adress" th:value="*{adress}"/>-->
+    <!--</div>-->
+    <!--<div>-->
+        <!--<label th:for="${schedule}">Gym schedule</label>-->
+        <!--<input type="text" id="schedule" name="schedule" th:value="*{schedule}"/>-->
+    <!--</div>-->
+    <!--<div>-->
+        <!--<label th:for="${days}">Gym schedule days</label>-->
+        <!--<input type="text" id="days" name="days" th:value="*{days}"/>-->
+    <!--</div>-->
+
+    <!--<div>-->
+        <!--<input type="submit" id="doUpdate" name="update gym trainer" value="Update gym trainer"/>-->
+    <!--</div>-->
+<!--</form>-->
+
+
+<table id="myTableId" dt:table="true">
+    <thead>
+    <tr style="color:white">
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Program</th>
+        <!--<th>Gym Location</th>-->
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="gymTrainer : ${gymTrainers}">
+        <td th:text="${gymTrainer.firstNameTrainer}" style="color:white"></td>
+        <td th:text="${gymTrainer.lastNameTrainer}" style="color:white"></td>
+        <td th:text="${gymTrainer.program}" style="color:white"></td>
+        <!--<td th:text="${gymTrainer.gymLocation}"></td>-->
+
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+    body {
+    background-image: url(/img/img2.jpg);
+    background-color: #cccccc
+    }
+    </style>
+    <style>
+            select {
+              height: 30px;
+              color: #ffffff;
+            }
+        </style>
+    <title>List of reservations</title>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link href="../static/css/jquery.datetimepicker.min.css"
+          th:href="@{css/jquery.datetimepicker.min.css}" rel="stylesheet" media="screen"/>
+    <script src="jquery.datetimepicker.js"></script>
+    <script src="jquery.datetimepicker.full.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+</head>
+<body>
+
+<table th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error}"></td>
+    </tr>
+
+</table>
+
+<form action="#" th:action="@{/reservations}" th:object="${createGymMemberReservation}" method="post">
+    <fieldset>
+        <legend style="color:white">Reservation details</legend>
+
+        <div>
+            <label th:for="${period}" style="color:white">Gym trainer period</label>
+            <input type="text" id="period" name="period" th:value="*{period}"/>
+            <script>
+    $(document).ready(function(){
+        var date_input=$('input[name="period"]');
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'dd/mm/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        })
+    })
+        </script>
+
+            <label th:for="${email}" style="color:white">Gym member email</label>
+            <input type="text" id="email" name="email" th:value="*{email}"/>
+
+
+        </div>
+        <label th:for="${firstNameTrainer}" style="color:white">Gym trainer first name</label>
+        <input type="text" id="firstNameTrainer" name="firstNameTrainer" th:value="*{firstNameTrainer}"/>
+
+
+        <label th:for="${lastNameTrainer}" style="color:white">Gym trainer last name</label>
+        <input type="text" id="lastNameTrainer" name="lastNameTrainer" th:value="*{lastNameTrainer}"/>
+
+    </fieldset>
+
+
+    <fieldset>
+
+        <label th:for="${classes}" style="color:white">Class</label>
+        <select id="classes" name="classes">
+            <option value="NONE">---Select---</option>
+            <option value="Pilates">Pilates</option>
+            <option value="Yoga">Yoga</option>
+            <option value="Zumba">Zumba</option>
+            <option value="Kick-box">Kick-box</option>
+            <option value="TRX">TRX</option>
+            <option value="Fitball">Fitball</option>
+
+        </select>
+    </fieldset>
+
+
+    <div>
+        <input type="submit" id="doUpdate" name="save reservation" value="create new reservation"/>
+    </div>
+</form>
+
+<br/>
+<br/>
+
+
+<table id="myTableId" dt:table="true">
+    <!--<thead>-->
+    <!--<tr>-->
+        <!--<th>Email</th>-->
+
+        <!--<th>Gym Trainer</th>-->
+        <!--<th>Trainer first name</th>-->
+        <!--<th>Trainer last name</th>-->
+        <!--<th>Available period for the program</th>-->
+        <!--<th>Class</th>-->
+        <!--<th>Update</th>-->
+        <!--<th>Delete</th>-->
+    <!--</tr>-->
+    <!--</thead>-->
+    <tbody>
+    <tr th:each="reservation : ${reservations}">
+        <td th:text="${reservation.gymMembers.email}" style="color:white"></td>
+
+        <td>Gym Trainer</td>
+        <td th:text="${reservation.gymTrainer.firstNameTrainer}" style="color:white"></td>
+        <td th:text="${reservation.gymTrainer.lastNameTrainer}" style="color:white"></td>
+        <td th:text="${reservation.gymTrainer.program}" style="color:white"></td>
+
+        <td>Reservation </td>
+        <td th:text="${reservation.period}" style="color:white"></td>
+
+
+        <td>
+            <a th:href="@{/reservations/} + ${reservation?.id} + '/'">Update</a>
+        </td>
+
+        <td>
+            <form th:action="@{/reservations/delete/} + ${reservation?.id} + '/'" th:object="${reservation}" method="post">
+                <input type="submit" value="Delete"/>
+            </form>
+        </td>
+
+        <td>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
