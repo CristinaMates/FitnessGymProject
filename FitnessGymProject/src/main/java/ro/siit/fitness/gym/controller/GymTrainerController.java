@@ -3,21 +3,14 @@ package ro.siit.fitness.gym.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.AbstractController;
-import ro.siit.fitness.gym.domain.GymLocation;
-import ro.siit.fitness.gym.domain.GymMember;
 import ro.siit.fitness.gym.domain.GymTrainer;
 import ro.siit.fitness.gym.dto.CreateGymTrainerProgram;
 import ro.siit.fitness.gym.service.GymTrainerService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -102,15 +95,6 @@ public class GymTrainerController {
         gymTrainer.setFirstNameTrainer(createGymTrainerProgram.getFirstNameTrainer());
         gymTrainer.setLastNameTrainer(createGymTrainerProgram.getLastNameTrainer());
         gymTrainer.setProgram(createGymTrainerProgram.getProgram());
-//        gymTrainer.setGymMembers(createGymTrainerProgram.getGymMembers());
-//        gymTrainer.setProgram(createGymTrainerProgram.getProgram());
-//
-//        GymLocation gymLocation = new GymLocation();
-//        gymLocation.setAddress(createGymTrainerProgram.getAddress());
-//        gymLocation.setSchedule(createGymTrainerProgram.getSchedule());
-//        gymLocation.setDays(createGymTrainerProgram.getDays());
-//
-//        gymTrainer.setGymLocation(gymLocation);
 
         return gymTrainer;
     }
@@ -124,9 +108,6 @@ public class GymTrainerController {
 //        createGymTrainerProgram.setGymMembers(gymTrainer.getGymMembers());
 //        createGymTrainerProgram.setProgram(gymTrainer.getProgram());
 //
-//        createGymTrainerProgram.setAddress(gymTrainer.getGymLocation().getAddress());
-//        createGymTrainerProgram.setSchedule(gymTrainer.getGymLocation().getSchedule());
-//        createGymTrainerProgram.setDays(gymTrainer.getGymLocation().getDays());
 
         return createGymTrainerProgram;
     }

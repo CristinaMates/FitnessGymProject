@@ -20,22 +20,7 @@
         <label th:for="${program}">Program</label>
         <input type="text" id="program" name="program" th:value="*{program}"/>
     </div>
-    <!--<div>-->
-        <!--<label th:for="${gymLocation}">Gym</label>-->
-        <!--<input type="text" id="gymLocation" name="gymLocation" th:value="*{gymLocation}"/>-->
-    <!--</div>-->
-    <!--<div>-->
-        <!--<label th:for="${adress}">Gym Location adress</label>-->
-        <!--<input type="text" id="adress" name="adress" th:value="*{adress}"/>-->
-    <!--</div>-->
-    <!--<div>-->
-        <!--<label th:for="${schedule}">Gym schedule</label>-->
-        <!--<input type="text" id="schedule" name="schedule" th:value="*{schedule}"/>-->
-    <!--</div>-->
-    <!--<div>-->
-        <!--<label th:for="${days}">Gym schedule days</label>-->
-        <!--<input type="text" id="days" name="days" th:value="*{days}"/>-->
-    <!--</div>-->
+
 
     <div>
         <input type="submit" id="doUpdate" name="update gym trainer" value="Update gym trainer"/>
@@ -50,10 +35,7 @@
         <th>Trainer Last Name</th>
         <th>Capacity</th>
         <th>Prpgram</th>
-        <!--<th>GymLocation</th>-->
-        <!--<th>Adress</th>-->
-        <!--<th>Schedule</th>-->
-        <!--<th>Days</th>-->
+
 
     </tr>
     </thead>
@@ -63,10 +45,7 @@
         <td th:text="${gymTrainer.lastNameTrainer}"></td>
         <td th:text="${gymTrainer.capacity}"></td>
         <td th:text="${gymTrainer.program}"></td>
-        <!--<td th:text="${gymTrainer.gymLocation}"></td>-->
-        <!--<td th:text="${gymTrainer.adress}"></td>-->
-        <!--<td th:text="${gymTrainer.schedule}"></td>-->
-        <!--<td th:text="${gymTrainer.days}"></td>-->
+
 
     </tr>
     </tbody>
